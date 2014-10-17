@@ -125,7 +125,10 @@ class Ball implements Pingball{
      * @param posY
      * @param theta
      */
-    public void updateBall(int vel, int posX, int posY, double theta){ 
-        
+    public void updateBall(int vel, int posX, int posY, double dir){ 
+        velocity = vel; 
+        positionX = posX; 
+        positionY = posY; 
+        theta = dir; 
     }
 }
