@@ -3,53 +3,53 @@ import physics.*;
 
 public interface Pingball {
 
-/*
- * Playing Area:
- * playing area must be 20 L wide by 20 L high. That is, 400 square bumpers
- * The upper left corner is (0,0) and the lower right corner is (20,20).
- */
-public static Pingball ball(){ 
-    return new Ball("sadf"); 
-}
+    /*
+     * Playing Area:
+     * playing area must be 20 L wide by 20 L high. That is, 400 square bumpers
+     * The upper left corner is (0,0) and the lower right corner is (20,20).
+     */
+    public static Pingball ball(){ 
+        return new Ball("sadf"); 
+    }
 
-/*
- * Gadgets:
- * Every gadget has an (x,y) location, where x and y are integers in [0,19].
- * Every gadget has a width and height, also integers in [0,19]Others are configurable
- * Some gadgets have a coefficient of reflection, this is a multiplier applied to the ball's 
- *      velocity after it bounces off the gadget. Default multiplier is 1.0. 
- * Some gadgets have an orientation - how the gadget is rotated from its default orientation. 
- *      This is given in degrees (clockwise). Default orientation is 0. 
- * Some gadgets have triggers - an event that happens at the gadget. 
- * Some gadgets have actions - A response that a gadget can make to a trigger happening somewhere on the board. 
- */    
+    /*
+     * Gadgets:
+     * Every gadget has an (x,y) location, where x and y are integers in [0,19].
+     * Every gadget has a width and height, also integers in [0,19]Others are configurable
+     * Some gadgets have a coefficient of reflection, this is a multiplier applied to the ball's 
+     *      velocity after it bounces off the gadget. Default multiplier is 1.0. 
+     * Some gadgets have an orientation - how the gadget is rotated from its default orientation. 
+     *      This is given in degrees (clockwise). Default orientation is 0. 
+     * Some gadgets have triggers - an event that happens at the gadget. 
+     * Some gadgets have actions - A response that a gadget can make to a trigger happening somewhere on the board. 
+     */    
 }
 
 class Board implements Pingball{ 
 
-     /**
-      * Board Constructor  - Creates a 2D Array representing the board. 
-      * @param width
-      * @param height
-      * 
-      */
-    
+    /**
+     * Board Constructor  - Creates a 2D Array representing the board. 
+     * @param width
+     * @param height
+     * 
+     */
+
     private char [][] boardArray; 
     public Board(int width, int height){ 
 
     }
-    
 
-    
-    
+
+
+
     /**
      * Returns string representation of board. 
      */
     @Override
     public String toString(){ 
-      
+
     }
-    
+
     /**
      * Updates the board with the ball and changes balls fields
      * @param ball Current ball
@@ -59,9 +59,17 @@ class Board implements Pingball{
      */
     public void updateBoard(Ball ball, int x, int y){ 
         
+        if(boardArray[y][x] == '.'){
+            double theta =  ball.getTheta() + 90;
+            ball.updateBall(ball.getVelocity(), ball.getPostionX(), ball.getPostionY(), theta);
+        }else{
+            boardArray[y][x] = '*';
+            boardArray[ball.getPostionY()][ball.getPostionX()] = ' ';
+            ball.updateBall(ball.getVelocity(), x, y, ball.getTheta());
+        }
     }
-    
- 
+
+
 }
 
 class Ball implements Pingball{ 
@@ -70,18 +78,21 @@ class Ball implements Pingball{
     private int positionY; 
     private double theta; 
 
-    
+
     public Ball(String position){ 
-        
+
     }
-    
+
     /**
      * Calls update Board with correct parameters. ; 
      */
-    public void step(){ 
-        
+    public void step(Board board){ 
+        double deltaY = Math.sin(theta);
+        double deltaX = Math.cos(theta);
+        board.updateBoard(this, positionX + (int)Math.ceil(deltaX), positionY + (int)Math.ceil(deltaY));
+
     }
-    
+
     /**
      * Updates fields of the ball
      * @param vel
@@ -90,6 +101,25 @@ class Ball implements Pingball{
      * @param theta
      */
     public void updateBall(int vel, int posX, int posY, double theta){ 
-        
+
     }
+    
+    public int getPostionX(){
+        return positionX;
+    }
+    
+    public int getPostionY(){
+        return positionY;
+    }
+
+    public double getTheta() {
+        return theta;
+    }
+
+
+    public int getVelocity() {
+        return velocity;
+    }
+
+   
 }
