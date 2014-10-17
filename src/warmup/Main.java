@@ -14,11 +14,12 @@ public class Main {
         //Create ball
         Ball pingBall = new Ball(10,10);
         //While (True)
-        while(true){
-            pingBall.step(); 
-            Thread.sleep(100, 0);
-            
-        }
+        System.out.print(pingBoard.toString());
+//        while(true){
+//            pingBall.step(); 
+//            Thread.sleep(100, 0);
+//            
+//        }
     }
     
 }

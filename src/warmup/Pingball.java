@@ -73,7 +73,16 @@ class Board implements Pingball{
      */
     @Override
     public String toString(){ 
-      
+       String board = "";
+
+          for(int i=0; i<boardArray.length;i++){
+              for(int j=0; j< boardArray[0].length;j++){
+              board += Character.toString(boardArray[i][j]);
+              }
+              board += "\n";
+          }
+
+       return board;
     }
     
     /**
@@ -97,8 +106,9 @@ class Ball implements Pingball{
     private double theta; 
 
     
-    public Ball(String position){ 
-        
+    public Ball(int x, int y){ 
+        positionX= x;
+        positionY=y;
     }
     
     /**
