@@ -115,8 +115,7 @@ class Board implements Pingball{
 }
 
 class Ball implements Pingball{ 
-    private int velocityX;
-    private int velocityY;
+    private Vect velocity;
     private int positionX; 
     private int positionY; 
 
@@ -126,11 +125,10 @@ class Ball implements Pingball{
     public Ball(String position){ 
     }
     
-    public Ball(int x, int y,int velX, int velY){ 
+    public Ball(int x, int y,Vect velocity){ 
         this.positionX= x;
         this.positionY=y;
-        this.velocityX=velX;
-        this.velocityY=velY;
+        this.velocity=velocity;
     }
 
     /**
@@ -151,17 +149,16 @@ class Ball implements Pingball{
      * @param theta
      */
 
-    public void updateBall(int velX, int velY, int posX, int posY){ 
+    public void updateBall( int posX, int posY,Vect velocity){ 
      
-        velocityX= velX;
-        velocityY=velY;
+        this.velocity= velocity;
         positionX = posX; 
         positionY = posY;  
 
     }
     public Vect getVector(){
 
-        return Vect(velocityX, velocityY);
+        return this.velocity;
     }
     public int getPostionX(){
         return positionX;
