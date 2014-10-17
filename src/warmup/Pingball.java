@@ -34,9 +34,35 @@ class Board implements Pingball{
       * 
       */
     
-    private char [][] boardArray; 
+    private char[][] boardArray; 
+    
     public Board(int width, int height){ 
-
+        boardArray = new char[height][width]; //Access with x,y
+        
+        //Populate with space
+        for (int x = 0; x<width; x++){ 
+            for (int y = 0; y<height; y++){ 
+                boardArray[x][y] = ' '; 
+            }
+        }
+        
+        //Draw the walls
+        //Top wall
+        for (int i=0; i<width; i++){ 
+            boardArray[i][0] = '.'; 
+        }
+        //Bottom wall
+        for (int i=0; i<width; i++){ 
+            boardArray[i][height-1] = '.';
+        }
+        //Left wall
+        for (int y=0; y<width; y++){ 
+           boardArray[0][y] = '.'; 
+        }
+        //Right wall
+        for (int y=0; y<width; y++){ 
+           boardArray[width-1][y] = '.'; 
+        }
     }
     
 
