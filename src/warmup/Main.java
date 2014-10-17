@@ -23,7 +23,7 @@ public class Main {
         while(true){
             pingBall.step(pingBoard);
             System.out.print(pingBoard.toString());
-            Thread.sleep(500, 0);
+            Thread.sleep(50, 0);
             
         }
     }
