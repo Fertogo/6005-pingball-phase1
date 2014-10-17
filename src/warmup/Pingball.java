@@ -3,26 +3,26 @@ import physics.*;
 
 public interface Pingball {
 
-/*
- * Playing Area:
- * playing area must be 20 L wide by 20 L high. That is, 400 square bumpers
- * The upper left corner is (0,0) and the lower right corner is (20,20).
- */
-public static Pingball ball(){ 
-    return new Ball("sadf"); 
-}
+    /*
+     * Playing Area:
+     * playing area must be 20 L wide by 20 L high. That is, 400 square bumpers
+     * The upper left corner is (0,0) and the lower right corner is (20,20).
+     */
+    public static Pingball ball(){ 
+        return new Ball("sadf"); 
+    }
 
-/*
- * Gadgets:
- * Every gadget has an (x,y) location, where x and y are integers in [0,19].
- * Every gadget has a width and height, also integers in [0,19]Others are configurable
- * Some gadgets have a coefficient of reflection, this is a multiplier applied to the ball's 
- *      velocity after it bounces off the gadget. Default multiplier is 1.0. 
- * Some gadgets have an orientation - how the gadget is rotated from its default orientation. 
- *      This is given in degrees (clockwise). Default orientation is 0. 
- * Some gadgets have triggers - an event that happens at the gadget. 
- * Some gadgets have actions - A response that a gadget can make to a trigger happening somewhere on the board. 
- */    
+    /*
+     * Gadgets:
+     * Every gadget has an (x,y) location, where x and y are integers in [0,19].
+     * Every gadget has a width and height, also integers in [0,19]Others are configurable
+     * Some gadgets have a coefficient of reflection, this is a multiplier applied to the ball's 
+     *      velocity after it bounces off the gadget. Default multiplier is 1.0. 
+     * Some gadgets have an orientation - how the gadget is rotated from its default orientation. 
+     *      This is given in degrees (clockwise). Default orientation is 0. 
+     * Some gadgets have triggers - an event that happens at the gadget. 
+     * Some gadgets have actions - A response that a gadget can make to a trigger happening somewhere on the board. 
+     */    
 }
 
 class Board implements Pingball{ 
@@ -42,7 +42,7 @@ class Board implements Pingball{
         final LineSegment leftWall = new LineSegment(0,0,0,height-1); 
         final LineSegment rightWall = new LineSegment(width-1,0,width-1,height-1); 
         final LineSegment topWall = new LineSegment(0,0,width-1,0); 
-        final LineSegment bottomWall = new LineSegment(0,height-1, width-1,height-1)
+        final LineSegment bottomWall = new LineSegment(0,height-1, width-1,height-1);
         
         //Populate with space
         for (int x = 0; x<width; x++){ 
@@ -69,13 +69,13 @@ class Board implements Pingball{
            boardArray[width-1][y] = '.'; 
         }
     }
- 
-    
+
     /**
      * Returns string representation of board. 
      */
     @Override
     public String toString(){ 
+
        String board = "";
 
           for(int i=0; i<boardArray.length;i++){
@@ -87,7 +87,7 @@ class Board implements Pingball{
 
        return board;
     }
-    
+
     /**
      * Updates the board with the ball and changes balls fields
      * @param ball Current ball
@@ -97,9 +97,17 @@ class Board implements Pingball{
      */
     public void updateBoard(Ball ball, int x, int y){ 
         
+        if(boardArray[y][x] == '.'){
+            double theta =  ball.getTheta() + 90;
+            ball.updateBall(ball.getVelocity(), ball.getPostionX(), ball.getPostionY(), theta);
+        }else{
+            boardArray[y][x] = '*';
+            boardArray[ball.getPostionY()][ball.getPostionX()] = ' ';
+            ball.updateBall(ball.getVelocity(), x, y, ball.getTheta());
+        }
     }
-    
- 
+
+
 }
 
 class Ball implements Pingball{ 
@@ -108,19 +116,27 @@ class Ball implements Pingball{
     private int positionY; 
     private double theta; 
 
-    
-    public Ball(int x, int y){ 
-        positionX= x;
-        positionY=y;
+
+
+    public Ball(String position){ 
     }
     
+    public Ball(int x, int y, double theta){ 
+        this.positionX= x;
+        this.positionY=y;
+        this.theta = theta;
+    }
+
     /**
      * Calls update Board with correct parameters. ; 
      */
-    public void step(){ 
-        
+    public void step(Board board){ 
+        double deltaY = Math.sin(theta);
+        double deltaX = Math.cos(theta);
+        board.updateBoard(this, positionX + (int)Math.ceil(deltaX), positionY + (int)Math.ceil(deltaY));
+
     }
-    
+
     /**
      * Updates fields of the ball
      * @param vel
@@ -128,10 +144,31 @@ class Ball implements Pingball{
      * @param posY
      * @param theta
      */
+
     public void updateBall(int vel, int posX, int posY, double dir){ 
         velocity = vel; 
         positionX = posX; 
         positionY = posY; 
         theta = dir; 
+
     }
+    
+    public int getPostionX(){
+        return positionX;
+    }
+    
+    public int getPostionY(){
+        return positionY;
+    }
+
+    public double getTheta() {
+        return theta;
+    }
+
+
+    public int getVelocity() {
+        return velocity;
+    }
+
+   
 }
