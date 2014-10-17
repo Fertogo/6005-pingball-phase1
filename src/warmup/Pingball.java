@@ -115,20 +115,22 @@ class Board implements Pingball{
 }
 
 class Ball implements Pingball{ 
-    private int velocity;  
+    private int velocityX;
+    private int velocityY;
     private int positionX; 
     private int positionY; 
-    private double theta; 
+
 
 
 
     public Ball(String position){ 
     }
     
-    public Ball(int x, int y, double theta){ 
+    public Ball(int x, int y,int velX, int velY){ 
         this.positionX= x;
         this.positionY=y;
-        this.theta = theta;
+        this.velocityX=velX;
+        this.velocityY=velY;
     }
 
     /**
