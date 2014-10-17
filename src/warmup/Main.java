@@ -22,8 +22,8 @@ public class Main {
         System.out.print(pingBoard.toString());
         while(true){
             pingBall.step(pingBoard);
-            System.out.print(pingBoard.toString());
-            Thread.sleep(100, 0);
+//            System.out.print(pingBoard.toString());
+            Thread.sleep(500, 0);
             
         }
     }
