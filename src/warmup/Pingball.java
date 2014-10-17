@@ -143,14 +143,19 @@ class Ball implements Pingball{
      * @param theta
      */
 
-    public void updateBall(int vel, int posX, int posY, double dir){ 
-        velocity = vel; 
+    public void updateBall(int velX, int velY, int posX, int posY, double dir){ 
+     
+        velocityX= velX;
+        velocityY=velY;
         positionX = posX; 
         positionY = posY; 
         theta = dir; 
 
     }
-    
+    public Vect getVector(){
+
+        return Vect(velocityX, velocityY);
+    }
     public int getPostionX(){
         return positionX;
     }
@@ -164,9 +169,6 @@ class Ball implements Pingball{
     }
 
 
-    public int getVelocity() {
-        return velocity;
-    }
 
    
 }
