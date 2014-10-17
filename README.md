@@ -1,6 +1,6 @@
 6005-pingball-phase1
 ====================
-###Setup gitHub
+###Setup GitHub
 Follow the instructions on this site to generate and ssh key and add it to your GitHub account. 
 https://help.github.com/articles/generating-ssh-keys/
 
