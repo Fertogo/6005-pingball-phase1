@@ -109,15 +109,19 @@ class Board implements Pingball{
         if(boardArray[y][x] == '.'){
             switch (x){
             case 0: newVelocity = Geometry.reflectWall(leftWall, oldVelocity);
+                    System.out.print("Hit left wall");
                     break;
-            case 20: newVelocity = Geometry.reflectWall(rightWall, oldVelocity);
+            case 19: newVelocity = Geometry.reflectWall(rightWall, oldVelocity);
+            System.out.print("Hit right wall");
                     break;
             }
             
             switch(y){
-            case 0: newVelocity = Geometry.reflectWall(bottomWall, oldVelocity);
+            case 19: newVelocity = Geometry.reflectWall(bottomWall, oldVelocity);
+            System.out.print("Hit bottom wall");
                     break;
-            case 20: newVelocity = Geometry.reflectWall(topWall, oldVelocity);
+            case 0: newVelocity = Geometry.reflectWall(topWall, oldVelocity);
+            System.out.print("Hit top wall");
                     break;
             }
             
@@ -159,7 +163,7 @@ class Ball implements Pingball{
     public void step(Board board){ 
         double deltaY = velocity.angle().sin();
         double deltaX = velocity.angle().cos();
-        board.updateBoard(this, positionX + (int)Math.ceil(deltaX), positionY + (int)Math.ceil(deltaY));
+        board.updateBoard(this, positionX + (int)Math.round(deltaX), positionY + (int)Math.round(deltaY));
 
     }
 

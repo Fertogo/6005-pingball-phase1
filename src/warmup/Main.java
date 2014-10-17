@@ -15,7 +15,7 @@ public class Main {
         //Create board
         Board pingBoard = new Board(20,20);
         //Create ball
-        Vect velocity = new Vect(5.0, 6.0);
+        Vect velocity = new Vect(3.0, 3.0);
         Ball pingBall = new Ball(1,10, velocity);
 
         //While (True)
