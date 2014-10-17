@@ -19,10 +19,10 @@ public class Main {
         Ball pingBall = new Ball(1,10, velocity);
 
         //While (True)
-        System.out.print(pingBoard.toString());
+//        System.out.print(pingBoard.toString());
         while(true){
             pingBall.step(pingBoard);
-//            System.out.print(pingBoard.toString());
+            System.out.print(pingBoard.toString());
             Thread.sleep(500, 0);
             
         }

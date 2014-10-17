@@ -109,19 +109,19 @@ class Board implements Pingball{
         if(boardArray[y][x] == '.'){
             switch (x){
             case 0: newVelocity = Geometry.reflectWall(leftWall, oldVelocity);
-                    System.out.print("Hit left wall");
+                    System.out.println("Hit left wall");
                     break;
             case 19: newVelocity = Geometry.reflectWall(rightWall, oldVelocity);
-            System.out.print("Hit right wall");
+            System.out.println("Hit right wall");
                     break;
             }
             
             switch(y){
             case 19: newVelocity = Geometry.reflectWall(bottomWall, oldVelocity);
-            System.out.print("Hit bottom wall");
+            System.out.println("Hit bottom wall");
                     break;
             case 0: newVelocity = Geometry.reflectWall(topWall, oldVelocity);
-            System.out.print("Hit top wall");
+            System.out.println("Hit top wall");
                     break;
             }
             
