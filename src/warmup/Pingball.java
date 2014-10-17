@@ -35,14 +35,18 @@ class Board implements Pingball{
       */
     
     private char[][] boardArray; 
+    public LineSegment leftWall ;
+    public LineSegment rightWall; 
+    public LineSegment topWall ;
+    public LineSegment bottomWall ;
     
     public Board(int width, int height){ 
         boardArray = new char[height][width]; //Access with x,y
         
-        final LineSegment leftWall = new LineSegment(0,0,0,height-1); 
-        final LineSegment rightWall = new LineSegment(width-1,0,width-1,height-1); 
-        final LineSegment topWall = new LineSegment(0,0,width-1,0); 
-        final LineSegment bottomWall = new LineSegment(0,height-1, width-1,height-1);
+       leftWall = new LineSegment(0,0,0,height-1); 
+       rightWall = new LineSegment(width-1,0,width-1,height-1); 
+       topWall = new LineSegment(0,0,width-1,0); 
+       bottomWall = new LineSegment(0,height-1, width-1,height-1);
         
         //Populate with space
         for (int x = 0; x<width; x++){ 
