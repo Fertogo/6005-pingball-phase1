@@ -10,9 +10,15 @@ public class Main {
      */
     public static void main(String[] args) {
         //Create board
+        Board pingBoard = new Board(20,20);
         //Create ball
+        Ball pingBall = new Ball(10,10);
         //While (True)
-        //  ball.step(); 
+        while(true){
+            pingBall.step(); 
+
+            
+        }
     }
     
 }
