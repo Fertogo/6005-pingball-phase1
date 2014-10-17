@@ -1,5 +1,5 @@
 package warmup;
-
+import java.lang.Thread; 
 /**
  * TODO: put documentation for your class here
  */
@@ -16,7 +16,7 @@ public class Main {
         //While (True)
         while(true){
             pingBall.step(); 
-
+            Thread.sleep(100, 0);
             
         }
     }
