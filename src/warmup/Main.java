@@ -1,5 +1,7 @@
 package warmup;
 import java.lang.Thread; 
+
+import physics.Vect;
 /**
  * TODO: put documentation for your class here
  */
@@ -13,7 +15,9 @@ public class Main {
         //Create board
         Board pingBoard = new Board(20,20);
         //Create ball
-        Ball pingBall = new Ball(1,10);
+        Vect velocity = new Vect(5.0, 6.0);
+        Ball pingBall = new Ball(1,10, velocity);
+
         //While (True)
         System.out.print(pingBoard.toString());
         while(true){

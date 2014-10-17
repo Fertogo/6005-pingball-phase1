@@ -35,14 +35,21 @@ class Board implements Pingball{
       */
     
     private char[][] boardArray; 
+   
     private LineSegment leftWall;
     private LineSegment rightWall;
     private LineSegment topWall;
     private LineSegment bottomWall;
     
+
     
     public Board(int width, int height){ 
         boardArray = new char[height][width]; //Access with x,y
+        
+       leftWall = new LineSegment(0,0,0,height-1); 
+       rightWall = new LineSegment(width-1,0,width-1,height-1); 
+       topWall = new LineSegment(0,0,width-1,0); 
+       bottomWall = new LineSegment(0,height-1, width-1,height-1);
         
         //Populate with space
         for (int x = 0; x<width; x++){ 
@@ -69,9 +76,6 @@ class Board implements Pingball{
            boardArray[width-1][y] = '.'; 
         }
     }
-
-
-
 
     /**
      * Returns string representation of board. 
@@ -117,11 +121,11 @@ class Board implements Pingball{
                     break;
             }
             
-            ball.updateBall(newVelocity, ball.getPostionX(), ball.getPostionY());
+            ball.updateBall(ball.getPostionX(), ball.getPostionY(), newVelocity);
         }else{
             boardArray[y][x] = '*';
             boardArray[ball.getPostionY()][ball.getPostionX()] = ' ';
-            ball.updateBall(ball.getVelocity(), x, y);
+            ball.updateBall(x, y, ball.getVelocity());
         }
     }
 
@@ -129,20 +133,24 @@ class Board implements Pingball{
 }
 
 class Ball implements Pingball{ 
+
     private Vect velocity;  
+
     private int positionX; 
     private int positionY; 
-    private double theta; 
+
 
 
 
     public Ball(String position){ 
     }
     
+
     public Ball(int x, int y, Vect velocity){ 
         this.positionX = x;
         this.positionY = y;
         this.velocity = velocity;
+
     }
 
     /**
@@ -163,24 +171,25 @@ class Ball implements Pingball{
      * @param theta
      */
 
-    public void updateBall(Vect vel, int posX, int posY){ 
-        velocity = vel; 
-        positionX = posX; 
-        positionY = posY; 
+
+    public void updateBall( int posX, int posY,Vect velocity){ 
+     
+        this.velocity = velocity;
+        this.positionX = posX; 
+        this.positionY = posY;  
 
 
     }
-    
+    public Vect getVector(){
+
+        return this.velocity;
+    }
     public int getPostionX(){
         return positionX;
     }
     
     public int getPostionY(){
         return positionY;
-    }
-
-    public double getTheta() {
-        return theta;
     }
 
 
