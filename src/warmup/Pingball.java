@@ -27,16 +27,42 @@ public interface Pingball {
 
 class Board implements Pingball{ 
 
-    /**
-     * Board Constructor  - Creates a 2D Array representing the board. 
-     * @param width
-     * @param height
-     * 
-     */
-
-    private char [][] boardArray; 
+     /**
+      * Board Constructor  - Creates a 2D Array representing the board. 
+      * @param width
+      * @param height
+      * 
+      */
+    
+    private char[][] boardArray; 
+    
     public Board(int width, int height){ 
-
+        boardArray = new char[height][width]; //Access with x,y
+        
+        //Populate with space
+        for (int x = 0; x<width; x++){ 
+            for (int y = 0; y<height; y++){ 
+                boardArray[x][y] = ' '; 
+            }
+        }
+        
+        //Draw the walls
+        //Top wall
+        for (int i=0; i<width; i++){ 
+            boardArray[i][0] = '.'; 
+        }
+        //Bottom wall
+        for (int i=0; i<width; i++){ 
+            boardArray[i][height-1] = '.';
+        }
+        //Left wall
+        for (int y=0; y<width; y++){ 
+           boardArray[0][y] = '.'; 
+        }
+        //Right wall
+        for (int y=0; y<width; y++){ 
+           boardArray[width-1][y] = '.'; 
+        }
     }
 
 
@@ -48,6 +74,16 @@ class Board implements Pingball{
     @Override
     public String toString(){ 
 
+       String board = "";
+
+          for(int i=0; i<boardArray.length;i++){
+              for(int j=0; j< boardArray[0].length;j++){
+              board += Character.toString(boardArray[i][j]);
+              }
+              board += "\n";
+          }
+
+       return board;
     }
 
     /**
@@ -79,8 +115,14 @@ class Ball implements Pingball{
     private double theta; 
 
 
-    public Ball(String position){ 
 
+    public Ball(String position){ 
+    }
+    
+    public Ball(int x, int y, double theta){ 
+        this.positionX= x;
+        this.positionY=y;
+        this.theta = theta;
     }
 
     /**
@@ -100,7 +142,12 @@ class Ball implements Pingball{
      * @param posY
      * @param theta
      */
-    public void updateBall(int vel, int posX, int posY, double theta){ 
+
+    public void updateBall(int vel, int posX, int posY, double dir){ 
+        velocity = vel; 
+        positionX = posX; 
+        positionY = posY; 
+        theta = dir; 
 
     }
     
