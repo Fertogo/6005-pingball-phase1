@@ -13,7 +13,7 @@ public class Main {
         //Create board
         Board pingBoard = new Board(20,20);
         //Create ball
-        Ball pingBall = new Ball(1,10, 22);
+        Ball pingBall = new Ball(1,10);
         //While (True)
         System.out.print(pingBoard.toString());
         while(true){

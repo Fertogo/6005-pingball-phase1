@@ -35,6 +35,11 @@ class Board implements Pingball{
       */
     
     private char[][] boardArray; 
+    private LineSegment leftWall;
+    private LineSegment rightWall;
+    private LineSegment topWall;
+    private LineSegment bottomWall;
+    
     
     public Board(int width, int height){ 
         boardArray = new char[height][width]; //Access with x,y
@@ -94,14 +99,29 @@ class Board implements Pingball{
      * Call updateBall at the end with new ball properties. 
      */
     public void updateBoard(Ball ball, int x, int y){ 
+        Vect oldVelocity = ball.getVelocity();
+        Vect newVelocity = null;
         
         if(boardArray[y][x] == '.'){
-            double theta =  ball.getTheta() + 90;
-            ball.updateBall(ball.getVelocity(), ball.getPostionX(), ball.getPostionY(), theta);
+            switch (x){
+            case 0: newVelocity = Geometry.reflectWall(leftWall, oldVelocity);
+                    break;
+            case 20: newVelocity = Geometry.reflectWall(rightWall, oldVelocity);
+                    break;
+            }
+            
+            switch(y){
+            case 0: newVelocity = Geometry.reflectWall(bottomWall, oldVelocity);
+                    break;
+            case 20: newVelocity = Geometry.reflectWall(topWall, oldVelocity);
+                    break;
+            }
+            
+            ball.updateBall(newVelocity, ball.getPostionX(), ball.getPostionY());
         }else{
             boardArray[y][x] = '*';
             boardArray[ball.getPostionY()][ball.getPostionX()] = ' ';
-            ball.updateBall(ball.getVelocity(), x, y, ball.getTheta());
+            ball.updateBall(ball.getVelocity(), x, y);
         }
     }
 
@@ -109,7 +129,7 @@ class Board implements Pingball{
 }
 
 class Ball implements Pingball{ 
-    private int velocity;  
+    private Vect velocity;  
     private int positionX; 
     private int positionY; 
     private double theta; 
@@ -119,18 +139,18 @@ class Ball implements Pingball{
     public Ball(String position){ 
     }
     
-    public Ball(int x, int y, double theta){ 
-        this.positionX= x;
-        this.positionY=y;
-        this.theta = theta;
+    public Ball(int x, int y, Vect velocity){ 
+        this.positionX = x;
+        this.positionY = y;
+        this.velocity = velocity;
     }
 
     /**
      * Calls update Board with correct parameters. ; 
      */
     public void step(Board board){ 
-        double deltaY = Math.sin(theta);
-        double deltaX = Math.cos(theta);
+        double deltaY = velocity.angle().sin();
+        double deltaX = velocity.angle().cos();
         board.updateBoard(this, positionX + (int)Math.ceil(deltaX), positionY + (int)Math.ceil(deltaY));
 
     }
@@ -143,11 +163,11 @@ class Ball implements Pingball{
      * @param theta
      */
 
-    public void updateBall(int vel, int posX, int posY, double dir){ 
+    public void updateBall(Vect vel, int posX, int posY){ 
         velocity = vel; 
         positionX = posX; 
         positionY = posY; 
-        theta = dir; 
+
 
     }
     
@@ -164,7 +184,7 @@ class Ball implements Pingball{
     }
 
 
-    public int getVelocity() {
+    public Vect getVelocity() {
         return velocity;
     }
 
