@@ -2,8 +2,9 @@ package phase1;
 
 import java.awt.Rectangle;
 
-public class Absorber {
+public class Absorber implements Gadget {
     /*
+     * String Representation: =
      * Size and Shape: A rectangle kL *mL where k and m are 0<k<=20
      * Orientation: Only one kind
      * Coef of Reflection: None, ball captured
@@ -15,9 +16,23 @@ public class Absorber {
      * then the absorber takes no action when triggered.   
      */
     
-    public Absorber(int x, int y, double orientation,Rectangle size){ 
+    public Absorber(int x, int y, Rectangle size){ 
         
     }
+
+    @Override
+    public void action(Gadget outerWalls) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public String toString(Gadget OuterWalls) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    
+    
     
     
 }

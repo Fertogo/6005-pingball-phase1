@@ -11,15 +11,14 @@ public interface Gadget {
 
     
     /**
-     * TODO: Write specs
-     * @param x
-     * @param y
-     * @param orientation
-     * @param size
-     * @return
+     * Creates an Absorber object in the board 
+     * @param x: x Position on the board
+     * @param y: y Position on the baord
+     * @param size:  A rectangle kL *mL where k and m are 0<k<=20
+     * 
      */
-    public static Gadget absorber(int x, int y, double orientation,Rectangle size){ 
-        return new Absorber(x,  y,  orientation,size); 
+    public static Gadget absorber(int x, int y,Rectangle size){ 
+        return new Absorber(x,  y, size); 
     }
     
     /**
@@ -54,12 +53,14 @@ public interface Gadget {
     }
     
     /**
-     * TODO: Write specs
-     * @param type (left or right)
-     * @return
+     *Creates a Flipper object in the board 
+     * @param x: x Position on the board
+     * @param y: y Position on the board
+     * @param type: int representing left(0) or right flipper(1)
+     * 
      */
-    public static Gadget flipper(int x, int y, String type){ 
-        return new Flipper(x,  y, size); 
+    public static Gadget flipper(int x, int y, int type){ 
+        return new Flipper(x, y, type); 
     }
     
     /**
