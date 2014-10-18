@@ -63,19 +63,15 @@ public interface Gadget {
     }
     
     /**
-     * TODO: Write specs
-     * @param wall
-     * @return
+     * Creates a new outerWall Gadget
+     * @param wall: A LineSegment representing an outerWall
+     * @return A Gadget representation of an outerWall
      */
     public static Gadget outerWall(LineSegment wall){ 
         return new OuterWall(wall); 
     }
     
     
-    /**
-     * TODO: Write specs
-     */
-    public void trigger(); 
     
     /**
      * TODO: Write specs
