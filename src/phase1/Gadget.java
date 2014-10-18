@@ -28,7 +28,7 @@ public interface Gadget {
      * @return
      */
     public static Gadget squareBumper(int x, int y){ 
-        return new SquareBumper(x,  y, size); 
+        return new SquareBumper(x,y,size); 
     }
     
     /**
@@ -39,7 +39,7 @@ public interface Gadget {
      * @return
      */
     public static Gadget triangleBumper(int x, int y, double orientation){ //TODO: Size and shape
-        return new TriangleBumper(x,  y, size); 
+        return new TriangleBumper(x,y,size); 
     }
     
     /**

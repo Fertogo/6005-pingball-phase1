@@ -1,6 +1,7 @@
 package phase1;
 
-public class Flipper implements Gadget{
+import java.awt.Rectangle;
+
 /*
  * String Representation: | or --
  *                        |
@@ -16,10 +17,29 @@ public class Flipper implements Gadget{
  * velocity of the part that contacts the ball
  * 
  */
+public class Flipper implements Gadget{
+    private int xPos; 
+    private int yPos;
+    //String type  representing left(0) or right flipper(1)
+    private String flipperType; 
+    private final String [] typesOfFlipper = {"left", "right"} ;
+    
+    
+    
     public Flipper(int x, int y, int type){ 
+        this.xPos =x;
+        this.yPos = y;
+        this.flipperType=typesOfFlipper[type];
         
     }
-
+    public void trigger(){
+        if(collisionDetected()){
+            action(this);
+        }
+    }
+    private boolean collisionDetected(){
+        return true; //TODO
+    }
     @Override
     public void action(Gadget outerWalls) {
         // TODO Auto-generated method stub
@@ -27,8 +47,13 @@ public class Flipper implements Gadget{
     }
 
     @Override
-    public String toString(Gadget OuterWalls) {
-        // TODO Auto-generated method stub
-        return null;
+    public String toString() {
+        String stringBuilder="";
+        stringBuilder += "x:"+this.xPos;
+        stringBuilder += "y:"+this.yPos;
+        stringBuilder += "Type: "+ this.flipperType;
+        return stringBuilder;
+        
+
     }
 }
