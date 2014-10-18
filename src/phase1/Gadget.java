@@ -63,20 +63,30 @@ public interface Gadget {
     }
     
     /**
-     * Creates a new outerWall Gadget
-     * @param wall: A LineSegment representing an outerWall
-     * @return A Gadget representation of an outerWall
+     * Creates the board's outerWalls
+     * @param width - Desired width of the board
+     * @param height - Desired height of the wall
+     * @return - Gadget representing the outerWalls of the board. 
      */
-    public static Gadget outerWall(LineSegment wall){ 
-        return new OuterWall(wall); 
+    public static Gadget outerWalls(int width, int height){ 
+        return new OuterWalls(width, height); 
     }
+    
     
     
     
     /**
      * TODO: Write specs
      */
-    public void action(Gadget gadget); 
+    public void action(Gadget outerWalls); 
+    
+    /**
+     * 
+     * @return: String representation of the individual Gadget
+     */
+    @Override
+    public String toString(Gadget OuterWalls); 
+    
 
     
 }
