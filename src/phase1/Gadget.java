@@ -11,6 +11,7 @@ public interface Gadget {
 
     
     /**
+     * TODO left top corner is anchor then expand from there 
      * Creates an Absorber object in the board 
      * @param x: x Position on the board
      * @param y: y Position on the baord
