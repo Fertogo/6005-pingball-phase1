@@ -8,6 +8,7 @@ import org.junit.Test;
 public class GadgetTest {
 
     @Test
+    //TODO OuterWalls currently breaks when width != height (ArrayIndexOutOfBounds)
     public void testOuterWalls() {
 //        Gadget walls = outerWalls(10,10); 
 //        System.out.println(walls.toString(walls)); 

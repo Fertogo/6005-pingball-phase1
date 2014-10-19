@@ -42,13 +42,17 @@ public class OuterWalls implements Gadget {
         int height = ((phase1.OuterWalls) OuterWalls).getHeight(); 
         int width = ((phase1.OuterWalls) OuterWalls).getWidth(); 
         char [][] wallArray; 
+        System.out.println(height + " " + width); 
         wallArray = new char[height][width];
       //Populate with space
 
         for (int x = 0; x<width; x++){ 
+            System.out.println("x: " + x); 
             for (int y = 0; y<height; y++){ 
-                System.out.println(x); 
+                //System.out.println(wallArray[x]);
                 wallArray[x][y] = ' '; 
+                //System.out.println("   y:" + y); 
+
             }
         }
         
