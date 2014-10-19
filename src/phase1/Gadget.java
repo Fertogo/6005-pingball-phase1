@@ -18,39 +18,41 @@ public interface Gadget {
      * @param size
      * @return
      */
-    public static Gadget absorber(int x, int y, double orientation,Rectangle size){ 
-        return new Absorber(x,  y,  orientation,size); 
+
+    public static Gadget absorber(int x, int y, Rectangle size){ 
+        return new Absorber(x,  y, size); 
     }
     
     /**
-     * TODO: Write specs
-     * @param x
-     * @param y
-     * @return
+     * Creates a Square Bumper object on the board
+     * @param x: x Position on the board
+     * @param y: y Position on the board
+     * @return Gadget representing a Square Bumper
      */
     public static Gadget squareBumper(int x, int y){ 
-        return new SquareBumper(x,  y, size); 
+
+        return new SquareBumper(x, y); 
     }
     
     /**
-     * TODO: Write specs
-     * @param x
-     * @param y
-     * @param orientation
-     * @return
+     * Creates a Triangle Bumper object on the board
+     * @param x: x Position on the board
+     * @param y: y Position on the board
+     * @return Gadget representing a Circle Bumper
      */
-    public static Gadget triangleBumper(int x, int y, double orientation){ //TODO: Size and shape
-        return new TriangleBumper(x,  y, size); 
+
+    public static Gadget triangleBumper(int x, int y){
+        return new TriangleBumper(x, y); 
     }
     
     /**
-     * TODO: Write specs
-     * @param x
-     * @param y
-     * @return
+     *Creates a Circle Bumper object on the board
+     * @param x: x Position on the board
+     * @param y: y Position on the board
+     * @return Gadget representing a Circle Bumper
      */
     public static Gadget circleBumper(int x, int y){ 
-        return new CircleBumper(x,  y, size); 
+        return new CircleBumper(x, y); 
     }
     
     /**
@@ -72,13 +74,18 @@ public interface Gadget {
         return new OuterWalls(width, height); 
     }
     
-    
-    
-    
     /**
      * TODO: Write specs
      */
     public void action(Gadget outerWalls); 
+    
+    /**
+     * Changes the orientation of a gadget
+     * @param degrees: the clockwise orientation in degrees of the object. 
+     *                 Must be 0 degrees (the default orientation), 90 degrees, 
+     *                 180 degrees, or 270 degrees.
+     */
+    public void rotateGadget(int degrees);
     
     /**
      * 
