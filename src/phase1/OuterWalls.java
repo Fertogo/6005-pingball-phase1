@@ -44,8 +44,10 @@ public class OuterWalls implements Gadget {
         char [][] wallArray; 
         wallArray = new char[height][width];
       //Populate with space
+
         for (int x = 0; x<width; x++){ 
             for (int y = 0; y<height; y++){ 
+                System.out.println(x); 
                 wallArray[x][y] = ' '; 
             }
         }

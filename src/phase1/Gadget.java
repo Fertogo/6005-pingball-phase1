@@ -11,14 +11,15 @@ public interface Gadget {
 
     
     /**
-     * Creates an Absorber object in the board 
-     * @param x: x Position on the board
-     * @param y: y Position on the baord
-     * @param size:  A rectangle kL *mL where k and m are 0<k<=20
-     * 
+     * TODO: Write specs
+     * @param x
+     * @param y
+     * @param orientation
+     * @param size
+     * @return
      */
-    public static Gadget absorber(int x, int y,Rectangle size){ 
-        return new Absorber(x,  y, size); 
+    public static Gadget absorber(int x, int y, double orientation,Rectangle size){ 
+        return new Absorber(x,  y,  orientation,size); 
     }
     
     /**
@@ -28,7 +29,7 @@ public interface Gadget {
      * @return
      */
     public static Gadget squareBumper(int x, int y){ 
-        return new SquareBumper(x,y,size); 
+        return new SquareBumper(x,  y, size); 
     }
     
     /**
@@ -39,7 +40,7 @@ public interface Gadget {
      * @return
      */
     public static Gadget triangleBumper(int x, int y, double orientation){ //TODO: Size and shape
-        return new TriangleBumper(x,y,size); 
+        return new TriangleBumper(x,  y, size); 
     }
     
     /**
@@ -53,14 +54,12 @@ public interface Gadget {
     }
     
     /**
-     *Creates a Flipper object in the board 
-     * @param x: x Position on the board
-     * @param y: y Position on the board
-     * @param type: int representing left(0) or right flipper(1)
-     * 
+     * TODO: Write specs
+     * @param type (left or right)
+     * @return
      */
-    public static Gadget flipper(int x, int y, int type){ 
-        return new Flipper(x, y, type); 
+    public static Gadget flipper(int x, int y, String type){ 
+        return new Flipper(x,  y, size); 
     }
     
     /**
@@ -85,7 +84,6 @@ public interface Gadget {
      * 
      * @return: String representation of the individual Gadget
      */
-    @Override
     public String toString(Gadget OuterWalls); 
     
 
