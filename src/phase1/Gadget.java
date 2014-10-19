@@ -73,11 +73,21 @@ public interface Gadget {
     public static Gadget outerWalls(int width, int height){ 
         return new OuterWalls(width, height); 
     }
-    
     /**
-     * TODO: Write specs
+     * Creates a ball
+     * @param x: x position of the ball 
+     * @param y: y position of the ball
+     * @param velocity: initial velocity of the ball
+     * @return A ball
      */
-    public void action(Gadget outerWalls); 
+    public static Gadget ball(int x, int y, Vect velocity){
+        return new Ball(x, y, velocity);
+    }
+    /**
+     * Called when a gadget is triggered
+     * 
+     */
+    public void action(); 
     
     /**
      * Changes the orientation of a gadget
@@ -88,11 +98,11 @@ public interface Gadget {
     public void rotateGadget(int degrees);
     
     /**
-     * 
+     * @param height: height of board
+     * @param width: width of the board
      * @return: String representation of the individual Gadget
      */
-    public String toString(Gadget OuterWalls); 
+    public String toString(int height, int width);
     
-
     
 }
