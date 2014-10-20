@@ -11,21 +11,11 @@ public interface Gadget {
 
     
     /**
-<<<<<<< HEAD
      * TODO left top corner is anchor then expand from there 
      * Creates an Absorber object in the board 
      * @param x: x Position on the board
-     * @param y: y Position on the baord
+     * @param y: y Position on the board
      * @param size:  A rectangle kL *mL where k and m are 0<k<=20
-     * 
-=======
-     * TODO: Write specs
-     * @param x
-     * @param y
-     * @param orientation
-     * @param size
-     * @return
->>>>>>> d425a2669f1a5391bc045f049d14789691fe8475
      */
 
     public static Gadget absorber(int x, int y, Rectangle size){ 
@@ -39,7 +29,6 @@ public interface Gadget {
      * @return Gadget representing a Square Bumper
      */
     public static Gadget squareBumper(int x, int y){ 
-
         return new SquareBumper(x, y); 
     }
     
