@@ -11,23 +11,20 @@ public interface Gadget {
 
     
     /**
-<<<<<<< HEAD
-     * TODO left top corner is anchor then expand from there 
-     * Creates an Absorber object in the board 
+     * String Representation: =
+     * Size and Shape: A rectangle kL *mL where k and m are 0<k<=20
+     * Orientation: Only one kind
+     * Coef of Reflection: None, ball captured
+     * Trigger: generated when the ball hits it 
+     * Action: shoots out store ball
+     * Description: absorber stops ball and holds it. Ball's center is .25L from bottom .25 from the right side,
+     * Initial velocity of the ball should be 50L/sec with default gravity and default values for friction
+     * if not holding the ball or if previously rejected ball hos not left the absorber, 
+     * then the absorber takes no action when triggered.   
      * @param x: x Position on the board
      * @param y: y Position on the baord
      * @param size:  A rectangle kL *mL where k and m are 0<k<=20
-     * 
-=======
-     * TODO: Write specs
-     * @param x
-     * @param y
-     * @param orientation
-     * @param size
-     * @return
->>>>>>> d425a2669f1a5391bc045f049d14789691fe8475
      */
-
     public static Gadget absorber(int x, int y, Rectangle size){ 
         return new Absorber(x,  y, size); 
     }
@@ -65,12 +62,15 @@ public interface Gadget {
     }
     
     /**
-     * TODO: Write specs
-     * @param type (left or right)
-     * @return
+     * Flipper Flips when triggered
+     * it does so in a swivel motion. 
+     * @param x
+     * @param y
+     * @param type- int type  representing left(0) or right flipper(1)
+     * @return Flipper gadget
      */
-    public static Gadget flipper(int x, int y, String type){ 
-        return new Flipper(x,  y, size); 
+    public static Gadget flipper(int x, int y, int type){ 
+        return new Flipper(x,  y,  type); 
     }
     
     /**

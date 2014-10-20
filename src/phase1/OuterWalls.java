@@ -32,7 +32,7 @@ public class OuterWalls implements Gadget {
     }
     
     @Override
-    public void action(Gadget outerWalls) {
+    public void action() {
         // TODO Auto-generated method stub
         
     }

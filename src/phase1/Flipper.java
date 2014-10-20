@@ -20,40 +20,72 @@ import java.awt.Rectangle;
 public class Flipper implements Gadget{
     private int xPos; 
     private int yPos;
-    //String type  representing left(0) or right flipper(1)
+    //Int type  representing left(0) or right flipper(1)
     private String flipperType; 
     private final String [] typesOfFlipper = {"left", "right"} ;
+    private boolean isHorizontal;
     
-    
-    
+    /**
+     * Constructor
+     * @param x
+     * @param y
+     * @param type
+     */
     public Flipper(int x, int y, int type){ 
         this.xPos =x;
         this.yPos = y;
         this.flipperType=typesOfFlipper[type];
         
     }
+    /**
+     * Triggering event that is proceeded by an action
+     */
     public void trigger(){
         if(collisionDetected()){
             action(this);
         }
     }
+    /**
+     * Detects a collision
+     * @return true if collision occurs
+     */
     private boolean collisionDetected(){
         return true; //TODO
     }
+    /**
+     * Switches the state of the flipper 
+     */
     @Override
-    public void action(Gadget outerWalls) {
+    public void action() {
         // TODO Auto-generated method stub
         
     }
-
+    /**
+     * Returns a string representation of flipper
+     */
     @Override
-    public String toString() {
+    public String toString(int width, int height) {
         String stringBuilder="";
-        stringBuilder += "x:"+this.xPos;
-        stringBuilder += "y:"+this.yPos;
-        stringBuilder += "Type: "+ this.flipperType;
+        if(isHorizontal){
+            stringBuilder+="--";
+        }
+        else if(!isHorizontal){
+            stringBuilder+="|\n|";
+        }
         return stringBuilder;
         
 
     }
+    /**
+     * Rotates flipper
+     * @param degrees 0-360
+     */
+    @Override
+    public void rotateGadget(int degrees) {
+        // TODO Auto-generated method stub
+        
+    }
+    
+    
+    
 }
