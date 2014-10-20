@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-    private Gadget[] gadgets; 
+    private List<Gadget> gadgets = new ArrayList<Gadget>(); 
     private int height; 
     private int width; 
 
@@ -47,6 +47,7 @@ public class Board {
 
     public void addGadget(Gadget gadget){ 
         //Add gadget to board. 
+        this.gadgets.add(gadget); 
         //checkRep()
     }
 
@@ -56,11 +57,11 @@ public class Board {
      * @param y - y position in board
      * @return - A char representation of the topmost character when layers are merged. 
      */
-    private char mergeBoard( List<String> layers, int x, int y){ 
-        //        List<String> layers = new ArrayList<String>(); 
-        //        for (Gadget gadget : this.gadgets){ 
-        //            layers.add(gadget.toString(this.width,this.height)); 
-        //        }
+    private char mergeBoard(int x, int y){ 
+        List<String> layers = new ArrayList<String>(); 
+        for (Gadget gadget : this.gadgets){ 
+            layers.add(gadget.toString(this.width,this.height)); 
+             }
 
         for (String layer : layers){ 
             String[] lines = layer.split("\n"); 
@@ -78,14 +79,14 @@ public class Board {
 
         //Merge Layers
         StringBuilder board = new StringBuilder(""); 
-        for (int y=0; y < height-1; y++){ 
-            for (int x=0; x<width-1; x++){        
+        for (int y=0; y < height; y++){ 
+            for (int x=0; x<width; x++){        
                 //Current position = x,y 
                 board.append(mergeBoard(x,y)); 
             }
             board.append("\n"); 
         }
-        return ""; 
+        return board.toString(); 
         //Idea 1
         //Make empty array of size (width, height)
         // Add walls (see OuterWalls)
