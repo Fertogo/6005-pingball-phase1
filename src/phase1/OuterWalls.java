@@ -38,9 +38,8 @@ public class OuterWalls implements Gadget {
     }
 
     @Override
-    public String toString(Gadget OuterWalls) {
-        int height = ((phase1.OuterWalls) OuterWalls).getHeight(); 
-        int width = ((phase1.OuterWalls) OuterWalls).getWidth(); 
+    public String toString(int width, int height) {
+
         char [][] wallArray; 
         System.out.println(height + " " + width); 
         wallArray = new char[height][width];

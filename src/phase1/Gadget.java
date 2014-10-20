@@ -100,7 +100,7 @@ public interface Gadget {
      * @param width: width of the board
      * @return: String representation of the individual Gadget
      */
-    public String toString(int height, int width);
+    public String toString(int width, int height);
     
     
 }
