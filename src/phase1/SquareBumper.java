@@ -24,7 +24,19 @@ public class SquareBumper implements Gadget {
     @Override
     public String toString(int height, int width) {
         
-        return null;
+        Board board = new Board(width, height);
+        char [][] wallArray = board.getArray();
+        wallArray[this.yPosition][this.xPosition] = '#';
+        
+        String boardToString = "";
+        for(int i=0; i<wallArray.length;i++){
+            for(int j=0; j< wallArray[0].length;j++){
+            boardToString += Character.toString(wallArray[i][j]);
+            }
+            boardToString += "\n";
+        }
+        
+        return boardToString;
     }
 
 }

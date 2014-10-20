@@ -59,7 +59,7 @@ public interface Gadget {
      * @return
      */
     public static Gadget flipper(int x, int y, String type){ 
-        return new Flipper(x,  y, size); 
+        return new Flipper(x,  y, type); 
     }
     
     /**

@@ -1,9 +1,11 @@
 package phase1;
 
 public class CircleBumper implements Gadget {
-
+    private int xPosition;
+    private int yPosition;
     public CircleBumper(int x, int y) {
-        // TODO Auto-generated constructor stub
+        this.xPosition = x;
+        this.yPosition = y;
     }
 
     @Override
@@ -20,8 +22,20 @@ public class CircleBumper implements Gadget {
 
     @Override
     public String toString(int height, int width) {
-        // TODO Auto-generated method stub
-        return null;
+        
+        Board board = new Board(width, height);
+        char [][] wallArray = board.getArray();
+        wallArray[this.yPosition][this.xPosition] = 'O';
+        
+        String boardToString = "";
+        for(int i=0; i<wallArray.length;i++){
+            for(int j=0; j< wallArray[0].length;j++){
+            boardToString += Character.toString(wallArray[i][j]);
+            }
+            boardToString += "\n";
+        }
+        
+        return boardToString;
     }
 
 }

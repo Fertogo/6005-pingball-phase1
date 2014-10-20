@@ -31,11 +31,7 @@ public class OuterWalls implements Gadget {
         return this.width; 
     }
     
-    @Override
-    public void action(Gadget outerWalls) {
-        // TODO Auto-generated method stub
-        
-    }
+   
 
     @Override
     public String toString(int width, int height) {
@@ -84,5 +80,17 @@ public class OuterWalls implements Gadget {
         }
 
      return board;
+    }
+
+    @Override
+    public void action() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void rotateGadget(int degrees) {
+        // TODO Auto-generated method stub
+        
     }
 }

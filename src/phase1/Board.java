@@ -7,21 +7,49 @@ public class Board {
     private Gadget[] gadgets; 
     private int height; 
     private int width; 
-    
+
     private void checkRep(){ 
         //No two gadgets have same x and y 
         //Gadgets are not outside board. 
     }
-    public void Board(int width, int height){ 
-        //Create outer walls and add to list
-        //checkRep()
+    public Board(int width, int height){ 
+        this.height= height;
+        this.width = width;
     }
-    
+    public char [][] getArray(){
+        char [][] wallArray = new char[height][width];
+
+        //Populate with space
+        for (int x = 0; x<width; x++){ 
+            for (int y = 0; y<height; y++){ 
+                wallArray[x][y] = ' '; 
+            }
+        }
+        //Draw the walls
+        //Top wall
+        for (int i=0; i<width; i++){ 
+            wallArray[i][0] = '.'; 
+        }
+        //Bottom wall
+        for (int i=0; i<width; i++){ 
+            wallArray[i][height-1] = '.';
+        }
+        //Left wall
+        for (int y=0; y<width; y++){ 
+            wallArray[0][y] = '.'; 
+        }
+        //Right wall
+        for (int y=0; y<width; y++){ 
+            wallArray[width-1][y] = '.'; 
+        }
+        return wallArray;
+    }
+
     public void addGadget(Gadget gadget){ 
         //Add gadget to board. 
         //checkRep()
     }
-    
+
     /**
      * 
      * @param x - x position in board
@@ -29,11 +57,11 @@ public class Board {
      * @return - A char representation of the topmost character when layers are merged. 
      */
     private char mergeBoard( List<String> layers, int x, int y){ 
-//        List<String> layers = new ArrayList<String>(); 
-//        for (Gadget gadget : this.gadgets){ 
-//            layers.add(gadget.toString(this.width,this.height)); 
-//        }
-        
+        //        List<String> layers = new ArrayList<String>(); 
+        //        for (Gadget gadget : this.gadgets){ 
+        //            layers.add(gadget.toString(this.width,this.height)); 
+        //        }
+
         for (String layer : layers){ 
             String[] lines = layer.split("\n"); 
             if (lines[y].charAt(x) == ' '){ 
@@ -43,11 +71,11 @@ public class Board {
         }
         return ' '; 
     }
-    
+
     @Override
     public String toString(){
 
-        
+
         //Merge Layers
         StringBuilder board = new StringBuilder(""); 
         for (int y=0; y < height-1; y++){ 
@@ -59,16 +87,16 @@ public class Board {
         }
         return ""; 
         //Idea 1
-               //Make empty array of size (width, height)
-               // Add walls (see OuterWalls)
-              // For each gadget:
-                // Get String representation
-                //if absorber?
-                // array[gadget.getX(), gadget.getY()] = gadget.toString()
-                // 
-              // Convert array toString; 
+        //Make empty array of size (width, height)
+        // Add walls (see OuterWalls)
+        // For each gadget:
+        // Get String representation
+        //if absorber?
+        // array[gadget.getX(), gadget.getY()] = gadget.toString()
+        // 
+        // Convert array toString; 
         //Idea 2
-                //toString(height,width) of every gadgets returns String representation of that gadget in an empty board. 
-                //Call toString of every array, merge returned strings into board. 
+        //toString(height,width) of every gadgets returns String representation of that gadget in an empty board. 
+        //Call toString of every array, merge returned strings into board. 
     }
 }
