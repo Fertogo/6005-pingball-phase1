@@ -2,16 +2,22 @@ package phase1;
 import java.awt.Rectangle;
 
 import physics.*; 
-/**
- * 
- * TODO: Specs for the interface
- *
- */
+
+/*
+ * A Gadget: 
+ * Every gadget has an (x,y) location, where x and y are integers in [0,19].
+ * Every gadget has a width and height, also integers in [0,19]Others are configurable
+ * Some gadgets have a coefficient of reflection, this is a multiplier applied to the ball's 
+ *      velocity after it bounces off the gadget. Default multiplier is 1.0. 
+ * Some gadgets have an orientation - how the gadget is rotated from its default orientation. 
+ *      This is given in degrees (clockwise). Default orientation is 0. 
+ * Some gadgets have triggers - an event that happens at the gadget. 
+ * Some gadgets have actions - A response that a gadget can make to a trigger happening somewhere on the board. 
+ */   
 public interface Gadget {
 
     
     /**
-
      * absorber stops ball and holds it. 
      * if not holding the ball or if previously rejected ball hos not left the absorber, 
      * then the absorber takes no action when triggered.   
@@ -104,7 +110,7 @@ public interface Gadget {
     /**
      * @param height: height of board
      * @param width: width of the board
-     * @return: String representation of the individual Gadget
+     * @return: String representation of the individual Gadget in the board. 
      */
     public String toString(int width, int height);
     
