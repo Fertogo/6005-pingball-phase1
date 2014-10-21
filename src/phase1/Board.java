@@ -76,7 +76,6 @@ public class Board {
     @Override
     public String toString(){
 
-
         //Merge Layers
         StringBuilder board = new StringBuilder(""); 
         for (int y=0; y < height; y++){ 
@@ -87,17 +86,6 @@ public class Board {
             board.append("\n"); 
         }
         return board.toString(); 
-        //Idea 1
-        //Make empty array of size (width, height)
-        // Add walls (see OuterWalls)
-        // For each gadget:
-        // Get String representation
-        //if absorber?
-        // array[gadget.getX(), gadget.getY()] = gadget.toString()
-        // 
-        // Convert array toString; 
-        //Idea 2
-        //toString(height,width) of every gadgets returns String representation of that gadget in an empty board. 
-        //Call toString of every array, merge returned strings into board. 
+        
     }
 }
