@@ -113,6 +113,16 @@ public interface Gadget {
      * @return: String representation of the individual Gadget in the board. 
      */
     public String toString(int width, int height);
+    /**
+     * 
+     * @return x position of the gadget
+     */
+    public int getX(); 
     
+    /**
+     * 
+     * @return y position of the gadget
+     */
+    public int getY(); 
     
 }
