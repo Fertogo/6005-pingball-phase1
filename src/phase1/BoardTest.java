@@ -16,7 +16,17 @@ public class BoardTest {
         board.addGadget(squareBumper); 
         board.addGadget(squareBumper2);
         System.out.println(board.toString()) ;
+        System.out.println(squareBumper.toString(20,20)); 
                
+    }
+    
+    public void testCheckRep(){ 
+        Board board = new Board(20,20); 
+        Gadget circleBumper = new CircleBumper(10,10);
+        Gadget circleBumper2 = new CircleBumper(10,10); 
+        board.addGadget(circleBumper); 
+        board.addGadget(circleBumper2); 
+        //TODO: Assert that checkrep fails
     }
 
 }
