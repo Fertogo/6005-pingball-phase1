@@ -1,7 +1,9 @@
 package phase1;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Board {
     private List<Gadget> gadgets = new ArrayList<Gadget>(); 
@@ -9,13 +11,33 @@ public class Board {
     private int width; 
 
     private void checkRep(){ 
-        //No two gadgets have same x and y 
-        //Gadgets are not outside board. 
+        
+        for (Gadget gadget : gadgets){ 
+            //No two gadgets have same x and y 
+            Set<String> positions = new HashSet<String>(); 
+            String position = "("+gadget.getX() +","+gadget.getY() + ")"; 
+            
+            assert(!positions.contains(position)); 
+            positions.add(position);
+            
+            //Gadgets are not outside board.             
+            assert (gadget.getX() <= width); 
+            assert(gadget.getY() <= height); 
+        }
+
     }
     public Board(int width, int height){ 
         this.height= height;
         this.width = width;
     }
+    
+    /**
+     * Step every gadget in the board. 
+     */
+    public void step(){ 
+        
+    }
+    
     public char [][] getArray(){
         char [][] wallArray = new char[height][width];
 
@@ -48,7 +70,7 @@ public class Board {
     public void addGadget(Gadget gadget){ 
         //Add gadget to board. 
         this.gadgets.add(gadget); 
-        //checkRep()
+        checkRep();
     }
 
     /**
