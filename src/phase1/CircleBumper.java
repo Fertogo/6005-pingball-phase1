@@ -1,18 +1,25 @@
 package phase1;
 
+import java.awt.Rectangle;
+
 import physics.Circle;
 import physics.Geometry;
 import physics.Vect;
 
 public class CircleBumper implements Gadget {
     private Vect position;
-    private Circle circle; 
+    private Circle circle;
+    private Rectangle gadgetArea; 
     
 
     public CircleBumper(Vect position) {
         this.position = position;
         int diameter = 1; 
         this.circle = new Circle(position.x(), position.y(), diameter/2); 
+        int posX = (int)(this.position.x());
+        int posY = (int)(this.position.y());  
+        this.gadgetArea = new Rectangle(posX, posY, posX+1, posY+1);
+
     }
 
     @Override
@@ -66,7 +73,8 @@ public class CircleBumper implements Gadget {
 
     @Override
     public boolean contains(Vect position) {
-        return this.position.equals(position); 
+        return gadgetArea.contains(position.x(),position.y());
+        //return this.position.equals(position); 
     }
 
 }

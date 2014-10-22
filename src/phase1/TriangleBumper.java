@@ -1,5 +1,7 @@
 package phase1;
 
+import java.awt.Rectangle;
+
 import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
@@ -10,6 +12,7 @@ public class TriangleBumper implements Gadget {
     private LineSegment wall1; 
     private LineSegment wall2; 
     private LineSegment longWall; 
+    private Rectangle gadgetArea; 
     
     private void checkRep(){ 
         System.out.println("Checking rep..."); 
@@ -23,12 +26,18 @@ public class TriangleBumper implements Gadget {
         this.position = position;      
         triangleDegree0(); 
         this.orientation= 0; 
+        int posX = (int)(this.position.x());
+        int posY = (int)(this.position.y());  
+        this.gadgetArea = new Rectangle(posX, posY, posX+1, posY+1);
         checkRep();
     }
     
     public TriangleBumper(Vect position, int orientation){ 
         this.position = position; 
         rotateGadget(orientation); 
+        int posX = (int)(this.position.x());
+        int posY = (int)(this.position.y());  
+        this.gadgetArea = new Rectangle(posX, posY, posX+1, posY+1);
         checkRep();
     }
 
@@ -235,7 +244,8 @@ public class TriangleBumper implements Gadget {
 
     @Override
     public boolean contains(Vect position) {
-        return this.position.equals(position); 
+        return gadgetArea.contains(position.x(),position.y());
+        //return this.position.equals(position); 
     }
 
 }
