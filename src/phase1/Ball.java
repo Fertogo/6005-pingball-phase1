@@ -57,7 +57,7 @@ public class Ball implements Gadget {
     }
     
     public void step(){
-        Vect delta = new Vect(velocity.angle().cos(), velocity.angle().sin());
+        Vect delta = new Vect(Math.round(velocity.angle().cos()), Math.round(velocity.angle().sin()));
         this.position = this.position.plus(delta);
     }
 
