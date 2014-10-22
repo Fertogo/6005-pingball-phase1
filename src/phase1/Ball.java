@@ -7,9 +7,13 @@ public class Ball implements Gadget {
     
     private Vect position;
     private Vect velocity;
-    public Ball(Vect position, Vect velocity) {
+    private double gravity;
+    private long time = System.currentTimeMillis();
+    private long timeDiff;
+    public Ball(Vect position, Vect velocity, double gravity) {
         this.position = position;
         this.velocity = velocity;
+        this.gravity = gravity;
     }
 
     @Override
@@ -26,7 +30,17 @@ public class Ball implements Gadget {
     public String toString(int width, int height) {
         Board board = new Board(width, height);
         char [][] wallArray = board.getArray();
-        wallArray[(int) this.position.y()][(int) this.position.x()] = '*';
+        if(this.position.y()>19){
+            this.position = new Vect(this.position.x(), 19);
+        }else if(this.position.y()<0){
+            this.position = new Vect(this.position.x(), 0);
+        }
+        if(this.position.x()>19){
+            this.position = new Vect(19,this.position.y());
+        }else if(this.position.x()<0){
+            this.position = new Vect(0, this.position.y());
+        }
+        wallArray[(int) Math.round(this.position.y())][(int) Math.round(this.position.x())] = '*';
         
         String boardToString = "";
         for(int i=0; i<wallArray.length;i++){
@@ -57,7 +71,8 @@ public class Ball implements Gadget {
     }
     
     public void step(){
-        Vect delta = new Vect(Math.round(velocity.angle().cos()), Math.round(velocity.angle().sin()));
+        Vect gravity = new Vect(0, this.gravity*(this.timeDiff));
+        Vect delta = new Vect(velocity.plus(gravity).angle().cos(), velocity.plus(gravity).angle().sin());
         this.position = this.position.plus(delta);
     }
 
@@ -67,15 +82,17 @@ public class Ball implements Gadget {
     
 
     public Vect getVelocity(){
-        return this.velocity;
+        Vect gravity = new Vect(0, this.gravity*(this.timeDiff));
+        return this.velocity.plus(gravity);
     }
 
+    
     @Override
     public Vect getNext() {
-        Vect delta = new Vect(Math.round(velocity.angle().cos()), Math.round(velocity.angle().sin()));
-        System.out.println("Delta: " + delta);
+        this.timeDiff = System.currentTimeMillis() - this.time;
+        Vect gravity = new Vect(0, this.gravity*(this.timeDiff));
+        Vect delta = new Vect(velocity.plus(gravity).angle().cos(), velocity.plus(gravity).angle().sin());
         return this.position.plus(delta);
-
 
     }
 

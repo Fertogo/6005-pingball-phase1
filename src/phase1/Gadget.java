@@ -81,8 +81,8 @@ public interface Gadget {
      * @param velocity: initial velocity of the ball
      * @return A ball
      */
-    public static Gadget ball(Vect position, Vect velocity){
-        return new Ball(position, velocity);
+    public static Gadget ball(Vect position, Vect velocity, double gravity){
+        return new Ball(position, velocity, gravity);
     }
     /**
      * Called when a gadget is triggered
