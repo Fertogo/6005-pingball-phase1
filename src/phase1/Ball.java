@@ -54,7 +54,6 @@ public class Ball implements Gadget {
             }
             boardToString += "\n";
         }
-        
         return boardToString;
     }
 

@@ -124,6 +124,8 @@ public class SquareBumper implements Gadget {
             System.out.println("Hit Left Wall of Square Bumper"); 
             newBallVelocity = Geometry.reflectWall(leftWall, currentBallVelocity);
         }
+        
+        System.out.println("New Ball Velocity" + newBallVelocity);
         ball.updateBall(currentBallPosition, newBallVelocity); 
     }
 
