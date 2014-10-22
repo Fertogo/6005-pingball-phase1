@@ -26,7 +26,9 @@ public class BoardTest {
     @Test
     public void testBouncingBall(){ 
         Board board = new Board(20,20); 
+
         Vect position = new Vect(2,5); 
+
         Vect velocity = new Vect(2,1); 
 
 
@@ -37,7 +39,7 @@ public class BoardTest {
         Ball ball = new Ball(position, velocity); 
         
         board.addBall(ball); 
-        int steps = 1000; 
+        int steps = 4; 
         for (int i=0; i<steps; i++){ 
             board.step(); 
             try {

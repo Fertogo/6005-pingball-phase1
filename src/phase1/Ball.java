@@ -73,8 +73,11 @@ public class Ball implements Gadget {
 
     @Override
     public Vect getNext() {
+
         Vect delta = new Vect(Math.round(position.angle().cos()), Math.round(position.angle().sin()));
         return this.position.plus(delta);
+
+
     }
 
    
