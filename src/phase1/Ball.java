@@ -1,7 +1,6 @@
 package phase1;
 
-import physics.Geometry;
-import physics.Vect;
+import physics.*;
 
 public class Ball implements Gadget {
     
@@ -32,7 +31,9 @@ public class Ball implements Gadget {
     public void action() {
 
     }
-
+    public Circle ballReturnCircle(){
+        return new Circle(position, .5);
+    }
     @Override
     public void rotateGadget(int degrees) {
 

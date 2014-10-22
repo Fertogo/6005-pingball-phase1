@@ -40,9 +40,7 @@ public class Absorber implements Gadget {
         this.positionPoint= new Vect(this.xPos, this.yPos);;
         this.absorberArea= new Rectangle(x, y, width, height);
     }
-    public Absorber(int x, int y, Rectangle size) {
-        // TODO Auto-generated constructor stub
-    }
+
     
     /**
      * Occurs when a ball hits it
@@ -60,10 +58,11 @@ public class Absorber implements Gadget {
         this.ballsStored+=1;
     }
     
+    //*
     
     @Override
     public void rotateGadget(int degrees) {
-        
+        //Empty
     }
    
     @Override
