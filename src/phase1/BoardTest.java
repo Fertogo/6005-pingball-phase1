@@ -11,9 +11,11 @@ public class BoardTest {
     @Test
     public void testMergeBoard() {
         Board board = new Board(20,20); 
-        //Gadget circleBumper = new CircleBumper(10,10); 
-        Gadget squareBumper = new SquareBumper(1,1); 
-        Gadget squareBumper2 = new SquareBumper(5,5); 
+        //Gadget circleBumper = new CircleBumper(10,10);
+        Vect vector = new Vect(1, 1);
+        Vect vector2 = new Vect(5, 5);
+        Gadget squareBumper = new SquareBumper(vector); 
+        Gadget squareBumper2 = new SquareBumper(vector2); 
         //board.addGadget(circleBumper);
         board.addGadget(squareBumper); 
         board.addGadget(squareBumper2);
@@ -26,7 +28,7 @@ public class BoardTest {
         Board board = new Board(20,20); 
         Vect position = new Vect(5,5); 
         Vect velocity = new Vect(1,1); 
-        Gadget ball = new Ball(position, velocity); 
+        Ball ball = new Ball(position, velocity); 
         
         board.addBall(ball); 
         board.step(); 

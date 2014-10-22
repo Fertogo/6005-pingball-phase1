@@ -23,7 +23,7 @@ public class OuterWalls {
         checkRep(); 
     }
     
-    public void collision(Gadget ball, int wall){ //0:Top 1:Right 2:Bottom 3:Left
+    public void collision(Ball ball, int wall){ //0:Top 1:Right 2:Bottom 3:Left
         Vect oldVelocity = ball.getVelocity(); 
         Vect newVelocity = null; 
         switch(wall){ 
