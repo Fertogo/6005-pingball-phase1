@@ -36,15 +36,19 @@ public class BoardTest {
     @Test
     public void testBouncingBall(){ 
         Board board = new Board(20,20); 
-        Vect position = new Vect(5,5); 
+        Vect position = new Vect(17,5); 
         Vect velocity = new Vect(2,1); 
 
+        Vect vector2 = new Vect(5, 5);
+        Gadget squareBumper = new SquareBumper(vector2); 
+        
+        board.addGadget(squareBumper);
 
         
         Ball ball = new Ball(position, velocity); 
         
         board.addBall(ball); 
-        int steps = 1000; 
+        int steps = 4; 
         for (int i=0; i<steps; i++){ 
             board.step(); 
             try {

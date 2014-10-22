@@ -24,6 +24,8 @@ public class OuterWalls {
     }
     
     public void collision(Ball ball, int wall){ //0:Top 1:Right 2:Bottom 3:Left
+        System.out.println("Hit a wall!"); 
+        System.out.println(ball.getPosition()); 
         Vect oldVelocity = ball.getVelocity(); 
         Vect newVelocity = null; 
         switch(wall){ 
@@ -47,6 +49,7 @@ public class OuterWalls {
         }
         Vect position = ball.getPosition(); 
         ball.updateBall(position,  newVelocity);
+
         
     }
     public int getHeight(){ 

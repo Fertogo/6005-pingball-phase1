@@ -72,7 +72,7 @@ public class Ball implements Gadget {
 
     @Override
     public Vect getNext() {
-        this.step();
+        //this.step();
         return this.position;
     }
 

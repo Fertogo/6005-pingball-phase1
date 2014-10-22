@@ -57,13 +57,14 @@ public class Board {
                 //Left wall collision
                 System.out.println("Hit Left Wall"); 
                 walls.collision(ball, 4);
+
             }
             else if (newBallPosition.x() == width-1){ 
                 //Right wall collision
                 System.out.println("Hit Right Wall"); 
 
                 walls.collision(ball, 2);
-
+                break; 
             }
             
             if (newBallPosition.y() == 0) { 
@@ -85,9 +86,11 @@ public class Board {
             for (Gadget gadget : gadgets){ 
                 if (gadget.getPosition().equals(newBallPosition)){ 
                     gadget.collision(ball); 
+                    break; 
                 }
-                else ball.step(); 
             }
+            System.out.println("Ball is allowed to move to position "+ newBallPosition.toString()); 
+            ball.step(); 
         }
         System.out.println(this.toString());
     }
