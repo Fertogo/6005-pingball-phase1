@@ -1,5 +1,8 @@
 package phase1;
 
+import java.awt.Rectangle;
+
+import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
 
@@ -9,6 +12,7 @@ public class TriangleBumper implements Gadget {
     private LineSegment wall1; 
     private LineSegment wall2; 
     private LineSegment longWall; 
+    private Rectangle gadgetArea; 
     
     private void checkRep(){ 
         System.out.println("Checking rep..."); 
@@ -21,12 +25,19 @@ public class TriangleBumper implements Gadget {
     public TriangleBumper(Vect position) {
         this.position = position;      
         triangleDegree0(); 
+        this.orientation= 0; 
+        int posX = (int)(this.position.x());
+        int posY = (int)(this.position.y());  
+        this.gadgetArea = new Rectangle(posX, posY, posX+1, posY+1);
         checkRep();
     }
     
     public TriangleBumper(Vect position, int orientation){ 
         this.position = position; 
         rotateGadget(orientation); 
+        int posX = (int)(this.position.x());
+        int posY = (int)(this.position.y());  
+        this.gadgetArea = new Rectangle(posX, posY, posX+1, posY+1);
         checkRep();
     }
 
@@ -56,11 +67,13 @@ public class TriangleBumper implements Gadget {
      * Changes orientation of this to a triangle with an orientation of 180 degrees
      */
     private void triangleDegree180(){ 
+        System.out.println("Rotating triangle to 180"); 
         int x = (int)(this.position.x());
         int y = (int)(this.position.y()); 
         this.wall1 = new LineSegment(x,y+1,x+1,y+1); 
         this.wall2 = new LineSegment(x+1,y,x+1,y+1); 
         this.longWall = new LineSegment(x,y+1,x+1,y); 
+        System.out.println(longWall.toString()); 
     }
     
     /**
@@ -84,14 +97,16 @@ public class TriangleBumper implements Gadget {
     public void rotateGadget(int degrees) {
         int newOrientation = (this.orientation+degrees) %360; 
         switch(newOrientation){ 
-        case(0): triangleDegree0(); 
-        case(90): triangleDegree90(); 
-        case(180): triangleDegree180(); 
-        case(270): triangleDegree270(); 
+        case(0): triangleDegree0(); break; 
+        case(90): triangleDegree90(); break;
+        case(180): triangleDegree180(); break;
+        case(270): triangleDegree270(); break;
         }
         this.orientation = newOrientation; 
         System.out.println(this.orientation); 
         checkRep(); 
+        System.out.println(longWall.toString()); 
+
    
     }
 
@@ -130,7 +145,96 @@ public class TriangleBumper implements Gadget {
 
     @Override
     public void collision(Ball ball) {
+        System.out.println("Collision with a TriangleBumper!"); 
+        Vect currentBallVelocity = ball.getVelocity(); 
+        Vect currentBallPosition = ball.getPosition(); 
+        Vect newBallVelocity = new Vect(0,0); 
+        double ballX = currentBallPosition.x(); 
+        double ballY = currentBallPosition.y(); 
         
+        //System.out.println(currentBallPosition.toString());
+        //Check Corners
+        if (ballX > this.position.x() + 1 && ballY > this.position.y()){ 
+            //Hitting the top right corner of Bumper
+            //System.out.println("TOP-RIGHT-CORNER");
+
+            newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
+        }
+        else if (ballX < this.position.x() && ballY > this.position.y()){ 
+            //Hitting the top left corner of Bumper
+            //System.out.println("TOP-LEFT-CORNER");
+            newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
+        }
+        else if (ballX < this.position.x() && ballY > this.position.y()+1){ 
+            //Hitting the bottom left corner of Bumper
+            //System.out.println("BOTTOM-LEFT-CORNER");
+            newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
+        }
+        else if (ballX > this.position.x()+1 && ballY > this.position.y()+1){ 
+            //Hitting the bottom right corner of Bumper
+            //System.out.println("BOTTOM=RIGHT-CORNER");
+            newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
+        }
+        //Check which wall was hit
+        else if(ballY < this.position.y() && ballX >= this.position.x() && ballX <= this.position.x()+1 ){ 
+            //Hitting top wall
+            //System.out.println("TOP"); 
+            //System.out.println(longWall.toString()) ;
+            switch(this.orientation){ 
+           
+            case(0):  newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
+            case(90): newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
+            case(180): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); System.out.println(newBallVelocity); break;
+            case(270): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
+            
+            }
+           
+        }
+        else if(ballY >= this.position.y()+1){ 
+            //Hitting bottom wall
+            //System.out.println("BOTTOM");
+            switch(this.orientation){ 
+
+            case(0):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
+            case(90): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
+            case(180): newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
+            case(270): newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
+            
+            }
+        }
+        else if(ballX >= this.position.x()+1){ 
+            //Hitting right wall
+            //System.out.println("RIGHT");
+            //System.out.println(longWall.toString()); 
+            switch(this.orientation){ 
+
+            case(0):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
+            case(90): newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
+            case(180): newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
+            case(270): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
+            
+            }        }
+        else if(ballX <= this.position.x()){ 
+            //Hitting left wall
+            //System.out.println("LEFT");
+            switch(this.orientation){ 
+            
+            case(0):  newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
+            case(90): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
+            case(180): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
+            case(270): newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
+            
+            }  
+   
+        }
+        else{
+            System.err.println("ERROR: Detected Collision, but can't figure out which side ball hit!"); 
+        }
+        
+//        System.out.println("Old Ball Velocity: " + ball.getVelocity().toString());
+//        System.out.println("New Ball Velocity: " + newBallVelocity.toString());
+
+        ball.updateBall(currentBallPosition, newBallVelocity); 
     }
 
     @Override
@@ -139,8 +243,9 @@ public class TriangleBumper implements Gadget {
     }
 
     @Override
-    public boolean contains(Vect pos) {
-        return this.position.equals(position); 
+    public boolean contains(Vect position) {
+        return gadgetArea.contains(position.x(),position.y());
+        //return this.position.equals(position); 
     }
 
 }

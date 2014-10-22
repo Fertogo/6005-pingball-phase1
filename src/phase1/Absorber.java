@@ -142,9 +142,9 @@ public class Absorber implements Gadget {
         }
         
         return boardToString;
-        
-        
+      
     }
+
     
     
     @Override
@@ -164,6 +164,6 @@ public class Absorber implements Gadget {
     
     
     
-    
+
 }
     

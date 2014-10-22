@@ -13,7 +13,7 @@ import physics.Vect;
  */
 public class SquareBumper implements Gadget {
     private Vect position;
-    private Rectangle area; 
+    private Rectangle gadgetArea; 
     private LineSegment leftWall; 
     private LineSegment rightWall; 
     private LineSegment bottomWall; 
@@ -24,23 +24,26 @@ public class SquareBumper implements Gadget {
         int y = (int)(position.y()); 
 
         this.position = position;
-        this.area = new Rectangle(x, y, 1,1);
+        
+        int posX = (int)(this.position.x());
+        int posY = (int)(this.position.y());  
+        this.gadgetArea = new Rectangle(posX, posY, posX+1, posY+1);
         
         //Create walls representing square bumper. 
         this.topWall = new LineSegment(x,y,x+1,y); 
         this.rightWall = new LineSegment(x+1,y,x+1,y+1); 
-        this.bottomWall = new LineSegment(x,y+1,x+1,y-1); 
+        this.bottomWall = new LineSegment(x,y+1,x+1,y+1); 
         this.leftWall = new LineSegment(x,y,x,y+1); 
     }
 
     @Override
     public void action() {
-
+        //TODO: Implement this
     }
 
     @Override
     public void rotateGadget(int degrees) {
-        //Not Applicable because symmetry. 
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -60,8 +63,6 @@ public class SquareBumper implements Gadget {
         
         return boardToString;
     }
-
-   
 
     @Override
     public Vect getPosition() {
@@ -124,6 +125,8 @@ public class SquareBumper implements Gadget {
             System.out.println("Hit Left Wall of Square Bumper"); 
             newBallVelocity = Geometry.reflectWall(leftWall, currentBallVelocity);
         }
+        
+        System.out.println("New Ball Velocity" + newBallVelocity);
         ball.updateBall(currentBallPosition, newBallVelocity); 
     }
 
@@ -133,9 +136,9 @@ public class SquareBumper implements Gadget {
     }
 
     @Override
-    public boolean contains(Vect position) {
-        
-        return this.position.equals(position); 
+    public boolean contains(Vect position) {  
+        return gadgetArea.contains(position.x(),position.y());
+        //return this.position.equals(position); 
     }
 
 }

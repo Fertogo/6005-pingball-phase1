@@ -15,7 +15,7 @@ public class Board {
 
     private int height; 
     private int width; 
-    private double gravity = 25;
+    private double gravity = 25; 
     
     private void checkRep(){ 
         Set<Vect> positions = new HashSet<Vect>(); 
@@ -82,7 +82,7 @@ public class Board {
                 walls.collision(ball, 2);
             }
             
-            
+            //System.out.println(newBallPosition.toString());
             //Check for collisions in other gadgets
             for (Gadget gadget : gadgets){ 
                 if (gadget.contains(newBallPosition)){ 
@@ -93,7 +93,15 @@ public class Board {
             //System.out.println("Ball is allowed to move to position "+ newBallPosition.toString()); 
             ball.step(); 
         }
-        System.out.println(this.toString());
+        System.out.println(this.toString()); //Print the board. 
+    }
+    
+    /**
+     * Steps the board mulipletimes
+     * @param steps: numper of times to step the board
+     */
+    public void step(int steps){ 
+       for (int i=0; i<steps; i++) step();  
     }
     
     public char [][] getArray(){
@@ -178,10 +186,6 @@ public class Board {
             board.append("\n"); 
         }
         return board.toString(); 
-        
-    }
-    public void updateBoard(Ball ball, Vect plus) {
-        // TODO Auto-generated method stub
         
     }
 
