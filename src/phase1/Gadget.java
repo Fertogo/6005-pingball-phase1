@@ -16,7 +16,6 @@ import physics.*;
  */   
 public interface Gadget {
 
-    
     /**
      * absorber stops ball and holds it. 
      * if not holding the ball or if previously rejected ball hos not left the absorber, 
@@ -74,15 +73,7 @@ public interface Gadget {
 
     }
     
-    /**
-     * Creates the board's outerWalls
-     * @param width - Desired width of the board
-     * @param height - Desired height of the wall
-     * @return - Gadget representing the outerWalls of the board. 
-     */
-    public static Gadget outerWalls(int width, int height){ 
-        return new OuterWalls(width, height); 
-    }
+
     /**
      * Creates a ball
      * @param x: x position of the ball 
@@ -90,8 +81,8 @@ public interface Gadget {
      * @param velocity: initial velocity of the ball
      * @return A ball
      */
-    public static Gadget ball(int x, int y, Vect velocity){
-        return new Ball(x, y, velocity);
+    public static Gadget ball(Vect position, Vect velocity){
+        return new Ball(position, velocity);
     }
     /**
      * Called when a gadget is triggered
@@ -114,6 +105,29 @@ public interface Gadget {
      */
     public String toString(int width, int height);
 
+    /**
+     * 
+     * @return Vector representing the position of the object
+     */
+    public Vect getPosition();
+
+     /**
+      * 
+      * @return where the gadget wants to be in the next time step. 
+      */
+    public Vect getNext();
+
+    /**
+     * Adjusts a ball after a collision. 
+     * @param ball: ball that is about to collide with gadget. 
+     */
     public void collision(Ball ball);
+
+    /**
+     * Updates gadget after one timestep
+     */
+    public void step(); 
+    
+
     
 }

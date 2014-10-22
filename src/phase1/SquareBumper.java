@@ -1,5 +1,7 @@
 package phase1;
 
+import physics.Vect;
+
 public class SquareBumper implements Gadget {
     private int xPosition;
     private int yPosition;
@@ -37,8 +39,28 @@ public class SquareBumper implements Gadget {
         return boardToString;
     }
 
+   
+
+    @Override
+    public Vect getPosition() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Vect getNext() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     @Override
     public void collision(Ball ball) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void step() {
         // TODO Auto-generated method stub
         
     }

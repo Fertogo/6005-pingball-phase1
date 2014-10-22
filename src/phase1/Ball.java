@@ -7,7 +7,7 @@ public class Ball implements Gadget {
     
     private Vect position;
     private Vect velocity;
-    public Ball(int x, int y, Vect velocity) {
+    public Ball(Vect position, Vect velocity) {
         this.position = position;
         this.velocity = velocity;
     }
@@ -50,8 +50,7 @@ public class Ball implements Gadget {
         ball.updateBall(ball.getPosition(), ballCollision.v1);
         
     }
-    
-    private void updateBall(Vect position, Vect velocity) {
+    public void updateBall(Vect position, Vect velocity) {
         this.position = position;
         this.velocity = velocity;
         
@@ -69,5 +68,17 @@ public class Ball implements Gadget {
 
     public Vect getVelocity(){
         return this.velocity;
+    }
+
+    @Override
+    public Vect getNext() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void step() {
+        // TODO Auto-generated method stub
+        
     }
 }

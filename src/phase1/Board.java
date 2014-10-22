@@ -1,23 +1,86 @@
 package phase1;
+import physics.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import physics.Vect;
 
 public class Board {
     private List<Gadget> gadgets = new ArrayList<Gadget>(); 
+    private List<Gadget> balls = new ArrayList<Gadget>(); 
+    private OuterWalls walls; 
+
     private int height; 
     private int width; 
 
     private void checkRep(){ 
-        //No two gadgets have same x and y 
-        //Gadgets are not outside board. 
+        Set<Vect> positions = new HashSet<Vect>(); 
+        for (Gadget gadget : gadgets){ 
+            //No two gadgets have same x and y 
+            
+            Vect position = gadget.getPosition(); 
+            
+            assert(!positions.contains(position)); 
+            positions.add(position);          
+            //Gadgets are not outside board.             
+            assert (position.x() <= width); 
+            assert(position.y() <= height); 
+        }
+        for (Gadget ball: balls){ 
+            Vect positionBall = ball.getPosition(); 
+            assert(!positions.contains(positionBall)); 
+            positions.add(positionBall); 
+            assert (positionBall.x() <= width); 
+            assert(positionBall.y() <= height);
+        }
     }
+    
     public Board(int width, int height){ 
         this.height= height;
         this.width = width;
+        walls = new OuterWalls(width,height); 
     }
+    
+    /**
+     * Step every gadget in the board. Check if ball is going to collide. 
+     */
+    public void step(){ 
+        for (Gadget ball : balls){ 
+            Vect newBallPosition = ball.getNext(); 
+            //Check for wall collisions
+            if (newBallPosition.x() == 0) { 
+                //Left wall collision
+                walls.collision(ball, 4);
+            }
+            else if (newBallPosition.x() == width){ 
+                //Right wall collision
+                walls.collision(ball, 2);
+
+            }
+            
+            if (newBallPosition.y() == 0) { 
+                //Top Wall collision
+                walls.collision(ball, 1);
+            }
+            
+            else if (newBallPosition.y() == height){ 
+                //Bottom Wall collision
+                walls.collision(ball, 3);
+            }
+            
+            //Check for collisions in other gadgets
+            for (Gadget gadget : gadgets){ 
+                if (gadget.getPosition().equals(newBallPosition)){ 
+                    gadget.collision(ball); 
+                }
+                else ball.step(); 
+            }
+        }
+    }
+    
     public char [][] getArray(){
         char [][] wallArray = new char[height][width];
 
@@ -50,7 +113,7 @@ public class Board {
     public void addGadget(Gadget gadget){ 
         //Add gadget to board. 
         this.gadgets.add(gadget); 
-        //checkRep()
+        checkRep();
     }
 
     /**
@@ -78,7 +141,6 @@ public class Board {
     @Override
     public String toString(){
 
-
         //Merge Layers
         StringBuilder board = new StringBuilder(""); 
         for (int y=0; y < height; y++){ 
@@ -89,18 +151,7 @@ public class Board {
             board.append("\n"); 
         }
         return board.toString(); 
-        //Idea 1
-        //Make empty array of size (width, height)
-        // Add walls (see OuterWalls)
-        // For each gadget:
-        // Get String representation
-        //if absorber?
-        // array[gadget.getX(), gadget.getY()] = gadget.toString()
-        // 
-        // Convert array toString; 
-        //Idea 2
-        //toString(height,width) of every gadgets returns String representation of that gadget in an empty board. 
-        //Call toString of every array, merge returned strings into board. 
+        
     }
     public void updateBoard(Ball ball, Vect plus) {
         // TODO Auto-generated method stub
