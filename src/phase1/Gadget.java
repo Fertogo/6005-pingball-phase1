@@ -135,5 +135,33 @@ public interface Gadget {
      */
     public boolean contains(Vect position); 
 
+    public static char [][] getArray(int height,int width){
+        char [][] wallArray = new char[height][width];
+
+        //Populate with space
+        for (int x = 0; x<width; x++){ 
+            for (int y = 0; y<height; y++){ 
+                wallArray[x][y] = ' '; 
+            }
+        }
+        //Draw the walls
+        //Top wall
+        for (int i=0; i<width; i++){ 
+            wallArray[i][0] = '.'; 
+        }
+        //Bottom wall
+        for (int i=0; i<width; i++){ 
+            wallArray[i][height-1] = '.';
+        }
+        //Left wall
+        for (int y=0; y<width; y++){ 
+            wallArray[0][y] = '.'; 
+        }
+        //Right wall
+        for (int y=0; y<width; y++){ 
+            wallArray[width-1][y] = '.'; 
+        }
+        return wallArray;
+    }
     
 }

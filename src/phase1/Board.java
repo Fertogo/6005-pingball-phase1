@@ -40,8 +40,8 @@ public class Board {
     }
     
     public Board(int width, int height){ 
-        this.height= height;
-        this.width = width;
+        this.height= height+2; //Add two to compensate for walls. 
+        this.width = width+2;
         walls = new OuterWalls(width,height); 
     }
     

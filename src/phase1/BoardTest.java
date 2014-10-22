@@ -91,6 +91,23 @@ public class BoardTest {
 
     }
     
+    @Test public void testBoardGadgetInCorner(){ 
+        Board board = new Board(20,20); 
+        Gadget squareBumper = new SquareBumper(new Vect(0,0)); 
+        board.addGadget(squareBumper); 
+        board.step(); 
+        Gadget circleBumper = new CircleBumper(new Vect(0,19)); 
+        board.addGadget(circleBumper); 
+        board.step(); 
+        Gadget triangleBumper = new TriangleBumper(new Vect(19,0),90); 
+        Gadget triangleBumper2 = new TriangleBumper(new Vect(19,19), 180); 
+        board.addGadget(triangleBumper); 
+        board.addGadget(triangleBumper2); 
+        board.step(); 
+
+        
+    }
+    
 //    public void testCheckRep(){ 
 //        Board board = new Board(20,20); 
 //        Gadget circleBumper = new CircleBumper(10,10);

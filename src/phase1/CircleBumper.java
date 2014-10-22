@@ -13,11 +13,11 @@ public class CircleBumper implements Gadget {
     
 
     public CircleBumper(Vect position) {
-        this.position = position;
         int diameter = 1; 
         this.circle = new Circle(position.x(), position.y(), diameter/2); 
-        int posX = (int)(this.position.x());
-        int posY = (int)(this.position.y());  
+        int posX = (int)(position.x())+1;
+        int posY = (int)(position.y())+1; 
+        this.position = new Vect(posX, posY); 
         this.gadgetArea = new Rectangle(posX, posY, posX+1, posY+1);
 
     }
@@ -34,8 +34,7 @@ public class CircleBumper implements Gadget {
     @Override
     public String toString(int height, int width) {
         
-        Board board = new Board(width, height);
-        char [][] wallArray = board.getArray();
+        char [][] wallArray = Gadget.getArray(height,width); 
         wallArray[(int) this.position.y()][(int) this.position.x()] = 'O';
         
         String boardToString = "";
