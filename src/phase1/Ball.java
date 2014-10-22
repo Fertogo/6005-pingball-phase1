@@ -75,8 +75,6 @@ public class Ball implements Gadget {
         Vect delta = new Vect(Math.round(velocity.angle().cos()), Math.round(velocity.angle().sin()));
         System.out.println("Delta: " + delta);
         return this.position.plus(delta);
-
-
     }
 
     @Override
