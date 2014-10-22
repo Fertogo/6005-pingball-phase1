@@ -50,26 +50,36 @@ public class Board {
     public void step(){ 
         for (Ball ball : balls){ 
             Vect newBallPosition = ball.getNext(); 
+            
+            System.out.println(newBallPosition); 
             //Check for wall collisions
             if (newBallPosition.x() == 0) { 
                 //Left wall collision
+                System.out.println("Hit Left Wall"); 
                 walls.collision(ball, 4);
             }
-            else if (newBallPosition.x() == width){ 
+            else if (newBallPosition.x() == width-1){ 
                 //Right wall collision
+                System.out.println("Hit Right Wall"); 
+
                 walls.collision(ball, 2);
 
             }
             
             if (newBallPosition.y() == 0) { 
                 //Top Wall collision
+                System.out.println("Hit Top Wall"); 
+
                 walls.collision(ball, 1);
             }
             
-            else if (newBallPosition.y() == height){ 
+            else if (newBallPosition.y() == height-1){ 
                 //Bottom Wall collision
+                System.out.println("Hit Bottom Wall"); 
+
                 walls.collision(ball, 3);
             }
+            
             
             //Check for collisions in other gadgets
             for (Gadget gadget : gadgets){ 
