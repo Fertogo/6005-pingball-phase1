@@ -116,6 +116,12 @@ public interface Gadget {
      * 
      * @return Vector representing the position of the object
      */
-    public Vect getPosition(); 
+    public Vect getPosition();
+
+     /**
+      * 
+      * @return where the gadget wants to be in the next time step. 
+      */
+    public Vect getNext(); 
     
 }
