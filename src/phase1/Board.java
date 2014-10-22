@@ -84,7 +84,7 @@ public class Board {
             
             //Check for collisions in other gadgets
             for (Gadget gadget : gadgets){ 
-                if (gadget.getPosition().equals(newBallPosition)){ 
+                if (gadget.contains(newBallPosition)){ 
                     gadget.collision(ball); 
                     break; 
                 }
