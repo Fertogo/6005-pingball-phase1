@@ -46,9 +46,10 @@ public class BallTest {
         int steps = 20;
         for(int i=1; i<steps; i++){
             System.out.println(ball.getPosition());
+            System.out.println(sBumper2.contains(ball.getPosition()));
             System.out.println(sBumper3.contains(ball.getPosition()));
             board.step();
-            Thread.sleep(200);
+            Thread.sleep(100);
         }
     }
 }
