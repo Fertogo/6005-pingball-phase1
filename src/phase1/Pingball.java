@@ -4,17 +4,16 @@ import physics.Vect;
 
 public class Pingball {
     public static void main(String[] boardname){ 
-        Board board; 
+        Board board = new Board(20,20); 
         if (boardname.length == 0)  board = defaultBoard(); 
         else{ 
             switch(boardname[0]){ 
             case("absorber"): board = absorberBoard(); 
-            case("flippers"): board = flipperBoard(); 
+            case("flippers"): board = flipperBoard();
+            case("default"): board = defaultBoard(); 
             }
             
-        while (true){ 
-            board.step(); 
-        }
+        board.run(); 
         
         }
         

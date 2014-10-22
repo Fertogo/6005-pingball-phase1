@@ -134,6 +134,10 @@ public class Board {
         this.balls.add(ball); 
         checkRep(); 
     }
+    
+    public void run(){ 
+        while (true) this.step(); 
+    }
 
     /**
      * 
