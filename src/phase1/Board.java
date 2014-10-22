@@ -9,6 +9,7 @@ import java.util.Set;
 public class Board {
     private List<Gadget> gadgets = new ArrayList<Gadget>(); 
     private List<Gadget> balls = new ArrayList<Gadget>(); 
+    private OuterWalls walls; 
 
     private int height; 
     private int width; 
@@ -38,6 +39,7 @@ public class Board {
     public Board(int width, int height){ 
         this.height= height;
         this.width = width;
+        walls = new OuterWalls(width,height); 
     }
     
     /**
@@ -46,6 +48,28 @@ public class Board {
     public void step(){ 
         for (Gadget ball : balls){ 
             Vect newBallPosition = ball.getNext(); 
+            //Check for wall collisions
+            if (newBallPosition.x() == 0) { 
+                //Left wall collision
+                walls.collision(ball, 4);
+            }
+            else if (newBallPosition.x() == width){ 
+                //Right wall collision
+                walls.collision(ball, 2);
+
+            }
+            
+            if (newBallPosition.y() == 0) { 
+                //Top Wall collision
+                walls.collision(ball, 1);
+            }
+            
+            else if (newBallPosition.y() == height){ 
+                //Bottom Wall collision
+                walls.collision(ball, 3);
+            }
+            
+            //Check for collisions in other gadgets
             for (Gadget gadget : gadgets){ 
                 if (gadget.getPosition().equals(newBallPosition)){ 
                     gadget.collision(ball); 
