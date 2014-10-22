@@ -1,4 +1,5 @@
 package phase1;
+import physics.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -7,35 +8,51 @@ import java.util.Set;
 
 public class Board {
     private List<Gadget> gadgets = new ArrayList<Gadget>(); 
+    private List<Gadget> balls = new ArrayList<Gadget>(); 
+
     private int height; 
     private int width; 
 
     private void checkRep(){ 
-        
+        Set<Vect> positions = new HashSet<Vect>(); 
         for (Gadget gadget : gadgets){ 
             //No two gadgets have same x and y 
-            Set<String> positions = new HashSet<String>(); 
-            String position = "("+gadget.getX() +","+gadget.getY() + ")"; 
+            
+            Vect position = gadget.getPosition(); 
             
             assert(!positions.contains(position)); 
-            positions.add(position);
-            
+            positions.add(position);          
             //Gadgets are not outside board.             
-            assert (gadget.getX() <= width); 
-            assert(gadget.getY() <= height); 
+            assert (position.x() <= width); 
+            assert(position.y() <= height); 
         }
-
+        for (Gadget ball: balls){ 
+            Vect positionBall = ball.getPosition(); 
+            assert(!positions.contains(positionBall)); 
+            positions.add(positionBall); 
+            assert (positionBall.x() <= width); 
+            assert(positionBall.y() <= height);
+        }
     }
+    
     public Board(int width, int height){ 
         this.height= height;
         this.width = width;
     }
     
     /**
-     * Step every gadget in the board. 
+     * Step every gadget in the board. Check if ball is going to collide. 
      */
     public void step(){ 
-        
+        for (Gadget ball : balls){ 
+            Vect newBallPosition = ball.getNext(); 
+            for (Gadget gadget : gadgets){ 
+                if (gadget.getPosition().equals(newBallPosition)){ 
+                    gadget.collision(ball); 
+                }
+                else ball.step(); 
+            }
+        }
     }
     
     public char [][] getArray(){
