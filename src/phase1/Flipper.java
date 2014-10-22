@@ -23,7 +23,7 @@ public class Flipper implements Gadget{
     private int yPos;
     //Int type  representing left(0) or right flipper(1)
     private int flipperType; 
-//    private final String [] typesOfFlipper = {"left", "right"} ;
+    //    private final String [] typesOfFlipper = {"left", "right"} ;
     private boolean isHorizontal;
     private LineSegment lineSegment; 
     private Vect pivotPoint; 
@@ -62,6 +62,26 @@ public class Flipper implements Gadget{
      * @return
      */
     public Ball hitBall(Ball ball){
+        Ball ball =;
+    
+        if(!isHorizontal){
+            //left  --CounterClockwise 90
+            if(this.flipperType ==0){
+                    ball =new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, -1080., ball, ball.getVelocity()));
+            }
+            //right  -- Clockwise 90
+            if(this.flipperType ==1){
+                   ball =new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, 1080., ball, ball.getVelocity()));
+            }
+        }else if(isHorizontal){
+            //left  -- Clockwise
+            if(this.flipperType ==0){
+                ball =new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, 1080., ball, ball.getVelocity()));
+            }
+            //right  -- CounterClockwise
+            if(this.flipperType ==1){
+                ball new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, -1080., ball, ball.getVelocity()));
+            }
         return new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, 1080., ball, ball.getVelocity()));
     }
 

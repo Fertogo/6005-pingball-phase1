@@ -22,8 +22,10 @@ public class Absorber implements Gadget {
     private int width;
     private int height;
     private int ballsStored;
-    private Rectangle rectangle; //TODO: Change to meaningfull name. 
-    private Point positionPoint; 
+    private Rectangle absorberArea; 
+    private Vect positionPoint; 
+    
+
     /**
      * 
      * @param x-xPosition
@@ -35,12 +37,13 @@ public class Absorber implements Gadget {
         this.yPos = y;
         this.width=width;
         this.height=height;
-        this.positionPoint= new Point(this.xPos, this.yPos);;
-        this.rectangle= new Rectangle(x, y, width, height);
+        this.positionPoint= new Vect(this.xPos, this.yPos);;
+        this.absorberArea= new Rectangle(x, y, width, height);
     }
     public Absorber(int x, int y, Rectangle size) {
         // TODO Auto-generated constructor stub
     }
+    
     /**
      * Occurs when a ball hits it
      */
@@ -60,19 +63,9 @@ public class Absorber implements Gadget {
     
     @Override
     public void rotateGadget(int degrees) {
-        // TODO Auto-generated method stub
         
     }
-    @Override
-    public Vect getPosition() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    @Override
-    public Vect getNext() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+   
     @Override
     public void collision(Ball ball) {
         // TODO Auto-generated method stub
@@ -86,17 +79,12 @@ public class Absorber implements Gadget {
         
     }
     
-    public void shootBall(){
-        
+    public void shootBall(Ball ball){
+        ball.updateBall(pivotPosition, new Vect(0, 50) );
+        this.ballsStored--;
     }
     
-    
-    
-    @Override
-    public boolean contains(Vect pos) {
-        return rectangle.contains(pos.x(), pos.y()); 
-    }
-    
+
     /**
      * Store ball in one iteration and shoots it back in the next
      * 
@@ -136,6 +124,22 @@ public class Absorber implements Gadget {
         return boardToString;
         
         
+    }
+    
+    
+    @Override
+    public Vect getPosition() {
+       return this.positionPoint;
+    }
+    @Override
+    public Vect getNext() {
+       return positionPoint;
+    }
+    
+    
+    @Override
+    public boolean contains(Vect pos) {
+        return absorberArea.contains(pos.x(), pos.y()); 
     }
     
     
