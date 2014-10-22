@@ -56,4 +56,80 @@ public class GadgetTest {
         for (int i = 0; i<steps; i++) board.step(); 
         //TODO: Assert Something! 
     }
+    
+    /**
+     * SquareBumper Testing Strategy: 
+     *      Make sure ball is reflected correctly when it hits bumper.
+     *      Partitions:
+     *          Ball hits top side of Bumper
+     *          Ball hits bottom side of Bumper
+     *          Ball hits right side of Bumper
+     *          Ball hits left side of Bumper
+     *          Ball hits a side at an angle
+     *          Ball hits corners of bumper
+     *      
+     */
+    
+    //Test when the ball hits the top of the Bumper
+    @Test public void testSquareBumperTopSideHit(){ 
+        Board board = new Board (20,20); 
+        Gadget squareBumper = new SquareBumper(new Vect(5,5)); 
+        board.addGadget(squareBumper);
+        Ball ball = new Ball (new Vect(5,1), new Vect(0,1)); 
+        board.addBall(ball);
+        
+        int steps = 5; 
+        for (int i=1; i<steps; i++){ 
+            board.step();
+        }
+        assertEquals(new Vect(5,3), ball.getPosition()); 
+    }
+    
+    //Test when the ball hits the Bottom of the Bumper
+    @Test public void testSquareBumperBottomSideHit(){ 
+        Board board = new Board (20,20); 
+        Gadget squareBumper = new SquareBumper(new Vect(5,5)); 
+        board.addGadget(squareBumper);
+        Ball ball = new Ball (new Vect(5,8), new Vect(0,-1)); 
+        board.addBall(ball);
+        
+        int steps = 3; 
+        for (int i=1; i<=steps; i++){ 
+            board.step();
+        }
+        assertEquals(new Vect(5,8), ball.getPosition()); 
+    }
+    
+    //Test when the ball hits the Left of the Bumper
+    @Test public void testSquareBumperLeftSideHit(){ 
+        Board board = new Board (20,20); 
+        Gadget squareBumper = new SquareBumper(new Vect(5,5)); 
+        board.addGadget(squareBumper);
+        Ball ball = new Ball (new Vect(1,5), new Vect(1,0)); 
+        board.addBall(ball);
+        
+        int steps = 7; 
+        for (int i=1; i<=steps; i++){ 
+            board.step();
+        }
+        assertEquals(new Vect(2,5), ball.getPosition()); 
+    }
+    
+    //Test when the ball hits the Right of the Bumper
+    @Test public void testSquareBumperRightSideHit(){ 
+        Board board = new Board (20,20); 
+        Gadget squareBumper = new SquareBumper(new Vect(5,5)); 
+        board.addGadget(squareBumper);
+        Ball ball = new Ball (new Vect(8,5), new Vect(-1,0)); 
+        board.addBall(ball);
+        
+        int steps = 4; 
+        for (int i=1; i<=steps; i++){ 
+            board.step();
+        }
+        assertEquals(new Vect(8,5), ball.getPosition()); 
+    }
+    
+    //TODO: Test ball collision at an angle
+    //TODO: Test ball collision on corners. 
 }
