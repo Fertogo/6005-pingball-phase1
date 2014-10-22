@@ -57,7 +57,8 @@ public class Ball implements Gadget {
     }
     
     public void step(){
-        Vect delta = new Vect(Math.round(velocity.angle().cos()), Math.round(velocity.angle().sin()));
+        Vect delta = new Vect(Math.round(position.angle().cos()), Math.round(position.angle().sin()));
+        System.out.println(delta);
         this.position = this.position.plus(delta);
     }
 
@@ -72,8 +73,8 @@ public class Ball implements Gadget {
 
     @Override
     public Vect getNext() {
-        this.step();
-        return this.position;
+        Vect delta = new Vect(Math.round(position.angle().cos()), Math.round(position.angle().sin()));
+        return this.position.plus(delta);
     }
 
    
