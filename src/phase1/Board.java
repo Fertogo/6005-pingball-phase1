@@ -56,38 +56,41 @@ public class Board {
             if (newBallPosition.x() == 0) { 
                 //Left wall collision
                 System.out.println("Hit Left Wall"); 
-                walls.collision(ball, 4);
+                walls.collision(ball, 3);
+
             }
             else if (newBallPosition.x() == width-1){ 
                 //Right wall collision
                 System.out.println("Hit Right Wall"); 
 
-                walls.collision(ball, 2);
-
+                walls.collision(ball, 1);
+                break; 
             }
             
             if (newBallPosition.y() == 0) { 
                 //Top Wall collision
                 System.out.println("Hit Top Wall"); 
 
-                walls.collision(ball, 1);
+                walls.collision(ball, 0);
             }
             
             else if (newBallPosition.y() == height-1){ 
                 //Bottom Wall collision
                 System.out.println("Hit Bottom Wall"); 
 
-                walls.collision(ball, 3);
+                walls.collision(ball, 2);
             }
             
             
             //Check for collisions in other gadgets
             for (Gadget gadget : gadgets){ 
-                if (gadget.getPosition().equals(newBallPosition)){ 
+                if (gadget.contains(newBallPosition)){ 
                     gadget.collision(ball); 
+                    break; 
                 }
-                else ball.step(); 
             }
+            System.out.println("Ball is allowed to move to position "+ newBallPosition.toString()); 
+            ball.step(); 
         }
         System.out.println(this.toString());
     }

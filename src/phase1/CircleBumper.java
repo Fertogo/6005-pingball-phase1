@@ -56,4 +56,10 @@ public class CircleBumper implements Gadget {
     public void step() {
     }
 
+    @Override
+    public boolean contains(Vect pos) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }

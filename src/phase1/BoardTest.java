@@ -9,16 +9,6 @@ public class BoardTest {
     @Test
     public void testMergeBoard() {
         Board board = new Board(20,20); 
-<<<<<<< HEAD
-        Gadget circleBumper = new CircleBumper(10,10); 
-        Gadget absorber = new Absorber(13,13, 6, 3); 
-
-        Gadget squareBumper = new SquareBumper(1,1); 
-        Gadget flipper = new Flipper(3,3,0); 
-        Gadget squareBumper2 = new SquareBumper(5,5); 
-        board.addGadget(absorber);
-        board.addGadget(flipper);
-        board.addGadget(circleBumper);
 
 
         //Gadget circleBumper = new CircleBumper(10,10);
@@ -36,14 +26,20 @@ public class BoardTest {
     @Test
     public void testBouncingBall(){ 
         Board board = new Board(20,20); 
-        Vect position = new Vect(5,5); 
-        Vect velocity = new Vect(2,1); 
+
+        Vect position = new Vect(2,5); 
+
+        Vect velocity = new Vect(2,2); 
 
 
+        Vect bumperPosition = new Vect(5, 5);
+        Gadget squareBumper = new SquareBumper(bumperPosition);
+        board.addGadget(squareBumper); 
         
         Ball ball = new Ball(position, velocity); 
         
         board.addBall(ball); 
+
         int steps = 1000; 
         for (int i=0; i<steps; i++){ 
             board.step(); 
