@@ -18,7 +18,7 @@ public class CircleBumper implements Gadget {
         int posX = (int)(position.x())+1;
         int posY = (int)(position.y())+1; 
         this.position = new Vect(posX, posY); 
-        this.gadgetArea = new Rectangle(posX, posY, posX+1, posY+1);
+        this.gadgetArea = new Rectangle(posX, posY, 1, 1);
 
     }
 

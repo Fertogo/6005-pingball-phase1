@@ -12,19 +12,19 @@ public class Ball implements Gadget {
     private long timeDiff;
     
     public Ball(Vect position, Vect velocity) {
-        this.position = position;
+        this.position = new Vect(position.x()+1, position.y()+1);//Add 1 to account for walls
         this.velocity = velocity;
         this.gravity = 25; 
     }
     
     public Ball(Vect position, Vect velocity, double gravity) {
-        this.position = position;
+        this.position = new Vect(position.x()+1, position.y()+1);//Add 1 to account for walls
         this.velocity = velocity;
         this.gravity = gravity;
     }
     
     public Ball(Vect position){ 
-        this.position = position; 
+        this.position = new Vect(position.x()+1, position.y()+1);//Add 1 to account for walls
         this.velocity = new Vect(0,0); 
     }
 
@@ -40,8 +40,7 @@ public class Ball implements Gadget {
 
     @Override
     public String toString(int width, int height) {
-        Board board = new Board(width, height);
-        char [][] wallArray = board.getArray();
+        char [][] wallArray = Gadget.getArray(height,width); 
         if(this.position.y()>19){
             this.position = new Vect(this.position.x(), 19);
         }else if(this.position.y()<0){
@@ -76,9 +75,13 @@ public class Ball implements Gadget {
         
     }
     public void updateBall(Vect position, Vect velocity) {
-        this.position = position;
+        this.position = new Vect(position.x()+1, position.y()+1);//Add 1 to account for walls
         this.velocity = velocity;
         
+    }
+    
+    public void updateBall(Vect velocity) {
+        this.velocity = velocity;
     }
     
     public void step(){
