@@ -3,12 +3,10 @@ package phase1;
 import physics.Vect;
 
 public class SquareBumper implements Gadget {
-    private int xPosition;
-    private int yPosition;
+    private Vect position;
     
-    public SquareBumper(int x, int y) {
-        this.xPosition = x;
-        this.yPosition = y;
+    public SquareBumper(Vect position) {
+        this.position = position;
     }
 
     @Override
@@ -26,7 +24,7 @@ public class SquareBumper implements Gadget {
         
         Board board = new Board(width, height);
         char [][] wallArray = board.getArray();
-        wallArray[this.yPosition][this.xPosition] = '#';
+        wallArray[(int) this.position.y()][(int) this.position.x()] = '#';
         
         String boardToString = "";
         for(int i=0; i<wallArray.length;i++){
@@ -43,25 +41,22 @@ public class SquareBumper implements Gadget {
 
     @Override
     public Vect getPosition() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.position;
     }
 
     @Override
     public Vect getNext() {
-        // TODO Auto-generated method stub
-        return null;
+        this.step();
+        return this.position;
     }
 
     @Override
     public void collision(Ball ball) {
-        // TODO Auto-generated method stub
         
     }
 
     @Override
     public void step() {
-        // TODO Auto-generated method stub
         
     }
 

@@ -34,8 +34,8 @@ public interface Gadget {
      * @param y: y Position on the board
      * @return Gadget representing a Square Bumper
      */
-    public static Gadget squareBumper(int x, int y){ 
-        return new SquareBumper(x, y); 
+    public static Gadget squareBumper(Vect position){ 
+        return new SquareBumper(position); 
     }
     
     /**
@@ -45,8 +45,8 @@ public interface Gadget {
      * @return Gadget representing a Circle Bumper
      */
 
-    public static Gadget triangleBumper(int x, int y){
-        return new TriangleBumper(x, y); 
+    public static Gadget triangleBumper(Vect position){
+        return new TriangleBumper(position); 
     }
     
     /**
@@ -55,8 +55,8 @@ public interface Gadget {
      * @param y: y Position on the board
      * @return Gadget representing a Circle Bumper
      */
-    public static Gadget circleBumper(int x, int y){ 
-        return new CircleBumper(x, y); 
+    public static Gadget circleBumper(Vect position){ 
+        return new CircleBumper(position); 
     }
     
     /**
@@ -121,7 +121,7 @@ public interface Gadget {
      * Adjusts a ball after a collision. 
      * @param ball: ball that is about to collide with gadget. 
      */
-    public void collision(Gadget ball);
+    public void collision(Ball ball);
 
     /**
      * Updates gadget after one timestep

@@ -10,7 +10,7 @@ import physics.Vect;
 
 public class Board {
     private List<Gadget> gadgets = new ArrayList<Gadget>(); 
-    private List<Gadget> balls = new ArrayList<Gadget>(); 
+    private List<Ball> balls = new ArrayList<Ball>(); 
     private OuterWalls walls; 
 
     private int height; 
@@ -45,10 +45,10 @@ public class Board {
     }
     
     /**
-     * Step every gadget in the board. Check if ball is going to collide. 
+     * Step every gadget in the board and print it. Check if ball is going to collide. 
      */
     public void step(){ 
-        for (Gadget ball : balls){ 
+        for (Ball ball : balls){ 
             Vect newBallPosition = ball.getNext(); 
             //Check for wall collisions
             if (newBallPosition.x() == 0) { 
@@ -79,6 +79,7 @@ public class Board {
                 else ball.step(); 
             }
         }
+        System.out.println(this.toString());
     }
     
     public char [][] getArray(){
@@ -116,7 +117,7 @@ public class Board {
         checkRep();
     }
     
-    public void addBall(Gadget ball){ 
+    public void addBall(Ball ball){ 
         this.balls.add(ball); 
         checkRep(); 
     }
@@ -132,6 +133,9 @@ public class Board {
         for (Gadget gadget : this.gadgets){ 
             layers.add(gadget.toString(this.width,this.height)); 
              }
+        for (Gadget ball: this.balls){ 
+            layers.add(ball.toString(this.width, this.height));
+        }
 
         for (String layer : layers){ 
             String[] lines = layer.split("\n"); 
