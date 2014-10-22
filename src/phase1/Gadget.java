@@ -24,8 +24,8 @@ public interface Gadget {
      * @param y: y Position on the board
      * @param size:  A rectangle kL *mL where k and m are 0<k<=20
      */
-    public static Gadget absorber(int x, int y, Rectangle size){ 
-        return new Absorber(x,  y, size); 
+    public static Gadget absorber(int x, int y, int width, int height){ 
+        return new Absorber(x,  y, width, height); 
     }
     
     /**

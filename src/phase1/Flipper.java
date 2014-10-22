@@ -23,7 +23,7 @@ public class Flipper implements Gadget{
     private int yPos;
     //Int type  representing left(0) or right flipper(1)
     private int flipperType; 
-//    private final String [] typesOfFlipper = {"left", "right"} ;
+    //    private final String [] typesOfFlipper = {"left", "right"} ;
     private boolean isHorizontal;
     private LineSegment lineSegment; 
     private Vect pivotPoint; 
@@ -62,7 +62,28 @@ public class Flipper implements Gadget{
      * @return
      */
     public Ball hitBall(Ball ball){
-        return new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, 1080., ball, ball.getVelocity()));
+        Ball newBall=ball;
+    
+        if(!isHorizontal){
+            //left  --CounterClockwise 90
+            if(this.flipperType ==0){
+                    newBall =new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, -1080., ball.ballReturnCircle(), ball.getVelocity()));
+            }
+            //right  -- Clockwise 90
+            if(this.flipperType ==1){
+                newBall =new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, 1080., ball.ballReturnCircle(), ball.getVelocity()));
+            }
+        }else if(isHorizontal){
+            //left  -- Clockwise
+            if(this.flipperType ==0){
+                newBall =new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, 1080., ball.ballReturnCircle(), ball.getVelocity()));
+            }
+            //right  -- CounterClockwise
+            if(this.flipperType ==1){
+                newBall = new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, -1080., ball.ballReturnCircle(), ball.getVelocity()));
+            }
+        }
+           return newBall;
     }
 
     /**
@@ -71,16 +92,16 @@ public class Flipper implements Gadget{
     @Override
     public void action() {
         this.hitBall(ball);
-        this.rotateGadget(32);
+        this.flipFlipper();
     }
     
-    
+    //Orientation
     /**
      * Rotates flipper
      * @param degrees 0-360
      */
     @Override
-    public void rotateGadget(int degrees){
+    public void flipFlipper(){
         if(!isHorizontal){
             //left  --CounterClockwise 90
             if(this.flipperType ==0){
@@ -168,6 +189,13 @@ public class Flipper implements Gadget{
         
         return boardToString;
 
+    }
+    
+    
+    @Override
+    public void rotateGadget(int degrees) {
+        lineSegment.rotate()
+        
     }
     
 
