@@ -130,10 +130,10 @@ public interface Gadget {
     
     /**
      * 
-     * @param pos to check in Gadget
+     * @param position: position to check in Gadget
      * @return True if gadget contains p, that is, a ball at p would collide with the gadget. 
      */
-    public boolean contains(Vect pos); 
+    public boolean contains(Vect position); 
 
     
 }

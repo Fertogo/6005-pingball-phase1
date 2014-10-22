@@ -1,6 +1,7 @@
 package phase1;
-import physics.LineSegment;
 import java.awt.Rectangle;
+
+import physics.*;
 
 /*
  * String Representation: | or --
@@ -21,10 +22,12 @@ public class Flipper implements Gadget{
     private int xPos; 
     private int yPos;
     //Int type  representing left(0) or right flipper(1)
-    private String flipperType; 
-    private final String [] typesOfFlipper = {"left", "right"} ;
+    private int flipperType; 
+//    private final String [] typesOfFlipper = {"left", "right"} ;
     private boolean isHorizontal;
-    
+    private LineSegment lineSegment; 
+    private Vect pivotPoint; 
+    private Angle angle;
     /**
      * Constructor
      * @param x
@@ -34,32 +37,112 @@ public class Flipper implements Gadget{
     public Flipper(int x, int y, int type){ 
         this.xPos =x;
         this.yPos = y;
-        this.flipperType=typesOfFlipper[type];
+        this.pivotPoint= new Vect(x,y);
+        this.lineSegment= new LineSegment(x,y, x, y-1);
+//        this.flipperType=typesOfFlipper[type];
+        this.flipperType=type;
+        this.angle= new Angle(3/2*Math.PI);
         this.isHorizontal=false;
     }
     /**
      * Triggering event that is proceeded by an action
      */
     public void trigger(){
-        if(collisionDetected()){
-            action(this);
-        }
+        this.action();
+       if(isHorizontal){
+           isHorizontal=false;
+       }
+       else if(!isHorizontal){
+           isHorizontal=true;
+       }
     }
     /**
-     * Detects a collision
-     * @return true if collision occurs
+     * Method that returns a ball that has been hit by a flipper
+     * @param ball
+     * @return
      */
-    private boolean collisionDetected(){
-        return true; //TODO
+    public Ball hitBall(Ball ball){
+        return new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, 1080., ball, ball.getVelocity()));
     }
+
     /**
      * Switches the state of the flipper 
      */
     @Override
     public void action() {
-        reflectRotatingWall(LineSegment line, Vect center, double angularVelocity, Circle ball, Vect velocity)
+        this.hitBall(ball);
+        this.rotateGadget(32);
+    }
+    
+    
+    /**
+     * Rotates flipper
+     * @param degrees 0-360
+     */
+    @Override
+    public void rotateGadget(int degrees){
+        if(!isHorizontal){
+            //left  --CounterClockwise 90
+            if(this.flipperType ==0){
+                    this.angle = new Angle(0);
+            }
+            //right  -- Clockwise 90
+            if(this.flipperType ==1){
+                   this.angle = new Angle(Math.PI);
+            }
+        }else if(isHorizontal){
+            //left  -- Clockwise
+            if(this.flipperType ==0){
+                this.angle = new Angle(3/2*Math.PI);
+            }
+            //right  -- CounterClockwise
+            if(this.flipperType ==1){
+                this.angle = new Angle(3/2*Math.PI);
+            }
+        }
+        
+        
+        Geometry.rotateAround( this.lineSegment, this.pivotPoint, this.angle);    
         
     }
+    
+    /**
+     * Returns the position of the pivot
+     */
+    @Override
+    public Vect getPosition() {
+       return this.pivotPoint;
+    }
+    
+    /**
+     * Returns the next point that the Flipper will be at. 
+     */
+    @Override
+    public Vect getNext() {
+        return this.pivotPoint;
+
+    }
+    /**
+     * Defines the action that is to be committed upon collision
+     */
+    @Override
+    public void collision(Ball ball) {
+        trigger();
+    }
+    
+    @Override
+    public void step() {
+        //Empty
+    }
+    /**
+     * Return true if the lineSegment contains the point
+     */
+    @Override
+    public boolean contains(Vect position) {
+       if(  lineSegment.p1().equals(position ) ||  lineSegment.p2().equals(position ) ) return true;
+       return false;
+    }
+    
     /**
      * Returns a string representation of flipper
      */
@@ -86,16 +169,8 @@ public class Flipper implements Gadget{
         return boardToString;
 
     }
-    /**
-     * Rotates flipper
-     * @param degrees 0-360
-     */
-    @Override
-    public void rotateGadget(int degrees) {
-        // TODO Auto-generated method stub
-        
-    }
     
+
     
     
 }

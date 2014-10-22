@@ -22,7 +22,7 @@ public class Absorber implements Gadget {
     private int width;
     private int height;
     private int ballsStored;
-    private Rectangle rectangle;
+    private Rectangle rectangle; //TODO: Change to meaningfull name. 
     private Point positionPoint; 
     /**
      * 
@@ -35,8 +35,8 @@ public class Absorber implements Gadget {
         this.yPos = y;
         this.width=width;
         this.height=height;
+        this.positionPoint= new Point(this.xPos, this.yPos);;
         this.rectangle= new Rectangle(x, y, width, height);
-        this.positionPoint= new Point(x,y);
     }
     public Absorber(int x, int y, Rectangle size) {
         // TODO Auto-generated constructor stub
@@ -58,6 +58,44 @@ public class Absorber implements Gadget {
     }
     
     
+    @Override
+    public void rotateGadget(int degrees) {
+        // TODO Auto-generated method stub
+        
+    }
+    @Override
+    public Vect getPosition() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public Vect getNext() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public void collision(Ball ball) {
+        // TODO Auto-generated method stub
+        
+    }
+    @Override
+    public void step() {
+       if(ballsStored>0){
+           shootBall(); 
+       }
+        
+    }
+    
+    public void shootBall(){
+        
+    }
+    
+    
+    
+    @Override
+    public boolean contains(Vect pos) {
+        return rectangle.contains(pos.x(), pos.y()); 
+    }
     
     /**
      * Store ball in one iteration and shoots it back in the next
@@ -98,36 +136,6 @@ public class Absorber implements Gadget {
         return boardToString;
         
         
-    }
-    @Override
-    public void rotateGadget(int degrees) {
-        // TODO Auto-generated method stub
-        
-    }
-    @Override
-    public Vect getPosition() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    @Override
-    public Vect getNext() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    @Override
-    public void collision(Ball ball) {
-        // TODO Auto-generated method stub
-        
-    }
-    @Override
-    public void step() {
-        // TODO Auto-generated method stub
-        
-    }
-    @Override
-    public boolean contains(Vect pos) {
-        // TODO Auto-generated method stub
-        return false;
     }
     
     

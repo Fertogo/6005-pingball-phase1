@@ -1,12 +1,17 @@
 package phase1;
 
+import physics.Circle;
+import physics.Geometry;
 import physics.Vect;
 
 public class CircleBumper implements Gadget {
     private Vect position;
+    private Circle circle; 
     
     public CircleBumper(Vect position) {
         this.position = position;
+        int diameter = 1; 
+        this.circle = new Circle(position.x(), position.y(), diameter/2); 
     }
 
     @Override
@@ -15,6 +20,7 @@ public class CircleBumper implements Gadget {
 
     @Override
     public void rotateGadget(int degrees) {
+        //Not applicable
     }
 
     @Override
@@ -37,8 +43,9 @@ public class CircleBumper implements Gadget {
 
     @Override
     public void collision(Ball ball) {
-        // TODO Auto-generated method stub
-        
+        System.out.println("Collision with a CircleBumper"); 
+        Vect newBallVelocity = Geometry.reflectCircle(circle.getCenter(), ball.getPosition(), ball.getVelocity());
+        ball.updateBall(ball.getPosition(), newBallVelocity);
     }
 
     @Override
@@ -57,9 +64,8 @@ public class CircleBumper implements Gadget {
     }
 
     @Override
-    public boolean contains(Vect pos) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean contains(Vect position) {
+        return this.position.equals(position); 
     }
 
 }

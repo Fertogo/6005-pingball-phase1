@@ -52,7 +52,7 @@ public class Board {
         for (Ball ball : balls){ 
             Vect newBallPosition = ball.getNext(); 
             
-            System.out.println(newBallPosition); 
+            //System.out.println(newBallPosition); 
             //Check for wall collisions
             if (Math.round(newBallPosition.x()) == 0) { 
                 //Left wall collision
@@ -90,7 +90,7 @@ public class Board {
                     break; 
                 }
             }
-            System.out.println("Ball is allowed to move to position "+ newBallPosition.toString()); 
+            //System.out.println("Ball is allowed to move to position "+ newBallPosition.toString()); 
             ball.step(); 
         }
         System.out.println(this.toString());
@@ -134,6 +134,10 @@ public class Board {
     public void addBall(Ball ball){ 
         this.balls.add(ball); 
         checkRep(); 
+    }
+    
+    public void run(){ 
+        while (true) this.step(); 
     }
 
     /**

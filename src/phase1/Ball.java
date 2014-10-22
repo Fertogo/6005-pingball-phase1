@@ -15,6 +15,11 @@ public class Ball implements Gadget {
         this.velocity = velocity;
         this.gravity = gravity;
     }
+    
+    public Ball(Vect position){ 
+        this.position = position; 
+        this.velocity = new Vect(0,0); 
+    }
 
     @Override
     public void action() {
