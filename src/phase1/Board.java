@@ -15,7 +15,8 @@ public class Board {
 
     private int height; 
     private int width; 
-
+    private double gravity = 25;
+    
     private void checkRep(){ 
         Set<Vect> positions = new HashSet<Vect>(); 
         for (Gadget gadget : gadgets){ 
@@ -53,13 +54,13 @@ public class Board {
             
             //System.out.println(newBallPosition); 
             //Check for wall collisions
-            if (newBallPosition.x() == 0) { 
+            if (Math.round(newBallPosition.x()) == 0) { 
                 //Left wall collision
                 System.out.println("Hit Left Wall"); 
                 walls.collision(ball, 3);
 
             }
-            else if (newBallPosition.x() == width-1){ 
+            else if (Math.round(newBallPosition.x()) == width-1){ 
                 //Right wall collision
                 System.out.println("Hit Right Wall"); 
 
@@ -67,14 +68,14 @@ public class Board {
                 break; 
             }
             
-            if (newBallPosition.y() == 0) { 
+            if (Math.round(newBallPosition.y()) == 0) { 
                 //Top Wall collision
                 System.out.println("Hit Top Wall"); 
 
                 walls.collision(ball, 0);
             }
             
-            else if (newBallPosition.y() == height-1){ 
+            else if (Math.round(newBallPosition.y()) == height-1){ 
                 //Bottom Wall collision
                 System.out.println("Hit Bottom Wall"); 
 
@@ -182,5 +183,13 @@ public class Board {
     public void updateBoard(Ball ball, Vect plus) {
         // TODO Auto-generated method stub
         
+    }
+
+    public double getGravity() {
+        return gravity;
+    }
+
+    public void setGravity(double gravity) {
+        this.gravity = gravity;
     }
 }

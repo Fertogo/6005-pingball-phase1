@@ -142,6 +142,7 @@ public class GadgetTest {
      *          
      */
     
+    //Test a ball hitting the circleBumper at a straight angle
     @Test public void testCircleBumperDirectCollision(){ 
         Board board = new Board(20,20); 
         Gadget circleBumper = new CircleBumper(new Vect(5,5)); 
@@ -156,6 +157,7 @@ public class GadgetTest {
         assertEquals(new Vect(5,2), ball.getPosition()); 
     }
     
+    //Test a ball hitting the circleBumper at an angle
     @Test public void testCircleBumperAngledCollision(){ 
         Board board = new Board(20,20); 
         Gadget circleBumper = new CircleBumper(new Vect(5,5)); 
@@ -169,4 +171,51 @@ public class GadgetTest {
         }
         assertEquals(new Vect(2,2), ball.getPosition()); 
     }
+    
+    /**
+     * Triangle Bumper Testing Strategy
+     *      Make sure that rotateGadget works correctly. 
+     *      Make sure that the ball is reflected at the correct angle
+     *      Partitions:
+     *         Rotate a triangle four times by 90 degrees
+     *         Hit both of the straight walls 
+     *         Hit the slanted wall (hypotenous)
+     *         Try with different triangle orientations. 
+     *         
+     */
+    
+    //Test rotateGadget()
+    @Test public void testTriangleBumperRotateGadget(){ 
+        Board board = new Board(20,20); 
+        Gadget triangleBumper = new TriangleBumper(new Vect(5,5)); 
+        board.addGadget(triangleBumper);
+        board.step();
+        triangleBumper.rotateGadget(90);
+        board.step(); 
+        triangleBumper.rotateGadget(90); 
+        board.step();
+        triangleBumper.rotateGadget(90); 
+        board.step();
+        triangleBumper.rotateGadget(90); 
+        board.step();
+        triangleBumper.rotateGadget(180); 
+        board.step();
+        triangleBumper.rotateGadget(180); 
+        board.step();
+        triangleBumper.rotateGadget(360); 
+        board.step();
+        //TODO: Assert Something
+    }
+    
+    @Test public void testTriangleBumperRotateGadgetInvalidDegree(){ 
+        Board board = new Board(20,20); 
+        Gadget triangleBumper = new TriangleBumper(new Vect(5,5)); 
+        board.addGadget(triangleBumper);
+        triangleBumper.rotateGadget(91);
+        board.step(); 
+        //This should fail checkRep()
+        //TODO: Assert ^
+    }
+   
+    
 }

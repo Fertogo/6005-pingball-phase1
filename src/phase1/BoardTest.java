@@ -36,7 +36,7 @@ public class BoardTest {
         Gadget squareBumper = new SquareBumper(bumperPosition);
         board.addGadget(squareBumper); 
         
-        Ball ball = new Ball(position, velocity); 
+        Ball ball = new Ball(position, velocity, 25); 
         
         board.addBall(ball); 
 
