@@ -56,7 +56,7 @@ public class Ball implements Gadget {
         
     }
     
-    public void step(Board board){
+    public void step(){
         Vect delta = new Vect(velocity.angle().cos(), velocity.angle().sin());
         this.position = this.position.plus(delta);
     }
@@ -72,13 +72,9 @@ public class Ball implements Gadget {
 
     @Override
     public Vect getNext() {
-        // TODO Auto-generated method stub
-        return null;
+        this.step();
+        return this.position;
     }
 
-    @Override
-    public void step() {
-        // TODO Auto-generated method stub
-        
-    }
+   
 }

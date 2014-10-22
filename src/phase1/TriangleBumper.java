@@ -3,12 +3,10 @@ package phase1;
 import physics.Vect;
 
 public class TriangleBumper implements Gadget {
-    private int xPosition;
-    private int yPosition;
+    private Vect position;
     private int orientation = 0;
-    public TriangleBumper(int x, int y) {
-        this.xPosition = x;
-        this.yPosition = y;
+    public TriangleBumper(Vect position) {
+        this.position = position;
     }
 
     @Override
@@ -27,9 +25,9 @@ public class TriangleBumper implements Gadget {
         Board board = new Board(width, height);
         char [][] wallArray = board.getArray();
         if(this.orientation == 0 || this.orientation == 180){
-            wallArray[this.yPosition][this.xPosition] = '/';
+            wallArray[(int) this.position.y()][(int) this.position.x()] = '/';
         }else{
-            wallArray[this.yPosition][this.xPosition] = '\\';
+            wallArray[(int) this.position.y()][(int) this.position.x()] = '\\';
         }
         
         String boardToString = "";
@@ -46,25 +44,22 @@ public class TriangleBumper implements Gadget {
 
     @Override
     public Vect getPosition() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.position;
     }
 
     @Override
     public Vect getNext() {
-        // TODO Auto-generated method stub
-        return null;
+        this.step();
+        return this.position;
     }
 
     @Override
     public void collision(Ball ball) {
-        // TODO Auto-generated method stub
         
     }
 
     @Override
     public void step() {
-        // TODO Auto-generated method stub
         
     }
 
