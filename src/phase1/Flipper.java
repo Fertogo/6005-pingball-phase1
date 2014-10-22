@@ -1,5 +1,6 @@
 package phase1;
 import java.awt.Rectangle;
+
 import physics.*;
 
 /*
@@ -55,24 +56,22 @@ public class Flipper implements Gadget{
            isHorizontal=true;
        }
     }
-    
+    /**
+     * Method that returns a ball that has been hit by a flipper
+     * @param ball
+     * @return
+     */
     public Ball hitBall(Ball ball){
         return new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, 1080., ball, ball.getVelocity()));
     }
-    /**
-     * Detects a collision
-     * @return true if collision occurs
-     */
-    private boolean collisionDetected(){
-        return true; //TODO
-    }
+
     /**
      * Switches the state of the flipper 
      */
     @Override
     public void action() {
         this.hitBall(ball);
-        this.rotate();
+        this.rotateGadget(32);
     }
     
     
@@ -81,30 +80,24 @@ public class Flipper implements Gadget{
      * @param degrees 0-360
      */
     @Override
-    public void rotateGadget(int degrees) {
-        // TODO Auto-generated method stub
-        
-    }
-    
-    public void rotate(){
-        
+    public void rotateGadget(int degrees){
         if(!isHorizontal){
             //left  --CounterClockwise 90
             if(this.flipperType ==0){
-                    this.angle = 0;
+                    this.angle = new Angle(0);
             }
             //right  -- Clockwise 90
             if(this.flipperType ==1){
-                   this.angle = Math.PI;
+                   this.angle = new Angle(Math.PI);
             }
         }else if(isHorizontal){
             //left  -- Clockwise
             if(this.flipperType ==0){
-                this.angle = 3/2*Math.PI;
+                this.angle = new Angle(3/2*Math.PI);
             }
             //right  -- CounterClockwise
             if(this.flipperType ==1){
-                this.angle = 3/2*Math.PI;
+                this.angle = new Angle(3/2*Math.PI);
             }
         }
         
@@ -137,6 +130,42 @@ public class Flipper implements Gadget{
         
         return boardToString;
 
+    }
+    /**
+     * Returns the position of the pivot
+     */
+    @Override
+    public Vect getPosition() {
+       return this.pivotPoint;
+    }
+    
+    /**
+     * Returns the next point that the Flipper will be at. 
+     */
+    @Override
+    public Vect getNext() {
+        return this.pivotPoint;
+
+    }
+    /**
+     * Defines the action that is to be committed upon collision
+     */
+    @Override
+    public void collision(Ball ball) {
+        trigger();
+    }
+    
+    @Override
+    public void step() {
+        //Empty
+    }
+    /**
+     * Return true if the lineSegment contains the point
+     */
+    @Override
+    public boolean contains(Vect position) {
+       if(  lineSegment.p1().equals(position ) ||  lineSegment.p2().equals(position ) ) return true;
+       return false;
     }
 
     
