@@ -115,6 +115,11 @@ public class Board {
         this.gadgets.add(gadget); 
         checkRep();
     }
+    
+    public void addBall(Gadget ball){ 
+        this.balls.add(ball); 
+        checkRep(); 
+    }
 
     /**
      * 
