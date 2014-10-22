@@ -122,6 +122,12 @@ public interface Gadget {
       * 
       * @return where the gadget wants to be in the next time step. 
       */
-    public Vect getNext(); 
+    public Vect getNext();
+
+    /**
+     * Adjusts a ball after a collision. 
+     * @param ball: ball that is about to collide with gadget. 
+     */
+    public void collision(Gadget ball); 
     
 }
