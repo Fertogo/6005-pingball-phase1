@@ -105,32 +105,7 @@ public class Flipper implements Gadget{
         Geometry.rotateAround( this.lineSegment, this.pivotPoint, this.angle);    
         
     }
-    /**
-     * Returns a string representation of flipper
-     */
-    @Override
-    public String toString(int width, int height) {
-        Board board = new Board(width, height);
-        char [][] wallArray = board.getArray();
-        if(isHorizontal){
-            wallArray[this.yPos][this.xPos] = '-';
-            wallArray[this.yPos][this.xPos+1] = '-';
-        }
-        else if(!isHorizontal){
-            wallArray[this.yPos][this.xPos] = '|';
-            wallArray[this.yPos+1][this.xPos] ='|';
-        }
-        String boardToString = "";
-        for(int i=0; i<wallArray.length;i++){
-            for(int j=0; j< wallArray[0].length;j++){
-            boardToString += Character.toString(wallArray[i][j]);
-            }
-            boardToString += "\n";
-        }
-        
-        return boardToString;
-
-    }
+    
     /**
      * Returns the position of the pivot
      */
@@ -167,6 +142,34 @@ public class Flipper implements Gadget{
        if(  lineSegment.p1().equals(position ) ||  lineSegment.p2().equals(position ) ) return true;
        return false;
     }
+    
+    /**
+     * Returns a string representation of flipper
+     */
+    @Override
+    public String toString(int width, int height) {
+        Board board = new Board(width, height);
+        char [][] wallArray = board.getArray();
+        if(isHorizontal){
+            wallArray[this.yPos][this.xPos] = '-';
+            wallArray[this.yPos][this.xPos+1] = '-';
+        }
+        else if(!isHorizontal){
+            wallArray[this.yPos][this.xPos] = '|';
+            wallArray[this.yPos+1][this.xPos] ='|';
+        }
+        String boardToString = "";
+        for(int i=0; i<wallArray.length;i++){
+            for(int j=0; j< wallArray[0].length;j++){
+            boardToString += Character.toString(wallArray[i][j]);
+            }
+            boardToString += "\n";
+        }
+        
+        return boardToString;
+
+    }
+    
 
     
     
