@@ -10,14 +10,10 @@ public class CircleBumper implements Gadget {
 
     @Override
     public void action() {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void rotateGadget(int degrees) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -36,6 +32,12 @@ public class CircleBumper implements Gadget {
         }
         
         return boardToString;
+    }
+
+    @Override
+    public void collision(Ball ball) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

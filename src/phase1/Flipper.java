@@ -1,5 +1,5 @@
 package phase1;
-
+import physics.LineSegment;
 import java.awt.Rectangle;
 
 /*
@@ -57,7 +57,7 @@ public class Flipper implements Gadget{
      */
     @Override
     public void action() {
-        // TODO Auto-generated method stub
+        reflectRotatingWall(LineSegment line, Vect center, double angularVelocity, Circle ball, Vect velocity)
         
     }
     /**

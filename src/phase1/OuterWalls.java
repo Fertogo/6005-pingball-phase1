@@ -1,7 +1,7 @@
 package phase1;
 import physics.*;
 
-public class OuterWalls implements Gadget {
+public class OuterWalls {
     private LineSegment leftWall;
     private LineSegment rightWall;
     private LineSegment topWall;
@@ -22,7 +22,33 @@ public class OuterWalls implements Gadget {
         this.width = width; 
         checkRep(); 
     }
-
+    
+    public void collision(Gadget ball, int wall){ //0:Top 1:Right 2:Bottom 3:Left
+        Vect oldVelocity = ball.getVelocity(); 
+        Vect newVelocity = null; 
+        switch(wall){ 
+        case(0): 
+           //Collision with Top Wall
+            newVelocity = Geometry.reflectWall(topWall, oldVelocity);
+            break; 
+        case(1):
+          //Collision with Right Wall
+            newVelocity = Geometry.reflectWall(rightWall, oldVelocity);
+            break;
+        case(2):
+            //Collision with Bottom Wall
+            newVelocity = Geometry.reflectWall(bottomWall, oldVelocity);
+            break;
+        case(3):
+           //Collision with Left Wall
+           newVelocity = Geometry.reflectWall(leftWall, oldVelocity);
+            break;
+            
+        }
+        Vect position = ball.getPosition(); 
+        ball.updateBall(position,  newVelocity);
+        
+    }
     public int getHeight(){ 
         return this.height; 
     }
@@ -30,16 +56,7 @@ public class OuterWalls implements Gadget {
     public int getWidth(){ 
         return this.width; 
     }
-    
-
-    @Override
-    public void action() {
-        // TODO Auto-generated method stub
-        
-    }
-
-
-    @Override
+   
     public String toString(int width, int height) {
 
         char [][] wallArray; 
@@ -88,11 +105,6 @@ public class OuterWalls implements Gadget {
      return board;
     }
 
-  
 
-    @Override
-    public void rotateGadget(int degrees) {
-        // TODO Auto-generated method stub
-        
-    }
+  
 }

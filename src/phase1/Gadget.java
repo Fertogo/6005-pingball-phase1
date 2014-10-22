@@ -73,15 +73,7 @@ public interface Gadget {
 
     }
     
-    /**
-     * Creates the board's outerWalls
-     * @param width - Desired width of the board
-     * @param height - Desired height of the wall
-     * @return - Gadget representing the outerWalls of the board. 
-     */
-    public static Gadget outerWalls(int width, int height){ 
-        return new OuterWalls(width, height); 
-    }
+
     /**
      * Creates a ball
      * @param x: x position of the ball 
@@ -89,8 +81,8 @@ public interface Gadget {
      * @param velocity: initial velocity of the ball
      * @return A ball
      */
-    public static Gadget ball(int x, int y, Vect velocity){
-        return new Ball(x, y, velocity);
+    public static Gadget ball(Vect position, Vect velocity){
+        return new Ball(position, velocity);
     }
     /**
      * Called when a gadget is triggered
@@ -112,6 +104,7 @@ public interface Gadget {
      * @return: String representation of the individual Gadget in the board. 
      */
     public String toString(int width, int height);
+
     /**
      * 
      * @return Vector representing the position of the object
@@ -134,5 +127,7 @@ public interface Gadget {
      * Updates gadget after one timestep
      */
     public void step(); 
+    
+
     
 }

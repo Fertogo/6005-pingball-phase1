@@ -1,41 +1,84 @@
 package phase1;
+import physics.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import physics.Vect;
+
 public class Board {
     private List<Gadget> gadgets = new ArrayList<Gadget>(); 
+    private List<Gadget> balls = new ArrayList<Gadget>(); 
+    private OuterWalls walls; 
+
     private int height; 
     private int width; 
 
     private void checkRep(){ 
-        
+        Set<Vect> positions = new HashSet<Vect>(); 
         for (Gadget gadget : gadgets){ 
             //No two gadgets have same x and y 
-            Set<String> positions = new HashSet<String>(); 
-            String position = "("+gadget.getX() +","+gadget.getY() + ")"; 
+            
+            Vect position = gadget.getPosition(); 
             
             assert(!positions.contains(position)); 
-            positions.add(position);
-            
+            positions.add(position);          
             //Gadgets are not outside board.             
-            assert (gadget.getX() <= width); 
-            assert(gadget.getY() <= height); 
+            assert (position.x() <= width); 
+            assert(position.y() <= height); 
         }
-
+        for (Gadget ball: balls){ 
+            Vect positionBall = ball.getPosition(); 
+            assert(!positions.contains(positionBall)); 
+            positions.add(positionBall); 
+            assert (positionBall.x() <= width); 
+            assert(positionBall.y() <= height);
+        }
     }
+    
     public Board(int width, int height){ 
         this.height= height;
         this.width = width;
+        walls = new OuterWalls(width,height); 
     }
     
     /**
-     * Step every gadget in the board. 
+     * Step every gadget in the board. Check if ball is going to collide. 
      */
     public void step(){ 
-        
+        for (Gadget ball : balls){ 
+            Vect newBallPosition = ball.getNext(); 
+            //Check for wall collisions
+            if (newBallPosition.x() == 0) { 
+                //Left wall collision
+                walls.collision(ball, 4);
+            }
+            else if (newBallPosition.x() == width){ 
+                //Right wall collision
+                walls.collision(ball, 2);
+
+            }
+            
+            if (newBallPosition.y() == 0) { 
+                //Top Wall collision
+                walls.collision(ball, 1);
+            }
+            
+            else if (newBallPosition.y() == height){ 
+                //Bottom Wall collision
+                walls.collision(ball, 3);
+            }
+            
+            //Check for collisions in other gadgets
+            for (Gadget gadget : gadgets){ 
+                if (gadget.getPosition().equals(newBallPosition)){ 
+                    gadget.collision(ball); 
+                }
+                else ball.step(); 
+            }
+        }
     }
     
     public char [][] getArray(){
@@ -71,6 +114,11 @@ public class Board {
         //Add gadget to board. 
         this.gadgets.add(gadget); 
         checkRep();
+    }
+    
+    public void addBall(Gadget ball){ 
+        this.balls.add(ball); 
+        checkRep(); 
     }
 
     /**
@@ -108,6 +156,10 @@ public class Board {
             board.append("\n"); 
         }
         return board.toString(); 
+        
+    }
+    public void updateBoard(Ball ball, Vect plus) {
+        // TODO Auto-generated method stub
         
     }
 }
