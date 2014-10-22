@@ -1,5 +1,6 @@
 package phase1;
-
+import java.awt.Rectangle;
+import java.awt.Point;
 import java.awt.Rectangle;
 /*
  * String Representation: =
@@ -18,6 +19,9 @@ public class Absorber implements Gadget {
     private int yPos;
     private int width;
     private int height;
+    private int ballsStored;
+    private Rectangle rectangle;
+    private Point positionPoint; 
     /**
      * 
      * @param x-xPosition
@@ -29,6 +33,8 @@ public class Absorber implements Gadget {
         this.yPos = y;
         this.width=width;
         this.height=height;
+        this.rectangle= new Rectangle(x, y, width, height);
+        this.positionPoint= new Point(x,y);
     }
     /**
      * Occurs when a ball hits it
@@ -42,9 +48,12 @@ public class Absorber implements Gadget {
      * Detects collsions
      * @return true if collision
      */
-    private boolean collisionDetected(){
-        return true; //TODO
+    private void collision(){
+        this.ballsStored+=1;
     }
+    
+    
+    
     /**
      * Store ball in one iteration and shoots it back in the next
      * 
