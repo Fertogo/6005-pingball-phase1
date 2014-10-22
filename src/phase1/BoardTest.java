@@ -9,12 +9,25 @@ public class BoardTest {
     @Test
     public void testMergeBoard() {
         Board board = new Board(20,20); 
+<<<<<<< HEAD
+        Gadget circleBumper = new CircleBumper(10,10); 
+        Gadget absorber = new Absorber(13,13, 6, 3); 
+
+        Gadget squareBumper = new SquareBumper(1,1); 
+        Gadget flipper = new Flipper(3,3,0); 
+        Gadget squareBumper2 = new SquareBumper(5,5); 
+        board.addGadget(absorber);
+        board.addGadget(flipper);
+        board.addGadget(circleBumper);
+
+
         //Gadget circleBumper = new CircleBumper(10,10);
         Vect vector = new Vect(1, 1);
         Vect vector2 = new Vect(5, 5);
         Gadget squareBumper = new SquareBumper(vector); 
         Gadget squareBumper2 = new SquareBumper(vector2); 
         //board.addGadget(circleBumper);
+
         board.addGadget(squareBumper); 
         board.addGadget(squareBumper2);
         board.step();     

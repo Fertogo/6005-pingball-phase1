@@ -1,5 +1,5 @@
 package phase1;
-
+import physics.LineSegment;
 import java.awt.Rectangle;
 
 /*
@@ -35,7 +35,7 @@ public class Flipper implements Gadget{
         this.xPos =x;
         this.yPos = y;
         this.flipperType=typesOfFlipper[type];
-        
+        this.isHorizontal=false;
     }
     /**
      * Triggering event that is proceeded by an action
@@ -57,7 +57,7 @@ public class Flipper implements Gadget{
      */
     @Override
     public void action() {
-        // TODO Auto-generated method stub
+        reflectRotatingWall(LineSegment line, Vect center, double angularVelocity, Circle ball, Vect velocity)
         
     }
     /**
@@ -65,15 +65,25 @@ public class Flipper implements Gadget{
      */
     @Override
     public String toString(int width, int height) {
-        String stringBuilder="";
+        Board board = new Board(width, height);
+        char [][] wallArray = board.getArray();
         if(isHorizontal){
-            stringBuilder+="--";
+            wallArray[this.yPos][this.xPos] = '-';
+            wallArray[this.yPos][this.xPos+1] = '-';
         }
         else if(!isHorizontal){
-            stringBuilder+="|\n|";
+            wallArray[this.yPos][this.xPos] = '|';
+            wallArray[this.yPos+1][this.xPos] ='|';
         }
-        return stringBuilder;
+        String boardToString = "";
+        for(int i=0; i<wallArray.length;i++){
+            for(int j=0; j< wallArray[0].length;j++){
+            boardToString += Character.toString(wallArray[i][j]);
+            }
+            boardToString += "\n";
+        }
         
+        return boardToString;
 
     }
     /**

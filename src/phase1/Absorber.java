@@ -1,5 +1,6 @@
 package phase1;
-
+import java.awt.Rectangle;
+import java.awt.Point;
 import java.awt.Rectangle;
 /*
  * String Representation: =
@@ -16,33 +17,43 @@ import java.awt.Rectangle;
 public class Absorber implements Gadget {
     private int xPos; 
     private int yPos;
-    private Rectangle absSize; 
+    private int width;
+    private int height;
+    private int ballsStored;
+    private Rectangle rectangle;
+    private Point positionPoint; 
     /**
      * 
      * @param x-xPosition
      * @param y-yPosition
      * @param size - General Size of the absorber. 
      */
-    public Absorber(int x, int y, Rectangle size){ 
+    public Absorber(int x, int y, int width, int height ){ 
         this.xPos =x;
         this.yPos = y;
-        this.absSize=size; 
+        this.width=width;
+        this.height=height;
+        this.rectangle= new Rectangle(x, y, width, height);
+        this.positionPoint= new Point(x,y);
     }
     /**
      * Occurs when a ball hits it
      */
     public void trigger(){
-        if(collisionDetected()){
-            action(this);
-        }
+//        if(collisionDetected()){
+//            action(this);
+//        }
     }
     /**
      * Detects collsions
      * @return true if collision
      */
-    private boolean collisionDetected(){
-        return true; //TODO
+    private void collision(){
+        this.ballsStored+=1;
     }
+    
+    
+    
     /**
      * Store ball in one iteration and shoots it back in the next
      * 
@@ -56,18 +67,37 @@ public class Absorber implements Gadget {
      * return Absorber representation
      */
     @Override
-    public String toString(int width, int height) {
-        String stringBuilder="";
+    public String toString(int boardWidth, int boardHeight) {
+        Board board = new Board(boardWidth, boardHeight);
+        char [][] wallArray = board.getArray();
+        for(int i=0; i< this.width;i++){
+//            stringBuilder+="=";
+            wallArray[this.yPos][this.xPos+i] = '=';
+        }
+//        for(int i=0; i<height;i++){
+//            stringBuilder+="\n";    
+//        }
         for(int i=0; i< width;i++){
-            stringBuilder+="=";
+//            stringBuilder+="=";
+            wallArray[this.yPos+this.height][this.xPos+i] = '=';
         }
-        for(int i=0; i<height;i++){
-            stringBuilder+="\n";    
+        
+        String boardToString = "";
+        for(int i=0; i<wallArray.length;i++){
+            for(int j=0; j< wallArray[0].length;j++){
+            boardToString += Character.toString(wallArray[i][j]);
+            }
+            boardToString += "\n";
         }
-        for(int i=0; i< width;i++){
-            stringBuilder+="=";
-        }
-        return stringBuilder;
+        
+        return boardToString;
+        
+        
+    }
+    @Override
+    public void rotateGadget(int degrees) {
+        // TODO Auto-generated method stub
+        
     }
     
     
