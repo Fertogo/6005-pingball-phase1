@@ -34,7 +34,6 @@ public class Absorber implements Gadget {
         this.width=width;
         this.height=height;
         this.rectangle= new Rectangle(x, y, width, height);
-        this.positionPoint= new Point(x,y);
     }
     /**
      * Occurs when a ball hits it

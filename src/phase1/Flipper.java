@@ -1,6 +1,9 @@
 package phase1;
 import physics.LineSegment;
 import java.awt.Rectangle;
+import physics.Geometry;
+import java.awt.Point;
+
 
 /*
  * String Representation: | or --
@@ -24,7 +27,8 @@ public class Flipper implements Gadget{
     private String flipperType; 
     private final String [] typesOfFlipper = {"left", "right"} ;
     private boolean isHorizontal;
-    
+    private LineSegment lineSegment; 
+    private Point pivotPoint; 
     /**
      * Constructor
      * @param x
@@ -34,6 +38,8 @@ public class Flipper implements Gadget{
     public Flipper(int x, int y, int type){ 
         this.xPos =x;
         this.yPos = y;
+        this.pivotPoint= new Point(x,y);
+        this.lineSegment= new LineSegment(x,y, x, y-1);
         this.flipperType=typesOfFlipper[type];
         this.isHorizontal=false;
     }
@@ -44,6 +50,10 @@ public class Flipper implements Gadget{
         if(collisionDetected()){
             action(this);
         }
+    }
+    
+    public Ball hitBall(Ball ball){
+        return new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, 1080., ball, ball.getVelocity()));
     }
     /**
      * Detects a collision
@@ -57,7 +67,7 @@ public class Flipper implements Gadget{
      */
     @Override
     public void action() {
-        reflectRotatingWall(LineSegment line, Vect center, double angularVelocity, Circle ball, Vect velocity)
+        
         
     }
     /**
