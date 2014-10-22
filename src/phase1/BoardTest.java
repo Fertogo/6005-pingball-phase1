@@ -1,7 +1,5 @@
 package phase1;
 import physics.*; 
-import physics.Vect; 
-
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -19,19 +17,32 @@ public class BoardTest {
         //board.addGadget(circleBumper);
         board.addGadget(squareBumper); 
         board.addGadget(squareBumper2);
-        System.out.println(board.toString()) ;
-               
+        board.step();     
     }
     
     @Test
     public void testBouncingBall(){ 
         Board board = new Board(20,20); 
         Vect position = new Vect(5,5); 
-        Vect velocity = new Vect(1,1); 
+        Vect velocity = new Vect(2,1); 
+
+
+        
         Ball ball = new Ball(position, velocity); 
         
         board.addBall(ball); 
-        board.step(); 
+        int steps = 1000; 
+        for (int i=0; i<steps; i++){ 
+            board.step(); 
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println("Done");
     }
     
 //    public void testCheckRep(){ 
