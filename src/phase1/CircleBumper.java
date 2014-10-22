@@ -8,6 +8,7 @@ public class CircleBumper implements Gadget {
     private Vect position;
     private Circle circle; 
     
+
     public CircleBumper(Vect position) {
         this.position = position;
         int diameter = 1; 

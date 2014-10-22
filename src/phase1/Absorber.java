@@ -137,9 +137,6 @@ public class Absorber implements Gadget {
         
         
     }
-    
-    
-    
-    
+   
 }
     
