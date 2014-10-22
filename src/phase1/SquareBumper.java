@@ -29,7 +29,7 @@ public class SquareBumper implements Gadget {
         //Create walls representing square bumper. 
         this.topWall = new LineSegment(x,y,x+1,y); 
         this.rightWall = new LineSegment(x+1,y,x+1,y+1); 
-        this.bottomWall = new LineSegment(x,y+1,x+1,y-1); 
+        this.bottomWall = new LineSegment(x,y+1,x+1,y+1); 
         this.leftWall = new LineSegment(x,y,x,y+1); 
     }
 

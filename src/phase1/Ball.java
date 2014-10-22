@@ -10,6 +10,13 @@ public class Ball implements Gadget {
     private double gravity;
     private long time = System.currentTimeMillis();
     private long timeDiff;
+    
+    public Ball(Vect position, Vect velocity) {
+        this.position = position;
+        this.velocity = velocity;
+        this.gravity = 25; 
+    }
+    
     public Ball(Vect position, Vect velocity, double gravity) {
         this.position = position;
         this.velocity = velocity;

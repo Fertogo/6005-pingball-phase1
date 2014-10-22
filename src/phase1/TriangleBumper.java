@@ -1,5 +1,6 @@
 package phase1;
 
+import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
 
@@ -130,7 +131,79 @@ public class TriangleBumper implements Gadget {
 
     @Override
     public void collision(Ball ball) {
+        System.out.println("Collision with a TriangleBumper!"); 
+        Vect currentBallVelocity = ball.getVelocity(); 
+        Vect currentBallPosition = ball.getPosition(); 
+        Vect newBallVelocity = new Vect(0,0); 
+        double ballX = currentBallPosition.x(); 
+        double ballY = currentBallPosition.y(); 
         
+        //Check Corners
+        if (ballX > this.position.x() + 1 && ballY > this.position.y()){ 
+            //Hitting the top right corner of Bumper
+
+            newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
+        }
+        else if (ballX < this.position.x() && ballY > this.position.y()){ 
+            //Hitting the top left corner of Bumper
+            newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
+        }
+        else if (ballX < this.position.x() && ballY > this.position.y()+1){ 
+            //Hitting the bottom left corner of Bumper
+            newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
+        }
+        else if (ballX > this.position.x()+1 && ballY > this.position.y()+1){ 
+            //Hitting the bottom right corner of Bumper
+            newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
+        }
+        //Check which wall was hit
+        else if(ballY < this.position.y()){ 
+            //Hitting top wall
+            System.out.println("TOP"); 
+            System.out.println(wall1.toString()) ;
+            switch(this.orientation){ 
+           
+            case(0):  newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity);
+            case(90): newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity);
+            case(180): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);
+            case(270): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);
+            
+            }
+           
+        }
+        else if(ballY > this.position.y()+1){ 
+            //Hitting bottom wall
+            switch(this.orientation){ 
+
+            case(0):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);
+            case(90): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);
+            case(180): newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity);
+            case(270): newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity);
+            
+            }
+        }
+        else if(ballX > this.position.x()+1){ 
+            //Hitting right wall
+            switch(this.orientation){ 
+
+            case(0):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);
+            case(90): newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity);
+            case(180): newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity);
+            case(270): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);
+            
+            }        }
+        else if(ballX < this.position.x()){ 
+            //Hitting left wall
+            switch(this.orientation){ 
+            
+            case(0):  newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity);
+            case(90): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);
+            case(180): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);
+            case(270): newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity);
+            
+            }  
+        }
+        ball.updateBall(currentBallPosition, newBallVelocity); 
     }
 
     @Override
@@ -139,7 +212,7 @@ public class TriangleBumper implements Gadget {
     }
 
     @Override
-    public boolean contains(Vect pos) {
+    public boolean contains(Vect position) {
         return this.position.equals(position); 
     }
 
