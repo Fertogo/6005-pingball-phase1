@@ -16,7 +16,6 @@ import physics.*;
  */   
 public interface Gadget {
 
-    
     /**
      * absorber stops ball and holds it. 
      * if not holding the ball or if previously rejected ball hos not left the absorber, 
@@ -113,6 +112,27 @@ public interface Gadget {
      * @return: String representation of the individual Gadget in the board. 
      */
     public String toString(int width, int height);
-    
+    /**
+     * 
+     * @return Vector representing the position of the object
+     */
+    public Vect getPosition();
+
+     /**
+      * 
+      * @return where the gadget wants to be in the next time step. 
+      */
+    public Vect getNext();
+
+    /**
+     * Adjusts a ball after a collision. 
+     * @param ball: ball that is about to collide with gadget. 
+     */
+    public void collision(Gadget ball);
+
+    /**
+     * Updates gadget after one timestep
+     */
+    public void step(); 
     
 }
