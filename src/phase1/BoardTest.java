@@ -64,6 +64,16 @@ public class BoardTest {
         fail("Not in Sync"); 
     }
     
+    @Test public void testBallThatStartsInDoubleAndBumper(){ 
+        Board board = new Board(20,20); 
+        Ball ball1 = new Ball(new Vect(1.25,1.25), new Vect(1,0)); 
+        board.addBall(ball1); 
+        Gadget circleBumper = new CircleBumper(new Vect(1,10)); 
+        board.addGadget(circleBumper); 
+        board.step(13); //TODO Ball goes through Bumper instead of hitting it. 
+        assertEquals(new Vect(1,1), ball1.getPosition());
+    }
+    
 //    public void testCheckRep(){ 
 //        Board board = new Board(20,20); 
 //        Gadget circleBumper = new CircleBumper(10,10);
