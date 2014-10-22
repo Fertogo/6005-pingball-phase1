@@ -29,7 +29,7 @@ public class BoardTest {
 
         Vect position = new Vect(2,5); 
 
-        Vect velocity = new Vect(2,1); 
+        Vect velocity = new Vect(2,2); 
 
 
         Vect bumperPosition = new Vect(5, 5);
@@ -39,7 +39,7 @@ public class BoardTest {
         Ball ball = new Ball(position, velocity); 
         
         board.addBall(ball); 
-        int steps = 4; 
+        int steps = 50; 
         for (int i=0; i<steps; i++){ 
             board.step(); 
             try {
