@@ -20,8 +20,8 @@ public class SquareBumper implements Gadget {
     private LineSegment topWall; 
     
     public SquareBumper(Vect position) {
-        int x = (int)(position.x())+1; //Adding 1 to compensate for the walls
-        int y = (int)(position.y())+1; 
+        int x = (int)(position.x()); //Adding 1 to compensate for the walls
+        int y = (int)(position.y()); 
 
         this.position = new Vect(x,y);
         
@@ -48,7 +48,7 @@ public class SquareBumper implements Gadget {
     public String toString(int height, int width) {
         
         char [][] wallArray = Gadget.getArray(height,width); 
-        wallArray[(int) this.position.y()][(int) this.position.x()] = '#';
+        wallArray[(int) this.position.y()+1][(int) this.position.x()+1] = '#';
         
         String boardToString = "";
         for(int i=0; i<wallArray.length;i++){

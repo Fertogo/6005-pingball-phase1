@@ -28,8 +28,8 @@ public class TriangleBumper implements Gadget {
     public TriangleBumper(Vect position) {
 
         this.orientation= 0; 
-        int posX = (int)(position.x())+1;
-        int posY = (int)(position.y())+1;  
+        int posX = (int)(position.x());
+        int posY = (int)(position.y());  
         this.position = new Vect(posX,posY); 
         //this.gadgetArea = new Polygon(); 
         this.gadgetArea = new Rectangle(posX,posY,1,1); 
@@ -38,8 +38,8 @@ public class TriangleBumper implements Gadget {
     }
     
     public TriangleBumper(Vect position, int orientation){ 
-        int posX = (int)(position.x())+1;
-        int posY = (int)(position.y())+1;  
+        int posX = (int)(position.x());
+        int posY = (int)(position.y());  
         this.position = new Vect(posX,posY); 
         rotateGadget(orientation); 
 
@@ -139,9 +139,9 @@ public class TriangleBumper implements Gadget {
     public String toString(int height, int width) {
         char [][] wallArray = Gadget.getArray(height,width); 
         if(this.orientation == 0 || this.orientation == 180){
-            wallArray[(int) this.position.y()][(int) this.position.x()] = '/';
+            wallArray[(int) this.position.y()+1][(int) this.position.x()+1] = '/';
         }else{
-            wallArray[(int) this.position.y()][(int) this.position.x()] = '\\';
+            wallArray[(int) this.position.y()+1][(int) this.position.x()+1] = '\\';
         }
         
         String boardToString = "";
