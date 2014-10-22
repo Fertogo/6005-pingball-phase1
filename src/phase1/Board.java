@@ -188,10 +188,6 @@ public class Board {
         return board.toString(); 
         
     }
-    public void updateBoard(Ball ball, Vect plus) {
-        // TODO Auto-generated method stub
-        
-    }
 
     public double getGravity() {
         return gravity;

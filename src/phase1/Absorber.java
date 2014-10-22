@@ -134,8 +134,7 @@ public class Absorber implements Gadget {
         }
         
         return boardToString;
-        
-        
+      
     }
    
 }

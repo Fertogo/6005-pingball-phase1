@@ -62,8 +62,8 @@ public class BoardTest {
         board.addBall(ball2);
         board.step(70); //Watch how the balls go out of sync! 
         fail("Not in Sync"); 
-
     }
+    
 //    public void testCheckRep(){ 
 //        Board board = new Board(20,20); 
 //        Gadget circleBumper = new CircleBumper(10,10);

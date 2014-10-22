@@ -21,7 +21,7 @@ public class CircleBumper implements Gadget {
 
     @Override
     public void rotateGadget(int degrees) {
-        //Not applicable
+        throw new UnsupportedOperationException();
     }
 
     @Override

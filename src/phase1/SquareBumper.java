@@ -35,12 +35,12 @@ public class SquareBumper implements Gadget {
 
     @Override
     public void action() {
-
+        //TODO: Implement this
     }
 
     @Override
     public void rotateGadget(int degrees) {
-        //Not Applicable because symmetry. 
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -60,8 +60,6 @@ public class SquareBumper implements Gadget {
         
         return boardToString;
     }
-
-   
 
     @Override
     public Vect getPosition() {
@@ -135,8 +133,7 @@ public class SquareBumper implements Gadget {
     }
 
     @Override
-    public boolean contains(Vect position) {
-        
+    public boolean contains(Vect position) {   
         return this.position.equals(position); 
     }
 
