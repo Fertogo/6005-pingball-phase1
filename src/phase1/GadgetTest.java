@@ -132,4 +132,41 @@ public class GadgetTest {
     
     //TODO: Test ball collision at an angle
     //TODO: Test ball collision on corners. 
+    
+    /**
+     * Circle Bumper Testing Strategy
+     *      Make sure that ball is reflected at the correct angle
+     *      Partitions: 
+     *          Ball hits circle at straight angle
+     *          Ball hits circle at angle
+     *          
+     */
+    
+    @Test public void testCircleBumperDirectCollision(){ 
+        Board board = new Board(20,20); 
+        Gadget circleBumper = new CircleBumper(new Vect(5,5)); 
+        board.addGadget(circleBumper);
+        Ball ball = new Ball (new Vect(5,1), new Vect(0,1)); 
+        board.addBall(ball); 
+        
+        int steps = 5; 
+        for (int i=1; i<=steps; i++){ 
+            board.step();
+        }
+        assertEquals(new Vect(5,2), ball.getPosition()); 
+    }
+    
+    @Test public void testCircleBumperAngledCollision(){ 
+        Board board = new Board(20,20); 
+        Gadget circleBumper = new CircleBumper(new Vect(5,5)); 
+        board.addGadget(circleBumper);
+        Ball ball = new Ball (new Vect(1,1), new Vect(1,1)); 
+        board.addBall(ball); 
+        
+        int steps = 5; 
+        for (int i=1; i<=steps; i++){ 
+            board.step();
+        }
+        assertEquals(new Vect(2,2), ball.getPosition()); 
+    }
 }
