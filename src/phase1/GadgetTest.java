@@ -47,7 +47,7 @@ public class GadgetTest {
     //Test ball bouncing between top left and bottom right corners
     @Test public void testOuterWallsTopLeftBottomRightCorners(){ 
         Board board = new Board(20,20); 
-        Ball ball = new Ball(new Vect(0,19), new Vect(-1,1),0); 
+        Ball ball = new Ball(new Vect(0,19), new Vect(1,-1),0); 
         board.addBall(ball);
         board.step(65); 
 

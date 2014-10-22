@@ -209,9 +209,9 @@ public class TriangleBumper implements Gadget {
             case(0):    newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
             case(90):   newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
             case(180):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
-                        ball.step(); break;
+                        break;
             case(270):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
-                        ball.step(); break;
+                         break;
             
             }
            
@@ -222,9 +222,9 @@ public class TriangleBumper implements Gadget {
             switch(this.orientation){ 
 
             case(0):    newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);
-                        ball.step(); break;
+                         break;
             case(90):   newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);
-                        ball.step(); break;
+                         break;
             case(180):  newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
             case(270): newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
             
@@ -237,11 +237,11 @@ public class TriangleBumper implements Gadget {
             switch(this.orientation){ 
 
             case(0):    newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
-                        ball.step(); break;
+                         break;
             case(90):   newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
             case(180):  newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
             case(270):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
-                        ball.step(); break;
+                        break;
             
             }        }
         else if(ballX <= this.position.x()){ 
@@ -251,9 +251,9 @@ public class TriangleBumper implements Gadget {
             
             case(0):    newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
             case(90):   newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
-                        ball.step(); break;
+                         break;
             case(180):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
-                        ball.step(); break;
+                         break;
             case(270):  newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
             
             }  
@@ -276,10 +276,22 @@ public class TriangleBumper implements Gadget {
 
     @Override
     public boolean contains(Vect position) {
-
+        //System.out.println(position); 
         //System.out.println(gadgetArea.contains(position.x()+1,position.y()+1));
-        return gadgetArea.contains(position.x(),position.y());
+        //return gadgetArea.contains(position.x(),position.y());
         //return this.position.equals(position); 
+        return false; 
+    }
+
+    @Override
+    public boolean willColide(Ball ball) {
+        double timeTillWall1 = Geometry.timeUntilWallCollision(wall1, ball.ballReturnCircle(), ball.getVelocity()); 
+        double timeTillWall2 = Geometry.timeUntilWallCollision(wall2, ball.ballReturnCircle(), ball.getVelocity()); 
+        double timeTillLongWall = Geometry.timeUntilWallCollision(longWall, ball.ballReturnCircle(), ball.getVelocity());
+        //System.out.println(timeTillLongWall); 
+        return (timeTillWall1 < .5 || timeTillWall2 < .5 || timeTillLongWall <.5); 
+
+        
     }
 
 }

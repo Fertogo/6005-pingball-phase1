@@ -11,19 +11,19 @@ public class Ball implements Gadget {
     private long timeDiff;
     
     public Ball(Vect position, Vect velocity) {
-        this.position = new Vect(position.x()+1, position.y()+1);//Add 1 to account for walls
+        this.position = new Vect(position.x(), position.y());//Add 1 to account for walls
         this.velocity = velocity;
         this.gravity = 25; 
     }
     
     public Ball(Vect position, Vect velocity, double gravity) {
-        this.position = new Vect(position.x()+1, position.y()+1);//Add 1 to account for walls
+        this.position = new Vect(position.x(), position.y());//Add 1 to account for walls
         this.velocity = velocity;
         this.gravity = gravity;
     }
     
     public Ball(Vect position){ 
-        this.position = new Vect(position.x()+1, position.y()+1);//Add 1 to account for walls
+        this.position = new Vect(position.x(), position.y());//Add 1 to account for walls
         this.velocity = new Vect(0,0); 
     }
 
@@ -52,7 +52,7 @@ public class Ball implements Gadget {
         }else if(this.position.x()<0){
             this.position = new Vect(0, this.position.y());
         }
-        wallArray[(int) Math.round(this.position.y())][(int) Math.round(this.position.x())] = '*';
+        wallArray[(int) Math.round(this.position.y()+1)][(int) Math.round(this.position.x()+1)] = '*'; //Add 1 to account for walls
         
         String boardToString = "";
         for(int i=0; i<wallArray.length;i++){
@@ -76,7 +76,7 @@ public class Ball implements Gadget {
         
     }
     public void updateBall(Vect position, Vect velocity) {
-        this.position = new Vect(position.x()+1, position.y()+1);//Add 1 to account for walls
+        this.position = new Vect(position.x(), position.y());//Add 1 to account for walls
         this.velocity = velocity;
         
     }
