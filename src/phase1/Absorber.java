@@ -80,7 +80,15 @@ public class Absorber implements Gadget {
     }
     
     public void shootBall(Ball ball){
-        ball.updateBall(pivotPosition, new Vect(0, 50) );
+        if(this.height < 4 ){
+            ball.updateBall(new Vect(positionPoint.x()+this.width, positionPoint.y()+this.height), new Vect(0,50));
+            
+        }
+        if(this.height > 4 ){
+            ball.updateBall(new Vect(positionPoint.x()+this.width, positionPoint.y()+this.height-(int)(this.height/4.0)), new Vect(0,50));
+        }
+       
+        
         this.ballsStored--;
     }
     
@@ -94,11 +102,8 @@ public class Absorber implements Gadget {
         // TODO Auto-generated method stub
         
     }
-    /**
-     * return Absorber representation
-     */
-    @Override
-    public String toString(int boardWidth, int boardHeight) {
+    
+    public void createAbsorber(){
         Board board = new Board(boardWidth, boardHeight);
         char [][] wallArray = board.getArray();
         for(int i=0; i< this.width;i++){
@@ -108,11 +113,26 @@ public class Absorber implements Gadget {
 //        for(int i=0; i<height;i++){
 //            stringBuilder+="\n";    
 //        }
-        for(int i=0; i< width;i++){
+        for(int i=0; i< this.width;i++){
 //            stringBuilder+="=";
             wallArray[this.yPos+this.height][this.xPos+i] = '=';
+            if(this.height < 4 && i> this.width-1-this.ballsStored){
+                wallArray[this.yPos+this.height][this.xPos+i] = '*';
+            }
+            if(this.height > 4 && i> this.width-1-this.ballsStored){
+                wallArray[this.yPos+this.height-(int)(this.height/4.0)][this.xPos+i] = '*';
+            }
         }
-        
+    }
+    
+    /**
+     * return Absorber representation
+     */
+    @Override
+    public String toString(int boardWidth, int boardHeight) {
+        Board board = new Board(boardWidth, boardHeight);
+        char [][] wallArray = board.getArray();
+        this.createAbsorber();
         String boardToString = "";
         for(int i=0; i<wallArray.length;i++){
             for(int j=0; j< wallArray[0].length;j++){
