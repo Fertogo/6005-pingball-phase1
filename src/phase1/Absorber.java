@@ -22,7 +22,7 @@ public class Absorber implements Gadget {
     private int width;
     private int height;
     private int ballsStored;
-    private Rectangle rectangle;
+    private Rectangle rectangle; //TODO: Change to meaningfull name. 
     private Point positionPoint; 
     /**
      * 
@@ -125,8 +125,7 @@ public class Absorber implements Gadget {
     }
     @Override
     public boolean contains(Vect pos) {
-        // TODO Auto-generated method stub
-        return false;
+        return rectangle.contains(pos.x(), pos.y()); 
     }
     
     

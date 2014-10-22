@@ -11,6 +11,11 @@ public class Ball implements Gadget {
         this.position = position;
         this.velocity = velocity;
     }
+    
+    public Ball(Vect position){ 
+        this.position = position; 
+        this.velocity = new Vect(0,0); 
+    }
 
     @Override
     public void action() {
@@ -75,8 +80,6 @@ public class Ball implements Gadget {
         Vect delta = new Vect(Math.round(velocity.angle().cos()), Math.round(velocity.angle().sin()));
         System.out.println("Delta: " + delta);
         return this.position.plus(delta);
-
-
     }
 
     @Override
