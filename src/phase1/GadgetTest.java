@@ -77,7 +77,7 @@ public class GadgetTest {
         
         board.step(5);
         
-        assertEquals(new Vect(5,4), ball.getPosition()); 
+        assertEquals(new Vect(5,2), ball.getPosition()); 
     }
     
     //Test when the ball hits the Bottom of the Bumper
@@ -213,30 +213,29 @@ public class GadgetTest {
         Ball ball = new Ball(new Vect(5,1), new Vect(0,1),0); 
         board.addBall(ball);
         board.step(7); 
-        //assertEquals(new Vect(5,2), ball.getPosition()); 
+        assertEquals(new Vect(5,2), ball.getPosition()); 
         //Should bounce back up 
         
         //Hit Bottom Wall
         System.out.println("Hitting Bottom Wall"); 
         ball.updateBall(new Vect(5,10), new Vect(0,-1));
         board.step(7); 
-        //assertEquals(new Vect(5,7), ball.getPosition()); 
+        assertEquals(new Vect(8,6), ball.getPosition()); 
         //Should hit the longWall and be deflected to the to the right
         
         //Hit RightWall(long)
         System.out.println("Hitting Right Wall"); 
         ball.updateBall(new Vect(10,5), new Vect (-1,0));
         board.step(7); 
-        //assertEuqlals...
+        assertEquals(new Vect(6,8), ball.getPosition());
         //Should hit the longWall and be deflected to the bottom
-        
         
         //Hit leftWall
         System.out.println("Hitting Left Wall"); 
         ball.updateBall(new Vect(1,5), new Vect (1,0));
         board.step(7); 
-        //assertEuqlals...ounce back to the left
-        //should b
+        assertEquals(new Vect(2,5), ball.getPosition());
+        //should bounce back to the left
     }
     
     @Test public void testTriangleBumperHitEachWallDegree90(){ 
@@ -249,21 +248,21 @@ public class GadgetTest {
         Ball ball = new Ball(new Vect(5,1), new Vect(0,1),0); 
         board.addBall(ball);
         board.step(7); 
-        //assertEquals(new Vect(5,2), ball.getPosition()); 
+        assertEquals(new Vect(5,2), ball.getPosition()); 
         //Should bounce back up 
         
         //Hit Bottom Wall
         System.out.println("Hitting Bottom Wall"); 
         ball.updateBall(new Vect(5,10), new Vect(0,-1));
         board.step(7); 
-        //assertEquals(new Vect(5,7), ball.getPosition()); 
+        assertEquals(new Vect(2,6), ball.getPosition()); 
         //Should hit the longWall and be deflected to the to the left
         
         //Hit RightWall(long)
         System.out.println("Hitting Right Wall"); 
         ball.updateBall(new Vect(10,5), new Vect (-1,0));
         board.step(7); 
-        //assertEuqlals...
+        assertEquals(new Vect(9,5), ball.getPosition()); 
         //Should bounce back to the right
         
         
@@ -271,7 +270,7 @@ public class GadgetTest {
         System.out.println("Hitting Left Wall"); 
         ball.updateBall(new Vect(1,5), new Vect (1,0));
         board.step(7); 
-        //assertEuqlals...ounce back to the left
+        assertEquals(new Vect(4,9), ball.getPosition()); 
         //should hit longWall and be deflected to the bottom
     }
     
@@ -285,21 +284,21 @@ public class GadgetTest {
         Ball ball = new Ball(new Vect(5,1), new Vect(0,1),0); 
         board.addBall(ball);
         board.step(7); 
-        //assertEquals(new Vect(5,2), ball.getPosition()); 
+        assertEquals(new Vect(1,4), ball.getPosition()); 
         //Should hit longWall and be deflected to the left
         
         //Hit Bottom Wall
         System.out.println("Hitting Bottom Wall"); 
         ball.updateBall(new Vect(5,10), new Vect(0,-1));
         board.step(7); 
-        //assertEquals(new Vect(5,7), ball.getPosition()); 
+        assertEquals(new Vect(5,9), ball.getPosition()); 
         //Should bounce back to the bottom
         
         //Hit RightWall(long)
         System.out.println("Hitting Right Wall"); 
         ball.updateBall(new Vect(10,5), new Vect (-1,0));
         board.step(7); 
-        //assertEuqlals...
+        assertEquals(new Vect(9,5), ball.getPosition()); 
         //Should bounce back to the right
         
         
@@ -307,7 +306,7 @@ public class GadgetTest {
         System.out.println("Hitting Left Wall"); 
         ball.updateBall(new Vect(1,5), new Vect (1,0));
         board.step(7); 
-        //assertEuqlals...ounce back to the left
+        assertEquals(new Vect(4,1), ball.getPosition()); 
         //should hit longWall and be deflected up.
     }
     
@@ -321,21 +320,21 @@ public class GadgetTest {
         Ball ball = new Ball(new Vect(5,1), new Vect(0,1),0); 
         board.addBall(ball);
         board.step(7); 
-        //assertEquals(new Vect(5,2), ball.getPosition()); 
+        assertEquals(new Vect(9,4), ball.getPosition()); 
         //Should hit longWall and be deflected to the right
         
         //Hit Bottom Wall
         System.out.println("Hitting Bottom Wall"); 
         ball.updateBall(new Vect(5,10), new Vect(0,-1));
         board.step(7); 
-        //assertEquals(new Vect(5,7), ball.getPosition()); 
+        assertEquals(new Vect(5,9), ball.getPosition()); 
         //Should bounce back to the bottom
         
         //Hit RightWall(long)
         System.out.println("Hitting Right Wall"); 
         ball.updateBall(new Vect(10,5), new Vect (-1,0));
         board.step(7); 
-        //assertEuqlals...
+        assertEquals(new Vect(6,2), ball.getPosition());  
         //Should hit longWall and be deflected up
         
         
@@ -343,7 +342,7 @@ public class GadgetTest {
         System.out.println("Hitting Left Wall"); 
         ball.updateBall(new Vect(1,5), new Vect (1,0));
         board.step(7); 
-        //assertEuqlals...ounce back to the left
+        assertEquals(new Vect(2,5), ball.getPosition()); 
         //should bounce back to the left
     }
           
