@@ -8,20 +8,20 @@ public class Pingball {
         if (boardname.length == 0)  board = defaultBoard(); 
         else{ 
             switch(boardname[0]){ 
-            case("absorber"): board = absorberBoard(); 
-            case("flippers"): board = flipperBoard();
-            case("default"): board = defaultBoard(); 
+            case("absorber"): board = absorberBoard(); break;
+            case("flippers"): board = flipperBoard(); break;
+            case("default"): board = defaultBoard(); break;
             }
-            
-        board.run(); 
-        
+
         }
-        
+        //board.step(); 
+        board.run(); 
+        System.out.print("Done");
     }
     
     public static Board defaultBoard(){ 
         Board board = new Board(20,20); 
-        Ball ball = new Ball(new Vect(1.25,1.25));
+        Ball ball = new Ball(new Vect(1.25,1.25),new Vect(0,1),0);
         board.addBall(ball); 
         
         Gadget circleBumper = new CircleBumper(new Vect(1,10));

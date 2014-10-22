@@ -82,7 +82,7 @@ public class Board {
                 walls.collision(ball, 2);
             }
             
-            
+            //System.out.println(newBallPosition.toString());
             //Check for collisions in other gadgets
             for (Gadget gadget : gadgets){ 
                 if (gadget.contains(newBallPosition)){ 
@@ -93,7 +93,7 @@ public class Board {
             //System.out.println("Ball is allowed to move to position "+ newBallPosition.toString()); 
             ball.step(); 
         }
-        System.out.println(this.toString());
+        System.out.println(this.toString()); //Print the board. 
     }
     
     /**
@@ -186,10 +186,6 @@ public class Board {
             board.append("\n"); 
         }
         return board.toString(); 
-        
-    }
-    public void updateBoard(Ball ball, Vect plus) {
-        // TODO Auto-generated method stub
         
     }
 
