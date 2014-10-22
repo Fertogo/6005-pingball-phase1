@@ -121,7 +121,7 @@ public interface Gadget {
      * Adjusts a ball after a collision. 
      * @param ball: ball that is about to collide with gadget. 
      */
-    public void collision(Ball ball);
+    public void collision(Gadget ball);
 
     /**
      * Updates gadget after one timestep
