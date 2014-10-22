@@ -199,17 +199,19 @@ public class TriangleBumper implements Gadget {
             //System.out.println("BOTTOM=RIGHT-CORNER");
             newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
         }
-        //Check which wall was hit
+        //Check which wall was hit. step the ball if it hits hypotenous (since gadgetArea of Triangle is a rectangle)
         else if(ballY < this.position.y() && ballX >= this.position.x() && ballX <= this.position.x()+1 ){ 
             //Hitting top wall
             //System.out.println("TOP"); 
             //System.out.println(longWall.toString()) ;
             switch(this.orientation){ 
            
-            case(0):  newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
-            case(90): newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
-            case(180): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); System.out.println(newBallVelocity); break;
-            case(270): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
+            case(0):    newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
+            case(90):   newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
+            case(180):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
+                        ball.step(); break;
+            case(270):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
+                        ball.step(); break;
             
             }
            
@@ -219,9 +221,11 @@ public class TriangleBumper implements Gadget {
             //System.out.println("BOTTOM");
             switch(this.orientation){ 
 
-            case(0):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
-            case(90): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
-            case(180): newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
+            case(0):    newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);
+                        ball.step(); break;
+            case(90):   newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);
+                        ball.step(); break;
+            case(180):  newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
             case(270): newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
             
             }
@@ -232,10 +236,12 @@ public class TriangleBumper implements Gadget {
             //System.out.println(longWall.toString()); 
             switch(this.orientation){ 
 
-            case(0):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
-            case(90): newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
-            case(180): newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
-            case(270): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
+            case(0):    newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
+                        ball.step(); break;
+            case(90):   newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
+            case(180):  newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
+            case(270):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
+                        ball.step(); break;
             
             }        }
         else if(ballX <= this.position.x()){ 
@@ -243,10 +249,12 @@ public class TriangleBumper implements Gadget {
             //System.out.println("LEFT");
             switch(this.orientation){ 
             
-            case(0):  newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
-            case(90): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
-            case(180): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
-            case(270): newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
+            case(0):    newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
+            case(90):   newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
+                        ball.step(); break;
+            case(180):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
+                        ball.step(); break;
+            case(270):  newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
             
             }  
    

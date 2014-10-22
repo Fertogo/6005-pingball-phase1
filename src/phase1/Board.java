@@ -93,6 +93,12 @@ public class Board {
             //System.out.println("Ball is allowed to move to position "+ newBallPosition.toString()); 
             ball.step(); 
         }
+        try {
+            Thread.sleep(10, 0);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         System.out.println(this.toString()); //Print the board. 
     }
     

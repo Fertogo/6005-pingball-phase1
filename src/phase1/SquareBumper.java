@@ -25,7 +25,7 @@ public class SquareBumper implements Gadget {
 
         this.position = new Vect(x,y);
         
-        this.gadgetArea = new Rectangle(x, y, x+1, y+1);
+        this.gadgetArea = new Rectangle(x, y, 1, 1);
         
         //Create walls representing square bumper. 
         this.topWall = new LineSegment(x,y,x+1,y); 
