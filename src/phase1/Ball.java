@@ -79,5 +79,11 @@ public class Ball implements Gadget {
 
     }
 
+    @Override
+    public boolean contains(Vect pos) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
    
 }

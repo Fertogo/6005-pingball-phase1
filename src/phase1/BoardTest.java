@@ -39,7 +39,8 @@ public class BoardTest {
         Ball ball = new Ball(position, velocity); 
         
         board.addBall(ball); 
-        int steps = 50; 
+
+        int steps = 1000; 
         for (int i=0; i<steps; i++){ 
             board.step(); 
             try {

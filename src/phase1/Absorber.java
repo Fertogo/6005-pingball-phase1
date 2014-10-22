@@ -2,6 +2,8 @@ package phase1;
 import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.Rectangle;
+
+import physics.Vect;
 /*
  * String Representation: =
  * Size and Shape: A rectangle kL *mL where k and m are 0<k<=20
@@ -35,6 +37,9 @@ public class Absorber implements Gadget {
         this.height=height;
         this.rectangle= new Rectangle(x, y, width, height);
         this.positionPoint= new Point(x,y);
+    }
+    public Absorber(int x, int y, Rectangle size) {
+        // TODO Auto-generated constructor stub
     }
     /**
      * Occurs when a ball hits it
@@ -98,6 +103,31 @@ public class Absorber implements Gadget {
     public void rotateGadget(int degrees) {
         // TODO Auto-generated method stub
         
+    }
+    @Override
+    public Vect getPosition() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public Vect getNext() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public void collision(Ball ball) {
+        // TODO Auto-generated method stub
+        
+    }
+    @Override
+    public void step() {
+        // TODO Auto-generated method stub
+        
+    }
+    @Override
+    public boolean contains(Vect pos) {
+        // TODO Auto-generated method stub
+        return false;
     }
     
     
