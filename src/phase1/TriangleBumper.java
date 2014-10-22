@@ -63,4 +63,10 @@ public class TriangleBumper implements Gadget {
         
     }
 
+    @Override
+    public boolean contains(Vect pos) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }

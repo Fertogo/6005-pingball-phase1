@@ -57,8 +57,7 @@ public class Ball implements Gadget {
     }
     
     public void step(){
-        Vect delta = new Vect(Math.round(position.angle().cos()), Math.round(position.angle().sin()));
-        System.out.println(delta);
+        Vect delta = new Vect(Math.round(velocity.angle().cos()), Math.round(velocity.angle().sin()));
         this.position = this.position.plus(delta);
     }
 
@@ -73,11 +72,17 @@ public class Ball implements Gadget {
 
     @Override
     public Vect getNext() {
-
-        Vect delta = new Vect(Math.round(position.angle().cos()), Math.round(position.angle().sin()));
+        Vect delta = new Vect(Math.round(velocity.angle().cos()), Math.round(velocity.angle().sin()));
+        System.out.println("Delta: " + delta);
         return this.position.plus(delta);
 
 
+    }
+
+    @Override
+    public boolean contains(Vect pos) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
    

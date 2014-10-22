@@ -163,6 +163,8 @@ class Ball implements Pingball{
     public void step(Board board){ 
         double deltaY = velocity.angle().sin();
         double deltaX = velocity.angle().cos();
+        System.out.println(Math.round(deltaX));
+        System.out.println(Math.round(deltaY));
         board.updateBoard(this, positionX + (int)Math.round(deltaX), positionY + (int)Math.round(deltaY));
 
     }

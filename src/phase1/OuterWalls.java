@@ -47,6 +47,7 @@ public class OuterWalls {
             break;
             
         }
+        System.out.println("New velocity: " + newVelocity);
         Vect position = ball.getPosition(); 
         ball.updateBall(position,  newVelocity);
 
