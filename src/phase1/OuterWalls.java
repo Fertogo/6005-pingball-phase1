@@ -95,4 +95,10 @@ public class OuterWalls implements Gadget {
         // TODO Auto-generated method stub
         
     }
+
+    @Override
+    public void collision(Ball ball) {
+        // TODO Auto-generated method stub
+        
+    }
 }

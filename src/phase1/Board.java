@@ -3,6 +3,8 @@ package phase1;
 import java.util.ArrayList;
 import java.util.List;
 
+import physics.Vect;
+
 public class Board {
     private List<Gadget> gadgets = new ArrayList<Gadget>(); 
     private int height; 
@@ -99,5 +101,9 @@ public class Board {
         //Idea 2
         //toString(height,width) of every gadgets returns String representation of that gadget in an empty board. 
         //Call toString of every array, merge returned strings into board. 
+    }
+    public void updateBoard(Ball ball, Vect plus) {
+        // TODO Auto-generated method stub
+        
     }
 }

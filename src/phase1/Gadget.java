@@ -113,6 +113,7 @@ public interface Gadget {
      * @return: String representation of the individual Gadget in the board. 
      */
     public String toString(int width, int height);
-    
+
+    public void collision(Ball ball);
     
 }

@@ -17,8 +17,7 @@ public class TriangleBumper implements Gadget {
 
     @Override
     public void rotateGadget(int degrees) {
-        // TODO Auto-generated method stub
-
+        this.orientation = degrees;
     }
 
     @Override
@@ -39,6 +38,12 @@ public class TriangleBumper implements Gadget {
             boardToString += "\n";
         }      
         return boardToString;
+    }
+
+    @Override
+    public void collision(Ball ball) {
+        // TODO Auto-generated method stub
+        
     }
 
 }
