@@ -40,7 +40,7 @@ public class BoardTest {
         
         board.addBall(ball); 
 
-        int steps = 1000; 
+        int steps = 10; 
         for (int i=0; i<steps; i++){ 
             board.step(); 
             try {
@@ -54,6 +54,16 @@ public class BoardTest {
         System.out.println("Done");
     }
     
+    @Test public void testTwoBallsHitSameWallSameTime(){ 
+        Board board = new Board(20,20); 
+        Ball ball1 = new Ball(new Vect(5,5), new Vect(-1,0),0); 
+        Ball ball2 = new Ball(new Vect(5,10), new Vect(-1,0),0); 
+        board.addBall(ball1); 
+        board.addBall(ball2);
+        board.step(70); //Watch how the balls go out of sync! 
+        fail("Not in Sync"); 
+
+    }
 //    public void testCheckRep(){ 
 //        Board board = new Board(20,20); 
 //        Gadget circleBumper = new CircleBumper(10,10);
