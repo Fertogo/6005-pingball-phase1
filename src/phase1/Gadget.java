@@ -16,7 +16,6 @@ import physics.*;
  */   
 public interface Gadget {
 
-    
     /**
      * absorber stops ball and holds it. 
      * if not holding the ball or if previously rejected ball hos not left the absorber, 
@@ -115,14 +114,8 @@ public interface Gadget {
     public String toString(int width, int height);
     /**
      * 
-     * @return x position of the gadget
+     * @return Vector representing the position of the object
      */
-    public int getX(); 
-    
-    /**
-     * 
-     * @return y position of the gadget
-     */
-    public int getY(); 
+    public Vect getPosition(); 
     
 }
