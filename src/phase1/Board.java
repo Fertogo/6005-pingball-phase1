@@ -16,6 +16,7 @@ public class Board {
     private int height; 
     private int width; 
     private double gravity = 25; 
+    private double timestep = .08;
     
     private void checkRep(){ 
         Set<Vect> positions = new HashSet<Vect>(); 
@@ -40,8 +41,8 @@ public class Board {
     }
     
     public Board(int width, int height){ 
-        this.height= height;
-        this.width = width;
+        this.height= height+2; //Add two to compensate for walls. 
+        this.width = width+2;
         walls = new OuterWalls(width,height); 
     }
     
@@ -50,7 +51,7 @@ public class Board {
      */
     public void step(){ 
         for (Ball ball : balls){ 
-            Vect newBallPosition = ball.getNext(); 
+            Vect newBallPosition = ball.getNext(timestep); 
             
             //System.out.println(newBallPosition); 
             //Check for wall collisions
@@ -85,16 +86,28 @@ public class Board {
             //System.out.println(newBallPosition.toString());
             //Check for collisions in other gadgets
             for (Gadget gadget : gadgets){ 
-                System.out.println("New Ball Position: " + newBallPosition);
-                if (gadget.contains(newBallPosition)){ 
+                double timeToCollision = gadget.timeToCollision(ball);
+                if(timeToCollision < timestep) {
                     gadget.collision(ball); 
-                    break; 
-                }
+//                    double remainingTime = timestep;                    
+//                    ball.updateBall(timeToCollision);
+//                        if (gadget.contains(newBallPosition) ){ 
+//                            gadget.collision(ball); 
+//                            break;
+//                        }
+
+
+                    //ball.updateBall(remainingTime);
+                } 
             }
-            //System.out.println("Ball is allowed to move to position "+ newBallPosition.toString()); 
             
-            ball.step(); 
+            System.out.println("Ball is allowed to move to position "+ newBallPosition.toString()); 
+            ball.updateBall(timestep);
+            for (Gadget gadget : gadgets){ 
+                if (gadget.willColide(ball)) gadget.collision(ball); 
+            }
         }
+       
         System.out.println(this.toString()); //Print the board. 
     }
     
@@ -104,35 +117,6 @@ public class Board {
      */
     public void step(int steps){ 
        for (int i=0; i<steps; i++) step();  
-    }
-    
-    public char [][] getArray(){
-        char [][] wallArray = new char[height][width];
-
-        //Populate with space
-        for (int x = 0; x<width; x++){ 
-            for (int y = 0; y<height; y++){ 
-                wallArray[x][y] = ' '; 
-            }
-        }
-        //Draw the walls
-        //Top wall
-        for (int i=0; i<width; i++){ 
-            wallArray[i][0] = '.'; 
-        }
-        //Bottom wall
-        for (int i=0; i<width; i++){ 
-            wallArray[i][height-1] = '.';
-        }
-        //Left wall
-        for (int y=0; y<width; y++){ 
-            wallArray[0][y] = '.'; 
-        }
-        //Right wall
-        for (int y=0; y<width; y++){ 
-            wallArray[width-1][y] = '.'; 
-        }
-        return wallArray;
     }
 
     public void addGadget(Gadget gadget){ 

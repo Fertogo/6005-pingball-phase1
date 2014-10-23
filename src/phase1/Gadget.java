@@ -24,8 +24,8 @@ public interface Gadget {
      * @param y: y Position on the board
      * @param size:  A rectangle kL *mL where k and m are 0<k<=20
      */
-    public static Gadget absorber(int x, int y, Rectangle size){ 
-        return new Absorber(x,  y, size); 
+    public static Gadget absorber(int x, int y, int width, int height){ 
+        return new Absorber(x,  y, width, height); 
     }
     
     /**
@@ -115,7 +115,7 @@ public interface Gadget {
       * 
       * @return where the gadget wants to be in the next time step. 
       */
-    public Vect getNext();
+    public Vect getNext(double time);
 
     /**
      * Adjusts a ball after a collision. 
@@ -134,11 +134,52 @@ public interface Gadget {
      * @return True if gadget contains p, that is, a ball at p would collide with the gadget. 
      */
     public boolean contains(Vect position); 
-
+    
+    /**
+     * 
+     * @param ball
+     * @return whether the ball will colide with the gadget on the next timestep. 
+     */
+    public boolean willColide(Ball ball); 
+    
     /**
      * 
      * @param ball: ball that us about to collide with gadget
      * @return the time until collision with ball
      */
     public double timeToCollision(Ball ball);
+
+    public static char [][] getArray(int height,int width){
+        char [][] wallArray = new char[height][width];
+
+
+    
+
+        //Populate with space
+        for (int x = 0; x<width; x++){ 
+            for (int y = 0; y<height; y++){ 
+                wallArray[x][y] = ' '; 
+            }
+        }
+        //Draw the walls
+        //Top wall
+        for (int i=0; i<width; i++){ 
+            wallArray[i][0] = '.'; 
+        }
+        //Bottom wall
+        for (int i=0; i<width; i++){ 
+            wallArray[i][height-1] = '.';
+        }
+        //Left wall
+        for (int y=0; y<width; y++){ 
+            wallArray[0][y] = '.'; 
+        }
+        //Right wall
+        for (int y=0; y<width; y++){ 
+            wallArray[width-1][y] = '.'; 
+        }
+        return wallArray;
+    }
+    
+
 }

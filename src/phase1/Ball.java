@@ -1,7 +1,9 @@
 package phase1;
 
-import physics.Geometry;
-import physics.Vect;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import physics.*;
 
 public class Ball implements Gadget {
     
@@ -10,21 +12,23 @@ public class Ball implements Gadget {
     private double gravity;
     private long time = System.currentTimeMillis();
     private long timeDiff;
+    private double mu = .025;
+    private double mu2 = .025;
     
     public Ball(Vect position, Vect velocity) {
-        this.position = position;
+        this.position = new Vect(position.x(), position.y());//Add 1 to account for walls
         this.velocity = velocity;
         this.gravity = 25; 
     }
     
     public Ball(Vect position, Vect velocity, double gravity) {
-        this.position = position;
+        this.position = new Vect(position.x(), position.y());//Add 1 to account for walls
         this.velocity = velocity;
         this.gravity = gravity;
     }
     
     public Ball(Vect position){ 
-        this.position = position; 
+        this.position = new Vect(position.x(), position.y());//Add 1 to account for walls
         this.velocity = new Vect(0,0); 
     }
 
@@ -32,7 +36,9 @@ public class Ball implements Gadget {
     public void action() {
 
     }
-
+    public Circle ballReturnCircle(){
+        return new Circle(position, .25);
+    }
     @Override
     public void rotateGadget(int degrees) {
 
@@ -40,8 +46,7 @@ public class Ball implements Gadget {
 
     @Override
     public String toString(int width, int height) {
-        Board board = new Board(width, height);
-        char [][] wallArray = board.getArray();
+        char [][] wallArray = Gadget.getArray(height,width); 
         if(this.position.y()>19){
             this.position = new Vect(this.position.x(), 19);
         }else if(this.position.y()<0){
@@ -52,7 +57,7 @@ public class Ball implements Gadget {
         }else if(this.position.x()<0){
             this.position = new Vect(0, this.position.y());
         }
-        wallArray[(int) Math.round(this.position.y())][(int) Math.round(this.position.x())] = '*';
+        wallArray[(int) Math.round(this.position.y()+1)][(int) Math.round(this.position.x()+1)] = '*'; //Add 1 to account for walls
         
         String boardToString = "";
         for(int i=0; i<wallArray.length;i++){
@@ -76,8 +81,23 @@ public class Ball implements Gadget {
         
     }
     public void updateBall(Vect position, Vect velocity) {
-        this.position = position;
+        this.position = new Vect(position.x(), position.y());//Add 1 to account for walls
         this.velocity = velocity;
+        
+    }
+    public void updatePosition(Vect position){
+        this.position = position;
+    }
+    
+    public void updateVelocity(Vect velocity) {
+        this.velocity = velocity;
+    }
+    
+    public void updateBall(double time){
+        this.updatePosition(this.getPosition().plus(this.getVelocity().times(time)));
+        this.updateVelocity(this.getVelocity().plus(Vect.Y_HAT.times(time*gravity)));
+        double delta = 1 - mu*time - mu2*this.getVelocity().length()*time;
+        this.updateVelocity(this.getVelocity().times(delta));
         
     }
     
@@ -96,17 +116,13 @@ public class Ball implements Gadget {
     
 
     public Vect getVelocity(){
-        Vect gravity = new Vect(0, this.gravity*(this.timeDiff));
-        return this.velocity.plus(gravity);
+        return this.velocity;
     }
 
     
     @Override
-    public Vect getNext() {
-        this.timeDiff = System.currentTimeMillis() - this.time;
-        Vect gravity = new Vect(0, this.gravity*(this.timeDiff));
-        Vect delta = new Vect(velocity.plus(gravity).angle().cos(), velocity.plus(gravity).angle().sin());
-        return this.position.plus(delta);
+    public Vect getNext(double time) {
+        return this.getPosition().plus(this.getVelocity().times(time));
 
     }
 
@@ -118,6 +134,23 @@ public class Ball implements Gadget {
 
     public void setTime(long time){
         this.time = time;
+    }
+
+    @Override
+    public boolean willColide(Ball ball) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public double timeToCollision(Ball ball) {
+        double timeToWallCollision = Double.POSITIVE_INFINITY;
+        double minimumTime = Geometry.timeUntilBallBallCollision(ball.ballReturnCircle(), ball.getVelocity(), 
+                this.ballReturnCircle(), this.getVelocity());
+            if(minimumTime < timeToWallCollision){
+                timeToWallCollision = minimumTime;
+            }
+        return timeToWallCollision;
     }
    
 }

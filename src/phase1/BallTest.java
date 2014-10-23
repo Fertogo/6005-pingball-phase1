@@ -29,7 +29,7 @@ public class BallTest {
     @Test
     public void testSquareBumper() throws InterruptedException{
         Board board = new Board(20, 20);
-        Vect velocity = new Vect(0,0);
+        Vect velocity = new Vect(.5,0);
         Vect position = new Vect(3.0, 3.0);
         Ball ball = new Ball(position, velocity, 25);
         board.addBall(ball);
@@ -42,13 +42,24 @@ public class BallTest {
         //board.addGadget(sBumper3);
 
         
-        int steps = 40;
+        int steps = 2000;
         for(int i=1; i<steps; i++){
             
             board.step();
             System.out.println(ball.getVelocity());
             System.out.println(ball.getPosition());
-            Thread.sleep(100);
+            //Thread.sleep();
         }
+    }
+    
+    @Test public void testBallsCollidingWithEachother() { 
+        Board board  = new Board (20,20); 
+        Ball ball1 = new Ball(new Vect(5,5), new Vect(3,0), 0); 
+        Ball ball2 = new Ball(new Vect(15,5), new Vect(-3,0), 0); 
+        board.addBall(ball1); 
+        board.addBall(ball2);
+        board.step(30); 
+        fail("TODO"); 
+
     }
 }

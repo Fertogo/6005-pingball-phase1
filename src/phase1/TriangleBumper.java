@@ -1,6 +1,9 @@
 package phase1;
 
+import java.awt.Polygon;
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import physics.Geometry;
 import physics.LineSegment;
@@ -12,6 +15,7 @@ public class TriangleBumper implements Gadget {
     private LineSegment wall1; 
     private LineSegment wall2; 
     private LineSegment longWall; 
+    //private Polygon gadgetArea; 
     private Rectangle gadgetArea; 
     
     private void checkRep(){ 
@@ -20,24 +24,29 @@ public class TriangleBumper implements Gadget {
         assert(longWall.length() > wall2.length()); 
         assert(this.orientation % 90 == 0); 
         assert(this.orientation <= 360); 
+        //assert(gadgetArea.npoints ==3); 
     }
     
     public TriangleBumper(Vect position) {
-        this.position = position;      
-        triangleDegree0(); 
+
         this.orientation= 0; 
-        int posX = (int)(this.position.x());
-        int posY = (int)(this.position.y());  
-        this.gadgetArea = new Rectangle(posX, posY, posX+1, posY+1);
+        int posX = (int)(position.x());
+        int posY = (int)(position.y());  
+        this.position = new Vect(posX,posY); 
+        //this.gadgetArea = new Polygon(); 
+        this.gadgetArea = new Rectangle(posX,posY,1,1); 
+        triangleDegree0(); 
         checkRep();
     }
     
     public TriangleBumper(Vect position, int orientation){ 
-        this.position = position; 
+        int posX = (int)(position.x());
+        int posY = (int)(position.y());  
+        this.position = new Vect(posX,posY); 
         rotateGadget(orientation); 
-        int posX = (int)(this.position.x());
-        int posY = (int)(this.position.y());  
-        this.gadgetArea = new Rectangle(posX, posY, posX+1, posY+1);
+
+        //this.gadgetArea = new Polygon(); 
+        this.gadgetArea = new Rectangle(posX,posY,1,1); 
         checkRep();
     }
 
@@ -45,11 +54,16 @@ public class TriangleBumper implements Gadget {
      * Changes orientation of this to a triangle with an orientation of 0 degrees
      */
     private void triangleDegree0(){ 
+
         int x = (int)(this.position.x());
-        int y = (int)(this.position.y()); 
+        int y = (int)(this.position.y());
         this.wall1 = new LineSegment(x,y,x+1,y); 
         this.wall2 = new LineSegment(x,y,x,y+1); 
         this.longWall = new LineSegment(x+1,y,x,y+1); 
+//        this.gadgetArea.reset();
+//        this.gadgetArea.addPoint(x, y);
+//        this.gadgetArea.addPoint(x+1, y);
+//        this.gadgetArea.addPoint(x, y+1);
     }
     
     /**
@@ -61,6 +75,10 @@ public class TriangleBumper implements Gadget {
         this.wall1 = new LineSegment(x,y,x+1,y); 
         this.wall2 = new LineSegment(x+1,y,x+1,y+1); 
         this.longWall = new LineSegment(x,y,x+1,y+1); 
+//        this.gadgetArea.reset();
+//        this.gadgetArea.addPoint(x, y);
+//        this.gadgetArea.addPoint(x+1, y);
+//        this.gadgetArea.addPoint(x+1, y+1);
     }
     
     /**
@@ -74,6 +92,10 @@ public class TriangleBumper implements Gadget {
         this.wall2 = new LineSegment(x+1,y,x+1,y+1); 
         this.longWall = new LineSegment(x,y+1,x+1,y); 
         System.out.println(longWall.toString()); 
+//        this.gadgetArea.reset();
+//        this.gadgetArea.addPoint(x, y+1);
+//        this.gadgetArea.addPoint(x+1, y);
+//        this.gadgetArea.addPoint(x+1, y+1);
     }
     
     /**
@@ -85,6 +107,11 @@ public class TriangleBumper implements Gadget {
         this.wall1 = new LineSegment(x,y,x,y+1); 
         this.wall2 = new LineSegment(x,y+1,x+1,y+1); 
         this.longWall = new LineSegment(x,y,x+1,y+1);
+//        this.gadgetArea.reset();
+//        this.gadgetArea.addPoint(x, y);
+//        this.gadgetArea.addPoint(x, y+1);
+//        this.gadgetArea.addPoint(x+1, y+1);
+        
     }
     
     @Override
@@ -112,12 +139,11 @@ public class TriangleBumper implements Gadget {
 
     @Override
     public String toString(int height, int width) {
-        Board board = new Board(width, height);
-        char [][] wallArray = board.getArray();
+        char [][] wallArray = Gadget.getArray(height,width); 
         if(this.orientation == 0 || this.orientation == 180){
-            wallArray[(int) this.position.y()][(int) this.position.x()] = '/';
+            wallArray[(int) this.position.y()+1][(int) this.position.x()+1] = '/';
         }else{
-            wallArray[(int) this.position.y()][(int) this.position.x()] = '\\';
+            wallArray[(int) this.position.y()+1][(int) this.position.x()+1] = '\\';
         }
         
         String boardToString = "";
@@ -138,7 +164,7 @@ public class TriangleBumper implements Gadget {
     }
 
     @Override
-    public Vect getNext() {
+    public Vect getNext(double time) {
         this.step();
         return this.position;
     }
@@ -152,7 +178,7 @@ public class TriangleBumper implements Gadget {
         double ballX = currentBallPosition.x(); 
         double ballY = currentBallPosition.y(); 
         
-        //System.out.println(currentBallPosition.toString());
+        System.out.println(currentBallPosition.toString());
         //Check Corners
         if (ballX > this.position.x() + 1 && ballY > this.position.y()){ 
             //Hitting the top right corner of Bumper
@@ -175,17 +201,19 @@ public class TriangleBumper implements Gadget {
             //System.out.println("BOTTOM=RIGHT-CORNER");
             newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
         }
-        //Check which wall was hit
+        //Check which wall was hit. step the ball if it hits hypotenous (since gadgetArea of Triangle is a rectangle)
         else if(ballY < this.position.y() && ballX >= this.position.x() && ballX <= this.position.x()+1 ){ 
             //Hitting top wall
             //System.out.println("TOP"); 
             //System.out.println(longWall.toString()) ;
             switch(this.orientation){ 
            
-            case(0):  newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
-            case(90): newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
-            case(180): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); System.out.println(newBallVelocity); break;
-            case(270): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
+            case(0):    newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
+            case(90):   newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
+            case(180):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
+                        break;
+            case(270):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
+                         break;
             
             }
            
@@ -195,9 +223,11 @@ public class TriangleBumper implements Gadget {
             //System.out.println("BOTTOM");
             switch(this.orientation){ 
 
-            case(0):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
-            case(90): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
-            case(180): newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
+            case(0):    newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);
+                         break;
+            case(90):   newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);
+                         break;
+            case(180):  newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
             case(270): newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
             
             }
@@ -208,10 +238,12 @@ public class TriangleBumper implements Gadget {
             //System.out.println(longWall.toString()); 
             switch(this.orientation){ 
 
-            case(0):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
-            case(90): newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
-            case(180): newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
-            case(270): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
+            case(0):    newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
+                         break;
+            case(90):   newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
+            case(180):  newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
+            case(270):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
+                        break;
             
             }        }
         else if(ballX <= this.position.x()){ 
@@ -219,10 +251,12 @@ public class TriangleBumper implements Gadget {
             //System.out.println("LEFT");
             switch(this.orientation){ 
             
-            case(0):  newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
-            case(90): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
-            case(180): newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
-            case(270): newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
+            case(0):    newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
+            case(90):   newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
+                         break;
+            case(180):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
+                         break;
+            case(270):  newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
             
             }  
    
@@ -234,7 +268,7 @@ public class TriangleBumper implements Gadget {
 //        System.out.println("Old Ball Velocity: " + ball.getVelocity().toString());
 //        System.out.println("New Ball Velocity: " + newBallVelocity.toString());
 
-        ball.updateBall(currentBallPosition, newBallVelocity); 
+        ball.updateVelocity(newBallVelocity); 
     }
 
     @Override
@@ -244,8 +278,37 @@ public class TriangleBumper implements Gadget {
 
     @Override
     public boolean contains(Vect position) {
-        return gadgetArea.contains(position.x(),position.y());
+        //System.out.println(position); 
+        //System.out.println(gadgetArea.contains(position.x()+1,position.y()+1));
+        //return gadgetArea.contains(position.x(),position.y());
         //return this.position.equals(position); 
+        return false; 
+    }
+
+    @Override
+    public boolean willColide(Ball ball) {
+        double timeTillWall1 = Geometry.timeUntilWallCollision(wall1, ball.ballReturnCircle(), ball.getVelocity()); 
+        double timeTillWall2 = Geometry.timeUntilWallCollision(wall2, ball.ballReturnCircle(), ball.getVelocity()); 
+        double timeTillLongWall = Geometry.timeUntilWallCollision(longWall, ball.ballReturnCircle(), ball.getVelocity());
+        System.out.println(timeTillWall1); 
+        return (timeTillWall1 < .5 || timeTillWall2 <= .5 || timeTillLongWall <= .5); 
+
+        
+    }
+
+    @Override
+    public double timeToCollision(Ball ball) {
+        ArrayList<LineSegment> bumperWalls = new ArrayList<LineSegment>();
+        bumperWalls.addAll(Arrays.asList(wall1, wall2, longWall));
+        double timeToWallCollision = Double.POSITIVE_INFINITY;
+        
+        for(LineSegment l: bumperWalls){
+            double minimumTime = Geometry.timeUntilWallCollision(l, ball.ballReturnCircle(), ball.getVelocity());
+            if(minimumTime < timeToWallCollision){
+                timeToWallCollision = minimumTime;
+            }
+        }
+        return timeToWallCollision;
     }
 
 }
