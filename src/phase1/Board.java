@@ -197,4 +197,9 @@ public class Board {
     public void setGravity(double gravity) {
         this.gravity = gravity;
     }
+    
+    public void setFriction(double friction){ 
+        this.mu = friction; 
+        this.mu2 = friction; 
+    }
 }
