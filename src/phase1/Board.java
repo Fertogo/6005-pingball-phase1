@@ -17,7 +17,7 @@ public class Board {
     private int height; 
     private int width; 
     private double gravity = 25; 
-    private double timestep = .1;
+    private double timestep = .16;
     private double mu = .025;
     private double mu2 = .025;
 
@@ -109,9 +109,7 @@ public class Board {
             }
             //            System.out.println("Ball is allowed to move to position "+ newBallPosition.toString()); 
             //ball.updateBall(timestep);
-            for (Gadget gadget : gadgets){ 
-                if (gadget.willColide(ball)) gadget.collision(ball); 
-            }
+
         }
         this.updateBalls(timestep);
         System.out.println(this.toString()); //Print the board. 
@@ -200,5 +198,10 @@ public class Board {
     }
     public void setGravity(double gravity) {
         this.gravity = gravity;
+    }
+    
+    public void setFriction(double friction){ 
+        this.mu = friction; 
+        this.mu2 = friction; 
     }
 }

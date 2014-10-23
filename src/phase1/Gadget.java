@@ -1,5 +1,7 @@
 package phase1; 
 
+import java.util.List;
+
 import physics.*; 
 
 /*
@@ -14,7 +16,7 @@ import physics.*;
  * Some gadgets have actions - A response that a gadget can make to a trigger happening somewhere on the board. 
  */   
 public interface Gadget {
-
+    
     /**
      * absorber stops ball and holds it. 
      * if not holding the ball or if previously rejected ball hos not left the absorber, 
@@ -23,8 +25,8 @@ public interface Gadget {
      * @param y: y Position on the board
      * @param size:  A rectangle kL *mL where k and m are 0<k<=20
      */
-    public static Gadget absorber(int x, int y, int width, int height){ 
-        return new Absorber(x,  y, width, height); 
+    public static Gadget absorber(Vect position, int width, int height){ 
+        return new Absorber(position, width, height); 
     }
     
     /**
@@ -80,8 +82,8 @@ public interface Gadget {
      * @param velocity: initial velocity of the ball
      * @return A ball
      */
-    public static Gadget ball(Vect position, Vect velocity, double gravity){
-        return new Ball(position, velocity, gravity);
+    public static Gadget ball(Vect position, Vect velocity){
+        return new Ball(position, velocity);
     }
     /**
      * Called when a gadget is triggered
@@ -122,24 +124,7 @@ public interface Gadget {
      */
     public void collision(Ball ball);
 
-    /**
-     * Updates gadget after one timestep
-     */
-    public void step(); 
     
-    /**
-     * 
-     * @param position: position to check in Gadget
-     * @return True if gadget contains p, that is, a ball at p would collide with the gadget. 
-     */
-    public boolean contains(Vect position); 
-    
-    /**
-     * 
-     * @param ball
-     * @return whether the ball will colide with the gadget on the next timestep. 
-     */
-    public boolean willColide(Ball ball); 
     
     /**
      * 
@@ -150,9 +135,6 @@ public interface Gadget {
 
     public static char [][] getArray(int height,int width){
         char [][] wallArray = new char[height][width];
-
-
-    
 
         //Populate with space
         for (int x = 0; x<width; x++){ 
@@ -180,5 +162,10 @@ public interface Gadget {
         return wallArray;
     }
     
+    /**
+     * Adds a gadget to Gadget's gadgets to be triggered
+     * @param triggeredGadget: Gadget to be added to triggered gadgets
+     */
+    public void addTriggeredGadget(Gadget triggeredGadget);
 
 }
