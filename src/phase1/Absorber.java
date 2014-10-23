@@ -1,8 +1,7 @@
 package phase1;
-import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.Rectangle;
-
+import java.util.ArrayList;
 import physics.Vect;
 /*
  * String Representation: =
@@ -24,8 +23,7 @@ public class Absorber implements Gadget {
     private int ballsStored;
     private Rectangle absorberArea; 
     private Vect positionPoint; 
-    
-
+    private ArrayList<Ball> ballStorage;
     /**
      * 
      * @param x-xPosition
@@ -40,8 +38,6 @@ public class Absorber implements Gadget {
         this.positionPoint= new Vect(this.xPos, this.yPos);;
         this.absorberArea= new Rectangle(x, y, width, height);
     }
-
-    
     /**
      * Occurs when a ball hits it
      */
@@ -54,47 +50,22 @@ public class Absorber implements Gadget {
      */
     @Override
     public void collision(Ball ball){
-        this.ballsStored+=1;
-        this.action();
+       this.storeBall(ball);      
     }
-    
-    //*
-    
-    @Override
-    public void rotateGadget(int degrees) {
-        //Empty
-    }
-   
-
     @Override
     public void step() {
-       if(ballsStored>0){
-           shootBall(abll); 
+       if(ballsStored>0 && this.ballStorage.size()>0){
+           shootBall(this.ballStorage.remove(0)); 
        }
         
     }
-    
-    public void shootBall(Ball ball){
-        if(this.height < 4 ){
-            ball.updateBall(new Vect(positionPoint.x()+this.width, positionPoint.y()+this.height), new Vect(0,50));
-            
-        }
-        if(this.height > 4 ){
-            ball.updateBall(new Vect(positionPoint.x()+this.width, positionPoint.y()+this.height-(int)(this.height/4.0)), new Vect(0,50));
-        }
-       
-        
-        this.ballsStored--;
-    }
-    
-
     /**
      * Store ball in one iteration and shoots it back in the next
      * 
      */
     @Override
     public void action() {
-        // TODO Auto-generated method stub
+ 
         
     }
     
@@ -139,8 +110,29 @@ public class Absorber implements Gadget {
         return boardToString;
       
     }
-
     
+    public void shootBall(Ball ball){
+        if(this.height < 4 ){
+            ball.updateBall(new Vect(positionPoint.x()+this.width, positionPoint.y()+this.height), new Vect(0,50));
+            
+        }
+        if(this.height > 4 ){
+            ball.updateBall(new Vect(positionPoint.x()+this.width, positionPoint.y()+this.height-(int)(this.height/4.0)), new Vect(0,50));
+        }
+        this.ballsStored--;
+    }
+    
+    public void storeBall(Ball ball){
+        this.ballStorage.add(ball);
+        if(this.height < 4 ){
+            ball.updateBall(new Vect(positionPoint.x()+this.width, positionPoint.y()+this.height), new Vect(0,0));
+            
+        }
+        if(this.height > 4 ){
+            ball.updateBall(new Vect(positionPoint.x()+this.width, positionPoint.y()+this.height-(int)(this.height/4.0)), new Vect(0,0));
+        }
+        this.ballsStored++;
+    }
     
     @Override
     public Vect getPosition() {
@@ -150,13 +142,16 @@ public class Absorber implements Gadget {
     public Vect getNext() {
        return positionPoint;
     }
-    
-    
     @Override
     public boolean contains(Vect pos) {
         return absorberArea.contains(pos.x(), pos.y()); 
     }
-    
+    @Override
+    public void rotateGadget(int degrees) {
+        //Empty
+        
+    }
+   
     
     
 
