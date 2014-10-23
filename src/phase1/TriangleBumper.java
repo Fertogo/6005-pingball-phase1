@@ -15,7 +15,7 @@ public class TriangleBumper implements Gadget {
     private LineSegment wall1; 
     private LineSegment wall2; 
     private LineSegment longWall; 
-    private List<Gadget> triggeredGadgets; 
+    private List<Gadget> triggeredGadgets = new ArrayList<Gadget>();; 
 
     //private Polygon gadgetArea; 
     //private Rectangle gadgetArea; 

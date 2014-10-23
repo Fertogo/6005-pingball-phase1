@@ -21,7 +21,7 @@ public class SquareBumper implements Gadget {
     private LineSegment rightWall; 
     private LineSegment bottomWall; 
     private LineSegment topWall; 
-    private List<Gadget> triggeredGadgets; 
+    private List<Gadget> triggeredGadgets = new ArrayList<Gadget>(); 
     
     public SquareBumper(Vect position) {
         int x = (int)(position.x()); //Adding 1 to compensate for the walls

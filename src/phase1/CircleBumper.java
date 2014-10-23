@@ -1,6 +1,7 @@
 package phase1;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.List;
 
 import physics.Circle;
@@ -11,7 +12,7 @@ public class CircleBumper implements Gadget {
     private Vect position;
     private Circle circle;
     private Rectangle gadgetArea; 
-    private List<Gadget> triggeredGadgets; 
+    private List<Gadget> triggeredGadgets = new ArrayList<Gadget>();; 
 
     
 
@@ -64,10 +65,6 @@ public class CircleBumper implements Gadget {
     }
 
 
-
-   
-
-
     @Override
     public Vect getNext(double time) {
         return null;
@@ -80,6 +77,8 @@ public class CircleBumper implements Gadget {
             if(minimumTime < timeToWallCollision){
                 timeToWallCollision = minimumTime;
             }
+            System.out.println("Time until collision with circle: " + minimumTime);
+            System.out.println("Velocity of ball at collision: " + ball.getVelocity());
         return timeToWallCollision;
     }
 
