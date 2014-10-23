@@ -68,6 +68,7 @@ public class Ball implements Gadget {
 
     @Override
     public void collision(Ball ball) {
+        System.out.println("Ball hit ball!");
         Vect center = new Vect(.5, .5);
         Vect centerBall1 = ball.getPosition().plus(center);
         Vect centerBall2 = this.getPosition().plus(center);
