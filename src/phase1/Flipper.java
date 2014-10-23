@@ -100,6 +100,8 @@ public class Flipper implements Gadget{
      * @param degrees 0-360
      */
     public void flipFlipper(){
+        //Right Flipper always clockwise rotations 
+        //Left counterclockwise rotations 
         if(!isHorizontal){
             //left  --CounterClockwise 90
             if(this.flipperType ==0){
