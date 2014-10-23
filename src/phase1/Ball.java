@@ -1,7 +1,6 @@
 package phase1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
 
 import physics.*;
 
@@ -10,8 +9,6 @@ public class Ball implements Gadget {
     private Vect position;
     private Vect velocity;
     private double gravity;
-    private long time = System.currentTimeMillis();
-    private long timeDiff;
     private double mu = .025;
     private double mu2 = .025;
     
@@ -71,6 +68,7 @@ public class Ball implements Gadget {
 
     @Override
     public void collision(Ball ball) {
+        System.out.println("Ball hit ball!");
         Vect center = new Vect(.5, .5);
         Vect centerBall1 = ball.getPosition().plus(center);
         Vect centerBall2 = this.getPosition().plus(center);
@@ -102,12 +100,12 @@ public class Ball implements Gadget {
     }
     
     public void step(){
-        Vect gravity = new Vect(0, this.gravity*(System.currentTimeMillis() - this.time));
-        System.out.println("Velocity in step" + velocity);
-        System.out.println("Gravity in step" + gravity);
-        Vect delta = new Vect(velocity.plus(gravity).angle().cos(), velocity.plus(gravity).angle().sin());
-        System.out.println("Delta in step" + delta);
-        this.position = this.position.plus(delta);
+//        Vect gravity = new Vect(0, this.gravity*(System.currentTimeMillis() - this.time));
+//        System.out.println("Velocity in step" + velocity);
+//        System.out.println("Gravity in step" + gravity);
+//        Vect delta = new Vect(velocity.plus(gravity).angle().cos(), velocity.plus(gravity).angle().sin());
+//        System.out.println("Delta in step" + delta);
+//        this.position = this.position.plus(delta);
     }
 
     public Vect getPosition(){
@@ -132,8 +130,9 @@ public class Ball implements Gadget {
         return false;
     }
 
-    public void setTime(long time){
-        this.time = time;
+    public void setFriction(double mu, double mu2){
+        this.mu = mu;
+        this.mu2 = mu2;
     }
 
     @Override

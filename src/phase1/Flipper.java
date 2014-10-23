@@ -136,7 +136,7 @@ public class Flipper implements Gadget{
      * Returns the next point that the Flipper will be at. 
      */
     @Override
-    public Vect getNext() {
+    public Vect getNext(double time) {
         return this.pivotPoint;
 
     }
@@ -197,11 +197,7 @@ public class Flipper implements Gadget{
         flipFlipper(); 
         
     }
-    @Override
-    public Vect getNext(double time) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    
     @Override
 
     public boolean willColide(Ball ball) {
