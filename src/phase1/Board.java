@@ -194,6 +194,10 @@ public class Board {
         return gravity;
     }
 
+    public void setFriction(double mu, double mu2){
+        this.mu = mu;
+        this.mu2 = mu2;
+    }
     public void setGravity(double gravity) {
         this.gravity = gravity;
     }
