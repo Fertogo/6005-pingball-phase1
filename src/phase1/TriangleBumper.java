@@ -194,9 +194,9 @@ public class TriangleBumper implements Gadget {
 
             newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
         }
-        else if (ballX < this.position.x() && ballY > this.position.y()){ 
+        else if (ballX == this.position.x() && ballY == this.position.y()){ 
             //Hitting the top left corner of Bumper
-            //System.out.println("TOP-LEFT-CORNER");
+            System.out.println("TOP-LEFT-CORNER");
             newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
         }
         else if (ballX < this.position.x() && ballY > this.position.y()+1){ 
@@ -211,7 +211,7 @@ public class TriangleBumper implements Gadget {
         }
         //Check which wall was hit. step the ball if it hits hypotenous (since gadgetArea of Triangle is a rectangle)
         
-        else if(ballY <= this.position.y() && ballX >= this.position.x() && ballX <= this.position.x()+1 ){ 
+        else if(ballY <= this.position.y() && ballX >= this.position.x() && ballX <= this.position.x()+1){ 
             //Hitting top wall
             System.out.println("TOP"); 
             //System.out.println(longWall.toString()) ;
