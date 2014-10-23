@@ -85,13 +85,22 @@ public class Board {
             //System.out.println(newBallPosition.toString());
             //Check for collisions in other gadgets
             for (Gadget gadget : gadgets){ 
-                if (gadget.contains(newBallPosition)){ 
+                if (gadget.contains(newBallPosition) ){ 
                     gadget.collision(ball); 
                     break; 
                 }
             }
-            //System.out.println("Ball is allowed to move to position "+ newBallPosition.toString()); 
+            System.out.println("Ball is allowed to move to position "+ newBallPosition.toString()); 
             ball.step(); 
+            for (Gadget gadget : gadgets){ 
+                if (gadget.willColide(ball)) gadget.collision(ball); 
+            }
+        }
+        try {
+            Thread.sleep(10, 0);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         System.out.println(this.toString()); //Print the board. 
     }
@@ -102,35 +111,6 @@ public class Board {
      */
     public void step(int steps){ 
        for (int i=0; i<steps; i++) step();  
-    }
-    
-    public char [][] getArray(){
-        char [][] wallArray = new char[height][width];
-
-        //Populate with space
-        for (int x = 0; x<width; x++){ 
-            for (int y = 0; y<height; y++){ 
-                wallArray[x][y] = ' '; 
-            }
-        }
-        //Draw the walls
-        //Top wall
-        for (int i=0; i<width; i++){ 
-            wallArray[i][0] = '.'; 
-        }
-        //Bottom wall
-        for (int i=0; i<width; i++){ 
-            wallArray[i][height-1] = '.';
-        }
-        //Left wall
-        for (int y=0; y<width; y++){ 
-            wallArray[0][y] = '.'; 
-        }
-        //Right wall
-        for (int y=0; y<width; y++){ 
-            wallArray[width-1][y] = '.'; 
-        }
-        return wallArray;
     }
 
     public void addGadget(Gadget gadget){ 

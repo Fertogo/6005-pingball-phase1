@@ -52,4 +52,15 @@ public class BallTest {
             Thread.sleep(100);
         }
     }
+    
+    @Test public void testBallsCollidingWithEachother() { 
+        Board board  = new Board (20,20); 
+        Ball ball1 = new Ball(new Vect(5,5), new Vect(3,0), 0); 
+        Ball ball2 = new Ball(new Vect(15,5), new Vect(-3,0), 0); 
+        board.addBall(ball1); 
+        board.addBall(ball2);
+        board.step(30); 
+        fail("TODO"); 
+
+    }
 }

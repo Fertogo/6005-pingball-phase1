@@ -15,10 +15,10 @@ public class CircleBumper implements Gadget {
     public CircleBumper(Vect position) {
         int diameter = 1; 
         this.circle = new Circle(position.x(), position.y(), diameter/2); 
-        int posX = (int)(position.x())+1;
-        int posY = (int)(position.y())+1; 
+        int posX = (int)(position.x());
+        int posY = (int)(position.y()); 
         this.position = new Vect(posX, posY); 
-        this.gadgetArea = new Rectangle(posX, posY, posX+1, posY+1);
+        this.gadgetArea = new Rectangle(posX, posY, 1, 1);
 
     }
 
@@ -35,7 +35,7 @@ public class CircleBumper implements Gadget {
     public String toString(int height, int width) {
         
         char [][] wallArray = Gadget.getArray(height,width); 
-        wallArray[(int) this.position.y()][(int) this.position.x()] = 'O';
+        wallArray[(int) this.position.y()+1][(int) this.position.x()+1] = 'O'; //Add 1 to account for walls
         
         String boardToString = "";
         for(int i=0; i<wallArray.length;i++){
@@ -74,6 +74,12 @@ public class CircleBumper implements Gadget {
     public boolean contains(Vect position) {
         return gadgetArea.contains(position.x(),position.y());
         //return this.position.equals(position); 
+    }
+
+    @Override
+    public boolean willColide(Ball ball) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }
