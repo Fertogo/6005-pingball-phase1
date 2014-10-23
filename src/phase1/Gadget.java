@@ -115,7 +115,7 @@ public interface Gadget {
       * 
       * @return where the gadget wants to be in the next time step. 
       */
-    public Vect getNext();
+    public Vect getNext(double time);
 
     /**
      * Adjusts a ball after a collision. 
@@ -141,9 +141,19 @@ public interface Gadget {
      * @return whether the ball will colide with the gadget on the next timestep. 
      */
     public boolean willColide(Ball ball); 
+    
+    /**
+     * 
+     * @param ball: ball that us about to collide with gadget
+     * @return the time until collision with ball
+     */
+    public double timeToCollision(Ball ball);
 
     public static char [][] getArray(int height,int width){
         char [][] wallArray = new char[height][width];
+
+
+    
 
         //Populate with space
         for (int x = 0; x<width; x++){ 
@@ -171,4 +181,5 @@ public interface Gadget {
         return wallArray;
     }
     
+
 }

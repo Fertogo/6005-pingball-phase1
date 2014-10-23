@@ -1,6 +1,8 @@
 package phase1;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import physics.Geometry;
 import physics.LineSegment;
@@ -25,6 +27,7 @@ public class SquareBumper implements Gadget {
 
         this.position = new Vect(x,y);
         
+
         this.gadgetArea = new Rectangle(x, y, 1, 1);
         
         //Create walls representing square bumper. 
@@ -67,7 +70,7 @@ public class SquareBumper implements Gadget {
     }
 
     @Override
-    public Vect getNext() {
+    public Vect getNext(double time) {
         return this.position;
     }
 
@@ -123,7 +126,7 @@ public class SquareBumper implements Gadget {
             newBallVelocity = Geometry.reflectWall(leftWall, currentBallVelocity);
         }
         
-        System.out.println("New Ball Velocity" + newBallVelocity);
+        
         ball.updateBall(currentBallPosition, newBallVelocity); 
     }
 
@@ -139,10 +142,26 @@ public class SquareBumper implements Gadget {
     }
 
     @Override
+
+    public double timeToCollision(Ball ball) {
+        ArrayList<LineSegment> bumperWalls = new ArrayList<LineSegment>();
+        bumperWalls.addAll(Arrays.asList(topWall,rightWall,bottomWall,leftWall));
+        double timeToWallCollision = Double.POSITIVE_INFINITY;
+        
+        for(LineSegment l: bumperWalls){
+            double minimumTime = Geometry.timeUntilWallCollision(l, ball.ballReturnCircle(), ball.getVelocity());
+            if(minimumTime < timeToWallCollision){
+                timeToWallCollision = minimumTime;
+            }
+        }
+        return timeToWallCollision;
+    }
+
     public boolean willColide(Ball ball) {
         // TODO Auto-generated method stub
         return false;
     }
 
    
+
 }

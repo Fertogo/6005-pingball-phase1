@@ -19,8 +19,7 @@ import physics.*;
  * 
  */
 public class Flipper implements Gadget{
-    private int xPos; 
-    private int yPos;
+    private Vect position; 
     //Int type  representing left(0) or right flipper(1)
     private int flipperType; 
     //    private final String [] typesOfFlipper = {"left", "right"} ;
@@ -34,11 +33,10 @@ public class Flipper implements Gadget{
      * @param y
      * @param type
      */
-    public Flipper(int x, int y, int type){ 
-        this.xPos =x;
-        this.yPos = y;
-        this.pivotPoint= new Vect(x,y);
-        this.lineSegment= new LineSegment(x,y, x, y-1);
+    public Flipper(Vect position, int type){ 
+        this.position = position; 
+        this.pivotPoint= new Vect(position.x(),position.y());
+        this.lineSegment= new LineSegment(position.x(),position.y(), position.x(), position.y()-1);
 //        this.flipperType=typesOfFlipper[type];
         this.flipperType=type;
         this.angle= new Angle(3/2*Math.PI);
@@ -100,7 +98,6 @@ public class Flipper implements Gadget{
      * Rotates flipper
      * @param degrees 0-360
      */
-    @Override
     public void flipFlipper(){
         if(!isHorizontal){
             //left  --CounterClockwise 90
@@ -169,15 +166,18 @@ public class Flipper implements Gadget{
      */
     @Override
     public String toString(int width, int height) {
-        Board board = new Board(width, height);
-        char [][] wallArray = board.getArray();
+        int yPos = (int) this.position.y(); 
+        int xPos = (int) this.position.x(); 
+
+        char [][] wallArray = Gadget.getArray(height,width); 
+        
         if(isHorizontal){
-            wallArray[this.yPos][this.xPos] = '-';
-            wallArray[this.yPos][this.xPos+1] = '-';
+            wallArray[yPos][xPos] = '-';
+            wallArray[yPos][xPos+1] = '-';
         }
         else if(!isHorizontal){
-            wallArray[this.yPos][this.xPos] = '|';
-            wallArray[this.yPos+1][this.xPos] ='|';
+            wallArray[yPos][xPos] = '|';
+            wallArray[yPos+1][xPos] ='|';
         }
         String boardToString = "";
         for(int i=0; i<wallArray.length;i++){
@@ -194,9 +194,32 @@ public class Flipper implements Gadget{
     
     @Override
     public void rotateGadget(int degrees) {
-        lineSegment.rotate()
+        flipFlipper(); 
         
     }
+    @Override
+    public Vect getNext(double time) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+
+    public boolean willColide(Ball ball) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public double timeToCollision(Ball ball) {
+        double timeToWallCollision = Double.POSITIVE_INFINITY;
+        double minimumTime = Geometry.timeUntilRotatingWallCollision(lineSegment, lineSegment.p1().plus(lineSegment.p2()).times(.5),
+                6*Math.PI , ball.ballReturnCircle(), ball.getVelocity());
+            if(minimumTime < timeToWallCollision){
+                timeToWallCollision = minimumTime;
+            }
+        return timeToWallCollision;
+    }
+
     
 
     

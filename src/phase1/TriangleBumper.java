@@ -2,6 +2,8 @@ package phase1;
 
 import java.awt.Polygon;
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import physics.Geometry;
 import physics.LineSegment;
@@ -162,7 +164,7 @@ public class TriangleBumper implements Gadget {
     }
 
     @Override
-    public Vect getNext() {
+    public Vect getNext(double time) {
         this.step();
         return this.position;
     }
@@ -266,7 +268,7 @@ public class TriangleBumper implements Gadget {
 //        System.out.println("Old Ball Velocity: " + ball.getVelocity().toString());
 //        System.out.println("New Ball Velocity: " + newBallVelocity.toString());
 
-        ball.updateBall(newBallVelocity); 
+        ball.updateVelocity(newBallVelocity); 
     }
 
     @Override
@@ -292,6 +294,21 @@ public class TriangleBumper implements Gadget {
         return (timeTillWall1 < .5 || timeTillWall2 <= .5 || timeTillLongWall <= .5); 
 
         
+    }
+
+    @Override
+    public double timeToCollision(Ball ball) {
+        ArrayList<LineSegment> bumperWalls = new ArrayList<LineSegment>();
+        bumperWalls.addAll(Arrays.asList(wall1, wall2, longWall));
+        double timeToWallCollision = Double.POSITIVE_INFINITY;
+        
+        for(LineSegment l: bumperWalls){
+            double minimumTime = Geometry.timeUntilWallCollision(l, ball.ballReturnCircle(), ball.getVelocity());
+            if(minimumTime < timeToWallCollision){
+                timeToWallCollision = minimumTime;
+            }
+        }
+        return timeToWallCollision;
     }
 
 }

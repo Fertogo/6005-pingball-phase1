@@ -16,6 +16,7 @@ public class Board {
     private int height; 
     private int width; 
     private double gravity = 25; 
+    private double timestep = .08;
     
     private void checkRep(){ 
         Set<Vect> positions = new HashSet<Vect>(); 
@@ -50,7 +51,7 @@ public class Board {
      */
     public void step(){ 
         for (Ball ball : balls){ 
-            Vect newBallPosition = ball.getNext(); 
+            Vect newBallPosition = ball.getNext(timestep); 
             
             //System.out.println(newBallPosition); 
             //Check for wall collisions
@@ -85,23 +86,28 @@ public class Board {
             //System.out.println(newBallPosition.toString());
             //Check for collisions in other gadgets
             for (Gadget gadget : gadgets){ 
-                if (gadget.contains(newBallPosition) ){ 
+                double timeToCollision = gadget.timeToCollision(ball);
+                if(timeToCollision < timestep) {
                     gadget.collision(ball); 
-                    break; 
-                }
+//                    double remainingTime = timestep;                    
+//                    ball.updateBall(timeToCollision);
+//                        if (gadget.contains(newBallPosition) ){ 
+//                            gadget.collision(ball); 
+//                            break;
+//                        }
+
+
+                    //ball.updateBall(remainingTime);
+                } 
             }
+            
             System.out.println("Ball is allowed to move to position "+ newBallPosition.toString()); 
-            ball.step(); 
+            ball.updateBall(timestep);
             for (Gadget gadget : gadgets){ 
                 if (gadget.willColide(ball)) gadget.collision(ball); 
             }
         }
-        try {
-            Thread.sleep(10, 0);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+       
         System.out.println(this.toString()); //Print the board. 
     }
     

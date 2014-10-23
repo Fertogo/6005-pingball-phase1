@@ -1,7 +1,7 @@
 package phase1;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+
 import physics.Vect;
 /*
  * String Representation: =
@@ -70,8 +70,7 @@ public class Absorber implements Gadget {
     }
     
     public void createAbsorber(){
-        Board board = new Board(boardWidth, boardHeight);
-        char [][] wallArray = board.getArray();
+        char [][] wallArray =  Gadget.getArray(height,width); 
         for(int i=0; i< this.width;i++){
 //            stringBuilder+="=";
             wallArray[this.yPos][this.xPos+i] = '=';
@@ -96,8 +95,7 @@ public class Absorber implements Gadget {
      */
     @Override
     public String toString(int boardWidth, int boardHeight) {
-        Board board = new Board(boardWidth, boardHeight);
-        char [][] wallArray = board.getArray();
+        char [][] wallArray = Gadget.getArray(height,width); 
         this.createAbsorber();
         String boardToString = "";
         for(int i=0; i<wallArray.length;i++){
@@ -139,19 +137,35 @@ public class Absorber implements Gadget {
        return this.positionPoint;
     }
     @Override
-    public Vect getNext() {
+    public Vect getNext(double time) {
        return positionPoint;
     }
     @Override
     public boolean contains(Vect pos) {
         return absorberArea.contains(pos.x(), pos.y()); 
     }
+
+
+ 
+
+    @Override
+    public boolean willColide(Ball ball) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+
+    @Override
+    public double timeToCollision(Ball ball) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
     @Override
     public void rotateGadget(int degrees) {
-        //Empty
+        // TODO Auto-generated method stub
         
     }
-   
+    
     
     
 
