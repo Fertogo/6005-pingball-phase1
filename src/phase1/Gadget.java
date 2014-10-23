@@ -1,5 +1,4 @@
 package phase1; 
-import java.awt.Rectangle;
 
 import physics.*; 
 
@@ -68,8 +67,8 @@ public interface Gadget {
      * @return Flipper gadget
      */
 
-    public static Gadget flipper(int x, int y, int type){ 
-        return new Flipper(x,  y,  type); 
+    public static Gadget flipper(Vect position, int type){ 
+        return new Flipper(position, type); 
 
     }
     

@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class BoardTest {
+public class AbsorberTest {
 
     @Test
     public void testMergeBoard() {

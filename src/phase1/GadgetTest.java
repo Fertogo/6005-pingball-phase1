@@ -292,7 +292,7 @@ public class GadgetTest {
         ball.updateBall(new Vect(5,10), new Vect(0,-1));
         System.out.println(ball.getPosition());
         System.out.println(ball.getVelocity());
-        System.out.println(ball.getNext()); 
+        System.out.println(ball.getNext(.1)); 
         board.step(7); 
         assertEquals(new Vect(6,10), ball.getPosition()); 
         //Should bounce back to the bottom
