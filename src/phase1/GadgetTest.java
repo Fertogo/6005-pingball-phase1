@@ -26,10 +26,10 @@ public class GadgetTest {
     //Tests correct bounces on left,right,top and bottom walls. 
     @Test public void testOuterWallsAllSides() {
         Board board = new Board(20,20); 
-        Ball ball = new Ball(new Vect(5,5), new Vect(5,-5),0); 
+        Ball ball = new Ball(new Vect(5,5), new Vect(10,-10),0); 
         board.addBall(ball);
-        
-        board.step(35);
+        ball.setFriction(0, 0);
+        board.step(200);
 
         //TODO: Assert something! Final ballPosition = 5,5
     }
@@ -37,7 +37,7 @@ public class GadgetTest {
     //Test ball bouncing between top right and bottom left corners
     @Test public void testOuterWallsTopRightBottomLeftCorners(){ 
         Board board = new Board(20,20); 
-        Ball ball = new Ball(new Vect(1,1), new Vect(-1,-1),0); 
+        Ball ball = new Ball(new Vect(1,1), new Vect(-10,-10),0); 
         board.addBall(ball);
         
         board.step(45); 

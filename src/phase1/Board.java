@@ -16,7 +16,7 @@ public class Board {
     private int height; 
     private int width; 
     private double gravity = 25; 
-    private double timestep = .08;
+    private double timestep = .1;
     
     private void checkRep(){ 
         Set<Vect> positions = new HashSet<Vect>(); 
@@ -53,7 +53,10 @@ public class Board {
         for (Ball ball : balls){ 
             Vect newBallPosition = ball.getNext(timestep); 
             
-            //System.out.println(newBallPosition); 
+            System.out.println("Rounded position x: " + Math.round(newBallPosition.x())); 
+            System.out.println("Rounded position y: " + Math.round(newBallPosition.y()));
+            System.out.println("Height: " + height);
+            System.out.println("Width: " + width);
             //Check for wall collisions
             if (Math.round(newBallPosition.x()) == 0) { 
                 //Left wall collision
@@ -61,7 +64,7 @@ public class Board {
                 walls.collision(ball, 3);
 
             }
-            else if (Math.round(newBallPosition.x()) == width-1){ 
+            else if (Math.round(newBallPosition.x()) == width-2){ 
                 //Right wall collision
                 System.out.println("Hit Right Wall"); 
 
@@ -76,7 +79,7 @@ public class Board {
                 walls.collision(ball, 0);
             }
             
-            else if (Math.round(newBallPosition.y()) == height-1){ 
+            else if (Math.round(newBallPosition.y()) == height-2){ 
                 //Bottom Wall collision
                 System.out.println("Hit Bottom Wall"); 
 
