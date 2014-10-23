@@ -35,6 +35,18 @@ public class GadgetTest {
 
         assertTrue(ball.getPosition().y() < 5);
     }
+    
+    @Test public void testOuterWallsFastBall(){ 
+        Board board = new Board(20,20); 
+
+        Ball ball = new Ball(new Vect(5,5), new Vect(0,-150)); 
+        board.addBall(ball);
+        board.setGravity(0);
+        board.setFriction(0, 0);
+        board.step(50);
+
+        fail("Doesn't seem to work"); 
+    }
 
     //Test ball bouncing between top right and bottom left corners
     @Test public void testOuterWallsTopRightBottomLeftCorners(){ 
@@ -80,13 +92,13 @@ public class GadgetTest {
         Board board = new Board (20,20); 
         Gadget squareBumper = new SquareBumper(new Vect(5,5)); 
         board.addGadget(squareBumper);
-        Ball ball = new Ball (new Vect(5,1), new Vect(0,1)); 
+        Ball ball = new Ball (new Vect(5,1), new Vect(0,5)); 
         board.addBall(ball);
         board.setGravity(0);
         board.setFriction(0, 0);
         board.step(5);
         
-        assertEquals(new Vect(5,2), ball.getPosition()); 
+        assertTrue(ball.getPosition().y() < 5); 
     }
     
     //Test when the ball hits the Bottom of the Bumper
@@ -94,14 +106,14 @@ public class GadgetTest {
         Board board = new Board (20,20); 
         Gadget squareBumper = new SquareBumper(new Vect(5,5)); 
         board.addGadget(squareBumper);
-        Ball ball = new Ball (new Vect(5,8), new Vect(0,-1)); 
+        Ball ball = new Ball (new Vect(5,8), new Vect(0,-5)); 
         board.addBall(ball);
         board.setGravity(0);
         board.setFriction(0, 0);
 
-        board.step(3);
+        board.step(7);
         
-        assertEquals(new Vect(5,8), ball.getPosition()); 
+        assertTrue(ball.getPosition().y() > 5); 
     }
     
     //Test when the ball hits the Left of the Bumper
@@ -109,14 +121,14 @@ public class GadgetTest {
         Board board = new Board (20,20); 
         Gadget squareBumper = new SquareBumper(new Vect(5,5)); 
         board.addGadget(squareBumper);
-        Ball ball = new Ball (new Vect(1,5), new Vect(1,0)); 
+        Ball ball = new Ball (new Vect(1,5), new Vect(5,0)); 
         board.addBall(ball);
         board.setGravity(0);
         board.setFriction(0, 0);
 
-        board.step(7);
+        board.step(10);
         
-        assertEquals(new Vect(2,5), ball.getPosition()); 
+        assertTrue(ball.getPosition().x() < 5); 
     }
     
     //Test when the ball hits the Right of the Bumper
@@ -133,6 +145,7 @@ public class GadgetTest {
 
         assertTrue(ball.getPosition().x() > 5); 
     }
+    
     
     //TODO: Test ball collision at an angle
     //TODO: Test ball collision on corners. 
