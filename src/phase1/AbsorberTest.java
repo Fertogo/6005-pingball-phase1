@@ -9,7 +9,7 @@ public class AbsorberTest {
     @Test public void holdBall(){ 
         Board board = new Board(20,20); 
         Ball ball1 = new Ball(new Vect(1.25,1.25), new Vect(1,0)); 
-        Absorber absorber = new Absorber(new Vect(0,0), 1, 1);
+        Absorber absorber = new Absorber(new Vect(0,19), 20, 1);
         board.addGadget(absorber); 
         board.addBall(ball1); 
         absorber.shootBall(ball1);

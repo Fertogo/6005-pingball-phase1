@@ -29,9 +29,9 @@ public class Absorber implements Gadget {
 
     /**
      * 
-     * @param x-xPosition
-     * @param y-yPosition
-     * @param size - General Size of the absorber. 
+     * @param Vect: position of absorber
+     * @param int: width of the absorber. 
+     * @param int: height of the absorber
      */
     public Absorber(Vect position, int width, int height ){ 
 
@@ -107,13 +107,15 @@ public class Absorber implements Gadget {
         
         char [][] wallArray = Gadget.getArray(boardHeight,boardWidth); 
         //this.createAbsorber(boardWidth, boardHeight);
-        for(int j=0; j<boardHeight; j++){
-            for(int i=0; i<boardWidth; i++){
+        System.out.println(wallArray);
+        for(int j=0; j<this.height; j++){
+            for(int i=0; i<this.width; i++){
+                System.out.println("i: " + i);
+                System.out.println("j: " + j);
+
                 wallArray[(int) this.position.y()+ 1 + i + j][(int) this.position.x()+1 + i ] = '=';
             }
         }
-        
-  
         
         String boardToString = "";
         for(int i=0; i<wallArray.length;i++){
