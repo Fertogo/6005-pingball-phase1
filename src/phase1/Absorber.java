@@ -1,12 +1,8 @@
 package phase1;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.awt.Point;
-=======
 import java.util.List;
-
->>>>>>> a4c23a35b06f512f4faf570e07ebcaac158b383d
 import physics.LineSegment;
 import physics.Geometry;
 import physics.Vect;
@@ -29,12 +25,8 @@ public class Absorber implements Gadget {
     private int ballsStored;
     private Rectangle absorberArea; 
     private ArrayList<Ball> ballStorage;
-<<<<<<< HEAD
-    
-=======
     private List<Gadget> triggeredGadgets; 
 
->>>>>>> a4c23a35b06f512f4faf570e07ebcaac158b383d
     /**
      * 
      * @param x-xPosition
@@ -46,14 +38,9 @@ public class Absorber implements Gadget {
         this.position = position; 
         this.width=width;
         this.height=height;
-<<<<<<< HEAD
-        this.positionPoint= new Vect(this.xPos, this.yPos);;
-        this.absorberArea= new Rectangle(this.xPos, this.yPos, this.width, this.height);
-=======
         int x = (int)position.x(); 
         int y = (int)position.y(); 
         this.absorberArea= new Rectangle(x, y, width, height);
->>>>>>> a4c23a35b06f512f4faf570e07ebcaac158b383d
         this.ballStorage= new ArrayList<>();
         this.ballsStored=0;
     }
@@ -164,26 +151,25 @@ public class Absorber implements Gadget {
     }
     @Override
     public Vect getNext(double time) {
-<<<<<<< HEAD
-       return positionPoint;
+       return this.position;
     }
-    @Override
+   
     public boolean contains(Vect pos) {
         boolean contains = false;
-        if(  (pos.x()>=this.xPos && pos.x()<=(this.xPos+this.width))  &&  (pos.y()>=this.yPos && pos.y()<=(this.yPos+this.height)) ){
+        if(  (pos.x()>=this.position.x() && pos.x()<=(this.position.x()+this.width))  &&  (pos.y()>=this.position.y() && pos.y()<=(this.position.y()+this.height)) ){
             contains =true;
         }
         return contains;
     }
 
 
-    @Override
+   
     public boolean willCollide(Ball ball) {
-        // TODO Auto-generated method stub
-        return false;
-=======
-       return position;
->>>>>>> a4c23a35b06f512f4faf570e07ebcaac158b383d
+        double timeVariable= 1.5;
+        if(this.timeToCollision(ball)< timeVariable){
+            return true;
+        }
+        return false; 
     }
 
     @Override

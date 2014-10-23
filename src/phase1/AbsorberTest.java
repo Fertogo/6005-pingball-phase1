@@ -65,7 +65,7 @@ public class AbsorberTest {
         @Test public void absorberWidthOneTest(){ 
             Board board = new Board(20,20); 
             Ball ball = new Ball(new Vect(1.25,1.25), new Vect(1,0)); 
-            Absorber absorber = new Absorber(10,10, 1, 2);
+            Absorber absorber = new Absorber(new Vect(10,10), 1, 2);
             board.addGadget(absorber); 
             board.addBall(ball); 
             assertTrue(absorber!=null);
@@ -79,7 +79,7 @@ public class AbsorberTest {
         @Test public void absorberWidth20Test(){ 
             Board board = new Board(20,20); 
             Ball ball = new Ball(new Vect(1.25,1.25), new Vect(1,0)); 
-            Absorber absorber = new Absorber(1,1, 20, 2);
+            Absorber absorber = new Absorber(new Vect(1,1), 20, 2);
             board.addGadget(absorber); 
             board.addBall(ball); 
             assertTrue(absorber!=null);
@@ -96,7 +96,7 @@ public class AbsorberTest {
         @Test public void absorberWidth10Test(){ 
             Board board = new Board(20,20); 
             Ball ball = new Ball(new Vect(1.25,1.25), new Vect(1,0)); 
-            Absorber absorber = new Absorber(1,1, 10, 2);
+            Absorber absorber = new Absorber(new Vect(1,1), 10, 2);
             board.addGadget(absorber); 
             board.addBall(ball); 
             assertTrue(absorber!=null);
@@ -113,7 +113,7 @@ public class AbsorberTest {
         @Test public void absorberWidth1Test(){ 
             Board board = new Board(20,20); 
             Ball ball = new Ball(new Vect(1.25,1.25), new Vect(1,0)); 
-            Absorber absorber = new Absorber(1,1, 10, 2);
+            Absorber absorber = new Absorber(new Vect(1,1), 10, 2);
             board.addGadget(absorber); 
             board.addBall(ball); 
             assertTrue(absorber!=null);
@@ -128,7 +128,21 @@ public class AbsorberTest {
             assertFalse(absorber.contains(new Vect(13,7)));
         }
         @Test public void absorberHeight20Test(){ 
-            //TODO
+            Board board = new Board(20,20); 
+            Ball ball = new Ball(new Vect(1.25,1.25), new Vect(1,0)); 
+            Absorber absorber = new Absorber(new Vect(1,1), 10, 2);
+            board.addGadget(absorber); 
+            board.addBall(ball); 
+            assertTrue(absorber!=null);
+            assertTrue(absorber.getPosition().equals(new Vect(1,1)));
+            assertTrue(absorber.contains(new Vect(1,1)));
+            assertFalse(absorber.contains(new Vect(20,1)));
+            assertTrue(absorber.contains(new Vect(10,2)));
+            assertTrue(absorber.contains(new Vect(11,3)));
+            assertFalse(absorber.contains(new Vect(1,4)));
+            assertFalse(absorber.contains(new Vect(20,5)));
+            assertFalse(absorber.contains(new Vect(10,19)));
+            assertFalse(absorber.contains(new Vect(13,7)));
         }
         @Test public void absorberHeight1Test(){ 
             //TODO
