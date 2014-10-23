@@ -57,7 +57,7 @@ public class Board {
             Vect newBallPosition = ball.getNext(timestep); 
 
             //Check for corner collisions
-            System.out.println("New Ball position " +  newBallPosition);
+            
             if (Math.round(newBallPosition.y()) <= 0 && Math.round(newBallPosition.x()) <= 0){
                 ball.updateVelocity(ball.getVelocity().times(-1));
             }else if(Math.round(newBallPosition.y()) <= 0 && Math.round(newBallPosition.x()) >= 19){
@@ -71,32 +71,30 @@ public class Board {
             //Checks for wall collisions
             else{
 
-                if (Math.round(newBallPosition.x()) == 0) { 
+                if (Math.round(newBallPosition.x()) <= 0) { 
                     //Left wall collision
-                    System.out.println("Hit Left Wall"); 
+                    //System.out.println("Hit Left Wall"); 
                     walls.collision(ball, 3);
 
                 }
-                else if (Math.round(newBallPosition.x()) == width-2){ 
+                else if (Math.round(newBallPosition.x()) >= width-2){ 
                     //Right wall collision
-                    System.out.println("Hit Right Wall"); 
-
+                    //System.out.println("Hit Right Wall"); 
                     walls.collision(ball, 1);
                     break; 
                 }
 
-                if (Math.round(newBallPosition.y()) == 0) { 
+                if (Math.round(newBallPosition.y()) <= 0) { 
                     //Top Wall collision
-                    System.out.println("Hit Top Wall"); 
-
+                    //System.out.println("Hit Top Wall"); 
                     walls.collision(ball, 0);
                 }
 
-                else if (Math.round(newBallPosition.y()) == height-2){ 
+                else if (Math.round(newBallPosition.y()) >= height-2){ 
                     //Bottom Wall collision
-                    System.out.println("Hit Bottom Wall"); 
-
+                    //System.out.println("Hit Bottom Wall"); 
                     walls.collision(ball, 2);
+                    
                 }
             }
 
