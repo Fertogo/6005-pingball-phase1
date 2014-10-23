@@ -2,6 +2,8 @@ package phase1;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+import physics.LineSegment;
+import physics.Geometry;
 import physics.Vect;
 /*
  * String Representation: =
@@ -149,10 +151,8 @@ public class Absorber implements Gadget {
     }
 
 
- 
-
     @Override
-    public boolean willColide(Ball ball) {
+    public boolean willCollide(Ball ball) {
         // TODO Auto-generated method stub
         return false;
     }
@@ -160,9 +160,21 @@ public class Absorber implements Gadget {
 
     @Override
     public double timeToCollision(Ball ball) {
-        // TODO Auto-generated method stub
-        return 0;
+        LineSegment topBorder= new LineSegment(this.xPos, this.yPos,this.xPos+this.width, this.yPos);
+        LineSegment bottomBorder= new LineSegment(this.xPos, this.yPos,this.xPos+this.width, this.yPos);
+        double  topTime   =   Geometry.timeUntilWallCollision(topBorder,ball.ballReturnCircle(), ball.getVelocity());
+        double bottomTime =   Geometry.timeUntilWallCollision(bottomBorder,ball.ballReturnCircle(), ball.getVelocity());
+        double timeToWallCollision = Double.POSITIVE_INFINITY;
+        if(topTime<bottomTime){
+            timeToWallCollision= topTime;
+        }else if(topTime>bottomTime){
+            timeToWallCollision = bottomTime;
+        }
+        return timeToWallCollision;
+        
+        
     }
+    
     @Override
     public void rotateGadget(int degrees) {
         // TODO Auto-generated method stub
