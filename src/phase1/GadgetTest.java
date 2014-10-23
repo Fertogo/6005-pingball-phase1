@@ -29,12 +29,11 @@ public class GadgetTest {
 
         Ball ball = new Ball(new Vect(5,5), new Vect(5,-5)); 
         board.addBall(ball);
-        //ball.setFriction(0, 0);
         board.setGravity(0);
         board.setFriction(0, 0);
-        board.step(200);
+        board.step(50);
 
-        //TODO: Assert something! Final ballPosition = 5,5
+        assertTrue(ball.getPosition().y() < 5);
     }
 
     //Test ball bouncing between top right and bottom left corners
@@ -42,6 +41,8 @@ public class GadgetTest {
         Board board = new Board(20,20); 
         Ball ball = new Ball(new Vect(1,1), new Vect(-10,-10)); 
         board.addBall(ball);
+        board.setGravity(0);
+        board.setFriction(0, 0);
         
         board.step(45); 
         fail("Not correct bounces"); //TODO Fix
@@ -53,6 +54,8 @@ public class GadgetTest {
         Board board = new Board(20,20); 
         Ball ball = new Ball(new Vect(0,19), new Vect(1,-1)); 
         board.addBall(ball);
+        board.setGravity(0);
+        board.setFriction(0, 0);
         board.step(65); 
         fail("Not correct bounces"); //TODO Fix
 
@@ -79,7 +82,8 @@ public class GadgetTest {
         board.addGadget(squareBumper);
         Ball ball = new Ball (new Vect(5,1), new Vect(0,1)); 
         board.addBall(ball);
-        
+        board.setGravity(0);
+        board.setFriction(0, 0);
         board.step(5);
         
         assertEquals(new Vect(5,2), ball.getPosition()); 
@@ -92,7 +96,8 @@ public class GadgetTest {
         board.addGadget(squareBumper);
         Ball ball = new Ball (new Vect(5,8), new Vect(0,-1)); 
         board.addBall(ball);
-        
+        board.setGravity(0);
+        board.setFriction(0, 0);
 
         board.step(3);
         
@@ -106,7 +111,8 @@ public class GadgetTest {
         board.addGadget(squareBumper);
         Ball ball = new Ball (new Vect(1,5), new Vect(1,0)); 
         board.addBall(ball);
-        
+        board.setGravity(0);
+        board.setFriction(0, 0);
 
         board.step(7);
         
@@ -118,11 +124,12 @@ public class GadgetTest {
         Board board = new Board (20,20); 
         Gadget squareBumper = new SquareBumper(new Vect(5,5)); 
         board.addGadget(squareBumper);
-        Ball ball = new Ball (new Vect(8,5), new Vect(-1,0));
+        Ball ball = new Ball (new Vect(8,5), new Vect(-5,0));
         board.addBall(ball);
-        
+        board.setGravity(0);
+        board.setFriction(0, 0);
 
-        board.step(4);
+        board.step(10);
 
         assertEquals(new Vect(8,5), ball.getPosition()); 
     }
@@ -148,7 +155,8 @@ public class GadgetTest {
         board.addGadget(circleBumper);
         Ball ball = new Ball (new Vect(5,1), new Vect(0,5)); 
         board.addBall(ball); 
-        
+        board.setGravity(0);
+        board.setFriction(0, 0);
         board.step(7); 
         assertTrue(ball.getPosition().y() < 5);  
     }
@@ -162,7 +170,8 @@ public class GadgetTest {
         board.addGadget(circleBumper);
         Ball ball = new Ball (new Vect(3,3), new Vect(3,3)); 
         board.addBall(ball); 
-        
+        board.setGravity(0);
+        board.setFriction(0, 0);
         board.step(8); 
         assertTrue(ball.getPosition().x() < 5); 
         assertTrue(ball.getPosition().y() < 5); 
@@ -207,6 +216,7 @@ public class GadgetTest {
         Board board = new Board(20,20); 
         board.setGravity(0); 
         board.setFriction(0); 
+        
         Gadget triangleBumper = new TriangleBumper(new Vect(5,5)); 
         board.addGadget(triangleBumper); 
         //Hit top wall
@@ -243,6 +253,7 @@ public class GadgetTest {
         Board board = new Board(20,20); 
         board.setGravity(0); 
         board.setFriction(0); 
+        
         Gadget triangleBumper = new TriangleBumper(new Vect(5,5)); 
         triangleBumper.rotateGadget(90);
         board.addGadget(triangleBumper); 
@@ -281,6 +292,7 @@ public class GadgetTest {
         Board board = new Board(20,20); 
         board.setGravity(0); 
         board.setFriction(0); 
+        
         Gadget triangleBumper = new TriangleBumper(new Vect(5,5)); 
         triangleBumper.rotateGadget(180);
         board.addGadget(triangleBumper); 
@@ -322,6 +334,7 @@ public class GadgetTest {
         Board board = new Board(20,20); 
         board.setGravity(0); 
         board.setFriction(0); 
+        
         Gadget triangleBumper = new TriangleBumper(new Vect(5,5)); 
         triangleBumper.rotateGadget(270);
         board.addGadget(triangleBumper); 
@@ -418,6 +431,8 @@ public class GadgetTest {
         
         @Test public void testFlipperSimpleHits(){
             Board board = new Board(20,20); 
+            board.setGravity(0);
+            board.setFriction(0, 0);
             Gadget leftVerticalFlipper = new Flipper(new Vect(5,5),0); 
             Gadget rightVerticalFlipper = new Flipper(new Vect(10,5),1);     
             Gadget leftHorizontalFlipper = new Flipper(new Vect(5,10),0); 
@@ -482,6 +497,7 @@ public class GadgetTest {
         board.addGadget(absorber); 
         board.addBall(ball1); 
         absorber.shootBall(ball1);
+        
 //        absorber.toString();
         //Test with CircleBumper
 //        board.step(100); //TODO Ball goes through Bumper instead of hitting it. 
