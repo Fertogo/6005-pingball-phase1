@@ -104,12 +104,15 @@ public class Pingball {
         Gadget circleBumper1 = new CircleBumper (new Vect(5,18));
         Gadget circleBumper2 = new CircleBumper (new Vect(7,13));
         Gadget circleBumper3 = new CircleBumper (new Vect(0,55));
-            //TODO: Add Triggers LeftFlipper1
+        circleBumper3.addTriggeredGadget(leftFlipper1); 
+            
         Gadget circleBumper4 = new CircleBumper (new Vect(5,5));
         Gadget circleBumper5 = new CircleBumper (new Vect(10,5));
-            //TODO: Add Triggers: LeftFlipper3
+        circleBumper5.addTriggeredGadget(leftFlipper3); 
+
         Gadget circleBumper6 = new CircleBumper (new Vect(15,5));
-            //TODO: Add Triggers: LeftFLipper4
+        circleBumper6.addTriggeredGadget(leftFlipper4); 
+
         board.addGadget(circleBumper1);
         board.addGadget(circleBumper2);
         board.addGadget(circleBumper3);
