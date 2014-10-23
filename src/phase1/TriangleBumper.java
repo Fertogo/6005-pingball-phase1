@@ -288,8 +288,8 @@ public class TriangleBumper implements Gadget {
         double timeTillWall1 = Geometry.timeUntilWallCollision(wall1, ball.ballReturnCircle(), ball.getVelocity()); 
         double timeTillWall2 = Geometry.timeUntilWallCollision(wall2, ball.ballReturnCircle(), ball.getVelocity()); 
         double timeTillLongWall = Geometry.timeUntilWallCollision(longWall, ball.ballReturnCircle(), ball.getVelocity());
-        //System.out.println(timeTillLongWall); 
-        return (timeTillWall1 < .5 || timeTillWall2 < .5 || timeTillLongWall <.5); 
+        System.out.println(timeTillWall1); 
+        return (timeTillWall1 < .5 || timeTillWall2 <= .5 || timeTillLongWall <= .5); 
 
         
     }

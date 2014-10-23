@@ -76,4 +76,10 @@ public class CircleBumper implements Gadget {
         //return this.position.equals(position); 
     }
 
+    @Override
+    public boolean willColide(Ball ball) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }

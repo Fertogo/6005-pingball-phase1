@@ -284,7 +284,7 @@ public class GadgetTest {
         Ball ball = new Ball(new Vect(5,1), new Vect(0,1),0); 
         board.addBall(ball);
         board.step(7); 
-        assertEquals(new Vect(2,6), ball.getPosition()); 
+        assertEquals(new Vect(2,5), ball.getPosition()); 
         //Should hit longWall and be deflected to the left
         
         //Hit Bottom Wall
