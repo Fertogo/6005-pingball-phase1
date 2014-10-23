@@ -427,17 +427,23 @@ public class GadgetTest {
      *      Make sure ball bounces off correctly on stable and moving flipper
      *      Partitions:
      *          Basics: 
-     *              toString of horizontal and vertical flippers
-     *              Trigger a horizontal and vertical flipper
-     *          Hits: 
-     *              Hit left stable vertical from left and right
-     *              Hit left stable horizontal from up and down
-     *              Hit right stable vertical from left and right
-     *              Hit right stable horizontal from up and down
-     *              Hit left rotating flipper
-     *              Hit right rotating flipper
+     *             Construction of Absorber of Multiple Widths and Height
+     *                  Try a Width of 1, 20, 10
+     *                  Try a Height of 1, 20
+     *             Trigger a Ball Storage
+     *                  Trigger A ball Storage with no balls in the 
+     *                  Trigger another BallStorage one time step later 
+     *             Trigger a Ball Release
+     *                  With One Ball Already in the Absorber
+     *                  With Two Balls in Absorber      
+     *             
+     *          Collisions 
+     *             Ball Collides with Absorber from the top
+     *             Ball Collides with Absorber from the bottom
+     *              
+     *             
      */
-
+    //TODO
     @Test public void holdBall(){ 
         Board board = new Board(20,20); 
         Ball ball1 = new Ball(new Vect(1.25,1.25), new Vect(1,0)); 
@@ -450,7 +456,45 @@ public class GadgetTest {
 //        board.step(100); //TODO Ball goes through Bumper instead of hitting it. 
 //        assertTrue(ball1.getPosition().x() > 1.25); 
         System.out.print(absorber.toString(20,20));
-       
 
     }
+    //Construction 
+        @Test public void absorberWidthOneTest(){ 
+            //TODO
+        }
+        @Test public void absorberWidth20Test(){ 
+            //TODO
+        }
+        @Test public void absorberWidth10Test(){ 
+            //TODO
+        }
+        @Test public void absorberHeight1Test(){ 
+            //TODO
+        }
+        @Test public void absorberHeight20Test(){ 
+            //TODO
+        }
+        @Test public void absorberHeight1Test(){ 
+            //TODO
+        }
+    // Trigger Storage 
+    // Trigger A ball Storage with no balls in the 
+    // Trigger another BallStorage one time step later 
+        @Test public void ballStorageTest(){ 
+            //TODO
+        }
+        @Test public void multipleBallsStorageTest(){ 
+            //TODO
+        }
+//        Collisions 
+//                Ball Collides with Absorber from the top
+//                Ball Collides with Absorber from the bottom
+        @Test public void ballCollideTopOfAbsorberTest(){ 
+            //TODO
+        }
+        @Test public void ballCollideBottomOfAbsorberTest(){ 
+            //TODO
+        }
+  
+    
 }

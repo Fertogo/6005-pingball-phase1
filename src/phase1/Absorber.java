@@ -124,7 +124,10 @@ public class Absorber implements Gadget {
         }
         this.ballsStored--;
     }
-    
+    /**
+     * 
+     * @param ball that is to be Stored 
+     */
     public void storeBall(Ball ball){
         if(this.ballStorage.size()>0)this.ballStorage.add(ball);
         if(this.height < 4 ){
@@ -157,7 +160,7 @@ public class Absorber implements Gadget {
         return false;
     }
 
-
+ 
     @Override
     public double timeToCollision(Ball ball) {
         LineSegment topBorder= new LineSegment(this.xPos, this.yPos,this.xPos+this.width, this.yPos);
