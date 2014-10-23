@@ -1,7 +1,7 @@
 package phase1;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-
+import java.awt.Point;
 import physics.LineSegment;
 import physics.Geometry;
 import physics.Vect;
@@ -26,6 +26,7 @@ public class Absorber implements Gadget {
     private Rectangle absorberArea; 
     private Vect positionPoint; 
     private ArrayList<Ball> ballStorage;
+    
     /**
      * 
      * @param x-xPosition
@@ -38,7 +39,7 @@ public class Absorber implements Gadget {
         this.width=width;
         this.height=height;
         this.positionPoint= new Vect(this.xPos, this.yPos);;
-        this.absorberArea= new Rectangle(x, y, width, height);
+        this.absorberArea= new Rectangle(this.xPos, this.yPos, this.width, this.height);
         this.ballStorage= new ArrayList<>();
         this.ballsStored=0;
     }
@@ -150,7 +151,11 @@ public class Absorber implements Gadget {
     }
     @Override
     public boolean contains(Vect pos) {
-        return absorberArea.contains(pos.x(), pos.y()); 
+        boolean contains = false;
+        if(  (pos.x()>=this.xPos && pos.x()<=(this.xPos+this.width))  &&  (pos.y()>=this.yPos && pos.y()<=(this.yPos+this.height)) ){
+            contains =true;
+        }
+        return contains;
     }
 
 
