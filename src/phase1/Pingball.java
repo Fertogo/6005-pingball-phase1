@@ -16,7 +16,6 @@ public class Pingball {
         }
         //board.step(); 
         board.run(); 
-        System.out.print("Done");
     }
     
     public static Board defaultBoard(){ 
@@ -27,7 +26,7 @@ public class Pingball {
         Gadget circleBumper = new CircleBumper(new Vect(1,10));
         board.addGadget(circleBumper);
         
-        Gadget triangleBumper = new TriangleBumper(new Vect(12,15), 180); //TODO: How to call this correctly
+        Gadget triangleBumper = new TriangleBumper(new Vect(12,15), 180);
         board.addGadget(triangleBumper); 
         
         Gadget squareBumper1 = new SquareBumper(new Vect(0,17));
@@ -57,10 +56,10 @@ public class Pingball {
         board.addBall(ball2); 
         board.addBall(ball3); 
         
-        Gadget absorber = new Absorber(new Vect (0,18), 20, 2) ;//TODO: How to call this correctly
+        Gadget absorber = new Absorber(new Vect (0,18), 20, 2) ;
         board.addGadget(absorber); 
         
-        Gadget triangleBumper = new TriangleBumper(new Vect(19,0), 90); //TODO: How to call this correctly
+        Gadget triangleBumper = new TriangleBumper(new Vect(19,0), 90); 
         board.addGadget(triangleBumper);
         
         Gadget circleBumper1 = new CircleBumper(new Vect(1,10));
@@ -91,10 +90,10 @@ public class Pingball {
         board.addBall(ball4); 
         board.addBall(ball5); 
         
-        Gadget leftFlipper1 = new Flipper (new Vect(0,8), 0,90); //TODO: How to correctly call this
-        Gadget leftFlipper2 = new Flipper (new Vect(4,10), 0,90);
-        Gadget leftFlipper3 = new Flipper (new Vect(9,8), 0,90);
-        Gadget leftFlipper4 = new Flipper (new Vect(15,8), 0,90);
+        Gadget leftFlipper1 = new Flipper (new Vect(0,8), 0,false); 
+        Gadget leftFlipper2 = new Flipper (new Vect(4,10), 0, false);
+        Gadget leftFlipper3 = new Flipper (new Vect(9,8), 0, false);
+        Gadget leftFlipper4 = new Flipper (new Vect(15,8), 0, false);
         board.addGadget(leftFlipper1);
         board.addGadget(leftFlipper2);
         board.addGadget(leftFlipper3);
@@ -121,8 +120,8 @@ public class Pingball {
         board. addGadget(triangleBumper1); 
         board. addGadget(triangleBumper2); 
         
-        Gadget rightFlipper1 = new Flipper (new Vect(2,15), 1,0);
-        Gadget rightFlipper2= new Flipper (new Vect(17,15), 1,0);
+        Gadget rightFlipper1 = new Flipper (new Vect(2,15), 1, true);
+        Gadget rightFlipper2= new Flipper (new Vect(17,15), 1, true);
         board.addGadget(rightFlipper1);
         board.addGadget(rightFlipper2);
         
@@ -130,5 +129,6 @@ public class Pingball {
             //TODO: Add Triggers: RightFlipper1, RightFlipper2, Absorber
         board.addGadget(absorber); 
 
+       return board; 
     }
 }

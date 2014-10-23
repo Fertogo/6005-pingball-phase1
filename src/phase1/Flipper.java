@@ -47,6 +47,16 @@ public class Flipper implements Gadget{
         this.isHorizontal=false;
     }
     
+    public Flipper(Vect position, int type, boolean isHorizontal){ 
+        this.position = position; 
+        this.pivotPoint= new Vect(position.x(),position.y());
+        this.lineSegment= new LineSegment(position.x(),position.y(), position.x(), position.y()-1);
+//        this.flipperType=typesOfFlipper[type];
+        this.flipperType=type;
+        this.angle= new Angle(3/2*Math.PI);
+        this.isHorizontal=isHorizontal;
+    }
+    
     @Override 
     public void trigger(){ 
         //Trigger Triggered Gadgets
