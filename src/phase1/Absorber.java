@@ -44,6 +44,22 @@ public class Absorber implements Gadget {
         this.ballStorage= new ArrayList<>();
         this.ballsStored=0;
     }
+    public void checkRep(){
+        if(this.position.x()<1){
+            this.position= new Vect(1, this.position.y());
+        }
+        if(this.position.y()<1){
+            this.position= new Vect(this.position.x(), 1);
+        }
+        if(this.position.x()+this.width>20){
+            this.width = (int)(20- this.position.x());
+            
+        }
+        if(this.position.y()+this.height>20){
+            this.height = (int)(20 - this.position.y());
+        }
+    }
+    
     /**
      * Occurs when a ball hits it
      */
@@ -136,11 +152,11 @@ public class Absorber implements Gadget {
     public void storeBall(Ball ball){
         if(this.ballStorage.size()>0)this.ballStorage.add(ball);
         if(this.height < 4 ){
-            ball.updateBall(new Vect(position.x()+this.width, position.y()+this.height), new Vect(0,0));
+            ball.updateBall(new Vect(position.x()+(int)(this.width*3.0/4.0), position.y()+this.height), new Vect(0,0));
             
         }
         if(this.height > 4 ){
-            ball.updateBall(new Vect(position.x()+this.width, position.y()+this.height-(int)(this.height/4.0)), new Vect(0,0));
+            ball.updateBall(new Vect(position.x()+(int)(this.width*3.0/4.0), position.y()+this.height-(int)(this.height/4.0)), new Vect(0,0));
         }
         this.ballsStored++;
     }
@@ -156,6 +172,7 @@ public class Absorber implements Gadget {
    
     public boolean contains(Vect pos) {
         boolean contains = false;
+        this.checkRep();
         if(  (pos.x()>=this.position.x() && pos.x()<=(this.position.x()+this.width))  &&  (pos.y()>=this.position.y() && pos.y()<=(this.position.y()+this.height)) ){
             contains =true;
         }
