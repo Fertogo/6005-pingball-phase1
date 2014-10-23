@@ -46,16 +46,16 @@ public class Absorber implements Gadget {
      * Occurs when a ball hits it
      */
     public void trigger(){
-//        if(collisionDetected()){
-//            action(this);
-//        }
+      this.action();
     }
     /**
      * Detects collsions
      * @return true if collision
      */
-    private void collision(){
+    @Override
+    public void collision(Ball ball){
         this.ballsStored+=1;
+        this.action();
     }
     
     //*
@@ -65,15 +65,11 @@ public class Absorber implements Gadget {
         //Empty
     }
    
-    @Override
-    public void collision(Ball ball) {
-        // TODO Auto-generated method stub
-        
-    }
+
     @Override
     public void step() {
        if(ballsStored>0){
-           shootBall(); 
+           shootBall(abll); 
        }
         
     }
