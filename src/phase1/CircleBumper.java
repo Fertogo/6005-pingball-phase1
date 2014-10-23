@@ -11,18 +11,18 @@ import physics.Vect;
 public class CircleBumper implements Gadget {
     private Vect position;
     private Circle circle;
-    private Rectangle gadgetArea; 
+    //private Rectangle gadgetArea; 
     private List<Gadget> triggeredGadgets = new ArrayList<Gadget>();; 
 
     
 
     public CircleBumper(Vect position) {
-        int diameter = 1; 
+        double diameter = 1; 
         this.circle = new Circle(position.x(), position.y(), diameter/2); 
         int posX = (int)(position.x());
         int posY = (int)(position.y()); 
         this.position = new Vect(posX, posY); 
-        this.gadgetArea = new Rectangle(posX, posY, 1, 1);
+        //this.gadgetArea = new Rectangle(posX, posY, 1, 1);
 
     }
 
@@ -54,7 +54,6 @@ public class CircleBumper implements Gadget {
 
     @Override
     public void collision(Ball ball) {
-        System.out.println("Collision with a CircleBumper"); 
         Vect newBallVelocity = Geometry.reflectCircle(circle.getCenter(), ball.getPosition(), ball.getVelocity());
         ball.updateBall(ball.getPosition(), newBallVelocity);
     }
@@ -77,8 +76,6 @@ public class CircleBumper implements Gadget {
             if(minimumTime < timeToWallCollision){
                 timeToWallCollision = minimumTime;
             }
-            System.out.println("Time until collision with circle: " + minimumTime);
-            System.out.println("Velocity of ball at collision: " + ball.getVelocity());
         return timeToWallCollision;
     }
 

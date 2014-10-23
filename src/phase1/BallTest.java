@@ -34,11 +34,11 @@ public class BallTest {
         Ball ball = new Ball(position, velocity);
         board.addBall(ball);
         
-        Gadget sBumper1 = new CircleBumper(new Vect(3.0, 10.0));
+        Gadget sBumper1 = new SquareBumper(new Vect(3.0, 10.0));
         Gadget sBumper2 = new CircleBumper(new Vect(4.0, 11.0));
         Gadget sBumper3 = new CircleBumper(new Vect(5.0, 12.0));
         board.addGadget(sBumper1);
-        //board.addGadget(sBumper2);
+        board.addGadget(sBumper2);
        // board.addGadget(sBumper3);
 
         
