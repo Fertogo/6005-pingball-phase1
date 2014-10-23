@@ -43,6 +43,7 @@ public class GadgetTest {
         board.addBall(ball);
         
         board.step(45); 
+        fail("Not correct bounces"); //TODO Fix
         //TODO: Assert Something! 
     }
     
@@ -52,6 +53,7 @@ public class GadgetTest {
         Ball ball = new Ball(new Vect(0,19), new Vect(1,-1),0); 
         board.addBall(ball);
         board.step(65); 
+        fail("Not correct bounces"); //TODO Fix
 
         //TODO: Assert Something! 
     }
@@ -139,25 +141,30 @@ public class GadgetTest {
     //Test a ball hitting the circleBumper at a straight angle
     @Test public void testCircleBumperDirectCollision(){ 
         Board board = new Board(20,20); 
+        board.setGravity(0);
+        board.setFriction(0);
         Gadget circleBumper = new CircleBumper(new Vect(5,5)); 
         board.addGadget(circleBumper);
-        Ball ball = new Ball (new Vect(5,1), new Vect(0,1),0); 
+        Ball ball = new Ball (new Vect(5,1), new Vect(0,5),0); 
         board.addBall(ball); 
         
-        board.step(5); 
-        assertEquals(new Vect(5,2), ball.getPosition()); 
+        board.step(7); 
+        assertTrue(ball.getPosition().y() < 5);  
     }
     
     //Test a ball hitting the circleBumper at an angle
     @Test public void testCircleBumperAngledCollision(){ 
         Board board = new Board(20,20); 
+        board.setGravity(0);
+        board.setFriction(0);
         Gadget circleBumper = new CircleBumper(new Vect(5,5)); 
         board.addGadget(circleBumper);
-        Ball ball = new Ball (new Vect(1,1), new Vect(1,1),0); 
+        Ball ball = new Ball (new Vect(3,3), new Vect(3,3),0); 
         board.addBall(ball); 
         
         board.step(8); 
-        //assertEquals(new Vect(2,2), ball.getPosition()); 
+        assertTrue(ball.getPosition().x() < 5); 
+        assertTrue(ball.getPosition().y() < 5); 
     }
     
     /**
@@ -177,34 +184,23 @@ public class GadgetTest {
         Board board = new Board(20,20); 
         Gadget triangleBumper = new TriangleBumper(new Vect(5,5)); 
         board.addGadget(triangleBumper);
-        board.step();
+        assertTrue(board.toString().contains("/"));
         triangleBumper.rotateGadget(90);
-        board.step(); 
+        assertTrue(board.toString().contains("\\"));
         triangleBumper.rotateGadget(90); 
-        board.step();
+        assertTrue(board.toString().contains("/"));
         triangleBumper.rotateGadget(90); 
-        board.step();
+        assertTrue(board.toString().contains("\\"));
         triangleBumper.rotateGadget(90); 
-        board.step();
+        assertTrue(board.toString().contains("/"));
         triangleBumper.rotateGadget(180); 
-        board.step();
+        assertTrue(board.toString().contains("/"));
         triangleBumper.rotateGadget(180); 
-        board.step();
+        assertTrue(board.toString().contains("/"));
         triangleBumper.rotateGadget(360); 
-        board.step();
-        //TODO: Assert Something
+        assertTrue(board.toString().contains("/"));
     }
     
-    @Test public void testTriangleBumperRotateGadgetInvalidDegree(){ 
-        Board board = new Board(20,20); 
-        Gadget triangleBumper = new TriangleBumper(new Vect(5,5)); 
-        board.addGadget(triangleBumper);
-        triangleBumper.rotateGadget(91);
-        board.step(); 
-        //This should fail checkRep()
-        //TODO: Assert ^
-    }
-    //TODO: Assert something in these tests
     //Test the walls of a Degree 0 TriangleBumper
     @Test public void testTriangleBumperHitEachWallDegree0(){ 
         Board board = new Board(20,20); 
