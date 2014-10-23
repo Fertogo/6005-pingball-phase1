@@ -356,6 +356,9 @@ public class GadgetTest {
      *          Basics: 
      *              toString of horizontal and vertical flippers
      *              Trigger a horizontal and vertical flipper
+     *          Flips:
+     *              Trigger Left Flipper
+     *              Trigger Right Flipper 
      *          Hits: 
      *              Hit left stable vertical from left and right
      *              Hit left stable horizontal from up and down
@@ -363,64 +366,88 @@ public class GadgetTest {
      *              Hit right stable horizontal from up and down
      *              Hit left rotating flipper
      *              Hit right rotating flipper
+     *          
      */
-    
-    @Test public void testFlipperBasics(){ 
-        Board board = new Board(20,20); 
-        Gadget leftVerticalFlipper = new Flipper(new Vect(5,5),0); 
-        Gadget rightVerticalFlipper = new Flipper(new Vect(10,5),1); 
+    //Flips
+        @Test public void testLeftFlipperTrigger(){ 
+            //TODO
+        }
+        @Test public void testRightFlipperTrigger(){ 
+            //TODO
+        }
         
-        Gadget leftHorizontalFlipper = new Flipper(new Vect(5,10),0); 
-        Gadget rightHorizontalFlipper = new Flipper(new Vect(10,10),0); 
-        leftHorizontalFlipper.rotateGadget(0);
-        rightHorizontalFlipper.rotateGadget(0);
-        board.addGadget(leftVerticalFlipper);
-        board.addGadget(rightVerticalFlipper);
-        board.addGadget(leftHorizontalFlipper); 
-        board.addGadget(rightHorizontalFlipper); 
-        board.step(); 
-        fail("Flippers did not rotate"); //TODO Implement rotateGadget
-    }
-    
-    @Test public void testFlipperSimpleHits(){
-        Board board = new Board(20,20); 
-        Gadget leftVerticalFlipper = new Flipper(new Vect(5,5),0); 
-        Gadget rightVerticalFlipper = new Flipper(new Vect(10,5),1);     
-        Gadget leftHorizontalFlipper = new Flipper(new Vect(5,10),0); 
-        Gadget rightHorizontalFlipper = new Flipper(new Vect(10,10),0); 
-        leftHorizontalFlipper.rotateGadget(0);
-        rightHorizontalFlipper.rotateGadget(0);
-        board.addGadget(leftVerticalFlipper);
-        board.addGadget(rightVerticalFlipper);
-        board.addGadget(leftHorizontalFlipper); 
-        board.addGadget(rightHorizontalFlipper); 
+   //Hits
+        @Test public void testLeftVerticalHits(){ 
+            //TODO
+        }
+        @Test public void testRightVerticalHits(){ 
+            //TODO
+        }
+        @Test public void testLeftHorizontalHits(){ 
+            //TODO
+        }
+        @Test public void testRightHorizontalHits(){ 
+            //TODO
+        }
+       
+       
+   //Previous Tests 
+        @Test public void testFlipperBasics(){ 
+            Board board = new Board(20,20); 
+            Gadget leftVerticalFlipper = new Flipper(new Vect(5,5),0); 
+            Gadget rightVerticalFlipper = new Flipper(new Vect(10,5),1); 
+            
+            Gadget leftHorizontalFlipper = new Flipper(new Vect(5,10),0); 
+            Gadget rightHorizontalFlipper = new Flipper(new Vect(10,10),0); 
+            leftHorizontalFlipper.rotateGadget(0);
+            rightHorizontalFlipper.rotateGadget(0);
+            board.addGadget(leftVerticalFlipper);
+            board.addGadget(rightVerticalFlipper);
+            board.addGadget(leftHorizontalFlipper); 
+            board.addGadget(rightHorizontalFlipper); 
+            board.step(); 
+            fail("Flippers did not rotate"); //TODO Implement rotateGadget
+        }
         
-        //Test leftVerticalFlipper
-        Ball ball = new Ball(new Vect(1,4), new Vect(1,0), 0); 
-        board.addBall(ball); 
-        board.step(8); 
-        //TODO Assert that ball bounced off correctly
+        @Test public void testFlipperSimpleHits(){
+            Board board = new Board(20,20); 
+            Gadget leftVerticalFlipper = new Flipper(new Vect(5,5),0); 
+            Gadget rightVerticalFlipper = new Flipper(new Vect(10,5),1);     
+            Gadget leftHorizontalFlipper = new Flipper(new Vect(5,10),0); 
+            Gadget rightHorizontalFlipper = new Flipper(new Vect(10,10),0); 
+            leftHorizontalFlipper.rotateGadget(0);
+            rightHorizontalFlipper.rotateGadget(0);
+            board.addGadget(leftVerticalFlipper);
+            board.addGadget(rightVerticalFlipper);
+            board.addGadget(leftHorizontalFlipper); 
+            board.addGadget(rightHorizontalFlipper); 
+            
+            //Test leftVerticalFlipper
+            Ball ball = new Ball(new Vect(1,4), new Vect(1,0), 0); 
+            board.addBall(ball); 
+            board.step(8); 
+            //TODO Assert that ball bounced off correctly
+            
+            //Test rightVericalFlipper
+            ball.updateBall(new Vect(10,4), new Vect(-1,0)); 
+            board.step(8); 
+            //TODO Assert that the ball bounced off correctly
+            
+            //Test leftHorizontalFlipper
+            ball.updateBall(new Vect(5,19), new Vect(0,-1)); 
+            board.step(8); 
+            //TODO Assert that the ball bounced off correctly
+            
+            //Test rightHorizontalFlipper
+            ball.updateBall(new Vect(10,19), new Vect(0,-1)); 
+            board.step(8); 
+            //TODO Assert that the ball bounced off correctly 
+        }
         
-        //Test rightVericalFlipper
-        ball.updateBall(new Vect(10,4), new Vect(-1,0)); 
-        board.step(8); 
-        //TODO Assert that the ball bounced off correctly
-        
-        //Test leftHorizontalFlipper
-        ball.updateBall(new Vect(5,19), new Vect(0,-1)); 
-        board.step(8); 
-        //TODO Assert that the ball bounced off correctly
-        
-        //Test rightHorizontalFlipper
-        ball.updateBall(new Vect(10,19), new Vect(0,-1)); 
-        board.step(8); 
-        //TODO Assert that the ball bounced off correctly 
-    }
-    
-    @Test public void testFlipperMovingHits(){ 
-        //TODO Implement this!
-        fail("Tests not implemented"); 
-    }
+        @Test public void testFlipperMovingHits(){ 
+            //TODO Implement this!
+            fail("Tests not implemented"); 
+        }
     
     /**
      * Absorber Testing Strategy
