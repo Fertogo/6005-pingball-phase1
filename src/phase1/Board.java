@@ -85,12 +85,14 @@ public class Board {
             //System.out.println(newBallPosition.toString());
             //Check for collisions in other gadgets
             for (Gadget gadget : gadgets){ 
+                System.out.println("New Ball Position: " + newBallPosition);
                 if (gadget.contains(newBallPosition)){ 
                     gadget.collision(ball); 
                     break; 
                 }
             }
             //System.out.println("Ball is allowed to move to position "+ newBallPosition.toString()); 
+            
             ball.step(); 
         }
         System.out.println(this.toString()); //Print the board. 

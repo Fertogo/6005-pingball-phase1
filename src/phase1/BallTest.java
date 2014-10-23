@@ -35,20 +35,19 @@ public class BallTest {
         board.addBall(ball);
         
         Gadget sBumper1 = new SquareBumper(new Vect(3.0, 10.0));
-        Gadget sBumper2 = new SquareBumper(new Vect(4.0, 10.0));
+        Gadget sBumper2 = new SquareBumper(new Vect(4.0, 11.0));
         Gadget sBumper3 = new SquareBumper(new Vect(5.0, 10.0));
-        Gadget sBumper4 = new SquareBumper(new Vect(6.0, 10.0));
         board.addGadget(sBumper1);
         board.addGadget(sBumper2);
-        board.addGadget(sBumper3);
-        board.addGadget(sBumper4);
+        //board.addGadget(sBumper3);
+
         
-        int steps = 20;
+        int steps = 40;
         for(int i=1; i<steps; i++){
-            System.out.println(ball.getPosition());
-            System.out.println(sBumper2.contains(ball.getPosition()));
-            System.out.println(sBumper3.contains(ball.getPosition()));
+            
             board.step();
+            System.out.println(ball.getVelocity());
+            System.out.println(ball.getPosition());
             Thread.sleep(100);
         }
     }

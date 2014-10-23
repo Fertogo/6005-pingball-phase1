@@ -135,5 +135,10 @@ public interface Gadget {
      */
     public boolean contains(Vect position); 
 
-    
+    /**
+     * 
+     * @param ball: ball that us about to collide with gadget
+     * @return the time until collision with ball
+     */
+    public double timeToCollision(Ball ball);
 }

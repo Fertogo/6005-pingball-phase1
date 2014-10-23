@@ -27,8 +27,8 @@ public class SquareBumper implements Gadget {
         
         int posX = (int)(this.position.x());
         int posY = (int)(this.position.y());  
-        this.gadgetArea = new Rectangle(posX, posY, posX+1, posY+1);
-        
+        this.gadgetArea = new Rectangle(posX, posY, 1, 1);
+
         //Create walls representing square bumper. 
         this.topWall = new LineSegment(x,y,x+1,y); 
         this.rightWall = new LineSegment(x+1,y,x+1,y+1); 
@@ -126,7 +126,9 @@ public class SquareBumper implements Gadget {
             newBallVelocity = Geometry.reflectWall(leftWall, currentBallVelocity);
         }
         
+        
         System.out.println("New Ball Velocity" + newBallVelocity);
+        System.out.println("Current Ball Position: " + currentBallPosition);
         ball.updateBall(currentBallPosition, newBallVelocity); 
     }
 
@@ -139,6 +141,12 @@ public class SquareBumper implements Gadget {
     public boolean contains(Vect position) {  
         return gadgetArea.contains(position.x(),position.y());
         //return this.position.equals(position); 
+    }
+
+    @Override
+    public double timeToCollision(Ball ball) {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
 }
