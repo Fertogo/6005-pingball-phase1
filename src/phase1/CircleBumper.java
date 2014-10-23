@@ -60,11 +60,7 @@ public class CircleBumper implements Gadget {
         return this.position;
     }
 
-    @Override
-    public Vect getNext() {
-        this.step();
-        return this.position;
-    }
+
 
     @Override
     public void step() {
@@ -80,6 +76,21 @@ public class CircleBumper implements Gadget {
     public boolean willColide(Ball ball) {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    public Vect getNext(double time) {
+        return null;
+    }
+
+    @Override
+    public double timeToCollision(Ball ball) {
+        double timeToWallCollision = Double.POSITIVE_INFINITY;
+        double minimumTime = Geometry.timeUntilCircleCollision(circle, ball.ballReturnCircle(), ball.getVelocity());
+            if(minimumTime < timeToWallCollision){
+                timeToWallCollision = minimumTime;
+            }
+        return timeToWallCollision;
     }
 
 }

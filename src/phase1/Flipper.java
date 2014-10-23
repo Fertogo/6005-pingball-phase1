@@ -27,6 +27,7 @@ public class Flipper implements Gadget{
     private LineSegment lineSegment; 
     private Vect pivotPoint; 
     private Angle angle;
+    
     /**
      * Constructor
      * @param x
@@ -87,10 +88,10 @@ public class Flipper implements Gadget{
     /**
      * Switches the state of the flipper 
      */
+    //TODO  Fix Balls issue think of something creative 
     @Override
     public void action() {
-        this.hitBall(ball);
-        this.flipFlipper();
+      
     }
     
     //Orientation
@@ -136,7 +137,7 @@ public class Flipper implements Gadget{
      * Returns the next point that the Flipper will be at. 
      */
     @Override
-    public Vect getNext() {
+    public Vect getNext(double time) {
         return this.pivotPoint;
 
     }
@@ -145,7 +146,8 @@ public class Flipper implements Gadget{
      */
     @Override
     public void collision(Ball ball) {
-        trigger();
+        this.hitBall(ball);
+        this.flipFlipper();
     }
     
     @Override
@@ -194,14 +196,9 @@ public class Flipper implements Gadget{
     
     @Override
     public void rotateGadget(int degrees) {
-        flipFlipper(); 
-        
+      //TODO  Geometry. rotateAround
     }
-    @Override
-    public Vect getNext(double time) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    
     @Override
 
     public boolean willColide(Ball ball) {

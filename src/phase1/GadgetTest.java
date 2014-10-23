@@ -26,10 +26,10 @@ public class GadgetTest {
     //Tests correct bounces on left,right,top and bottom walls. 
     @Test public void testOuterWallsAllSides() {
         Board board = new Board(20,20); 
-        Ball ball = new Ball(new Vect(5,5), new Vect(5,-5),0); 
+        Ball ball = new Ball(new Vect(5,5), new Vect(10,-10),0); 
         board.addBall(ball);
-        
-        board.step(35);
+        ball.setFriction(0, 0);
+        board.step(200);
 
         //TODO: Assert something! Final ballPosition = 5,5
     }
@@ -37,7 +37,7 @@ public class GadgetTest {
     //Test ball bouncing between top right and bottom left corners
     @Test public void testOuterWallsTopRightBottomLeftCorners(){ 
         Board board = new Board(20,20); 
-        Ball ball = new Ball(new Vect(1,1), new Vect(-1,-1),0); 
+        Ball ball = new Ball(new Vect(1,1), new Vect(-10,-10),0); 
         board.addBall(ball);
         
         board.step(45); 
@@ -292,7 +292,7 @@ public class GadgetTest {
         ball.updateBall(new Vect(5,10), new Vect(0,-1));
         System.out.println(ball.getPosition());
         System.out.println(ball.getVelocity());
-        System.out.println(ball.getNext()); 
+        System.out.println(ball.getNext(.1)); 
         board.step(7); 
         assertEquals(new Vect(6,10), ball.getPosition()); 
         //Should bounce back to the bottom
@@ -421,4 +421,80 @@ public class GadgetTest {
         //TODO Implement this
         fail("Tests not implemented"); 
     }
+    
+    /**
+     * Absorber Testing Strategy
+     *      Make sure ball bounces off correctly on stable and moving flipper
+     *      Partitions:
+     *          Basics: 
+     *             Construction of Absorber of Multiple Widths and Height
+     *                  Try a Width of 1, 20, 10
+     *                  Try a Height of 1, 20
+     *             Trigger a Ball Storage
+     *                  Trigger A ball Storage with no balls in the 
+     *                  Trigger another BallStorage one time step later 
+     *             Trigger a Ball Release
+     *                  With One Ball Already in the Absorber
+     *                  With Two Balls in Absorber      
+     *             
+     *          Collisions 
+     *             Ball Collides with Absorber from the top
+     *             Ball Collides with Absorber from the bottom
+     *              
+     *             
+     */
+    //TODO
+    @Test public void holdBall(){ 
+        Board board = new Board(20,20); 
+        Ball ball1 = new Ball(new Vect(1.25,1.25), new Vect(1,0)); 
+        Absorber absorber = new Absorber(10,10, 3, 2);
+        board.addGadget(absorber); 
+        board.addBall(ball1); 
+        absorber.shootBall(ball1);
+//        absorber.toString();
+        //Test with CircleBumper
+//        board.step(100); //TODO Ball goes through Bumper instead of hitting it. 
+//        assertTrue(ball1.getPosition().x() > 1.25); 
+        System.out.print(absorber.toString(20,20));
+
+    }
+    //Construction 
+        @Test public void absorberWidthOneTest(){ 
+            //TODO
+        }
+        @Test public void absorberWidth20Test(){ 
+            //TODO
+        }
+        @Test public void absorberWidth10Test(){ 
+            //TODO
+        }
+        @Test public void absorberHeight1Test(){ 
+            //TODO
+        }
+        @Test public void absorberHeight20Test(){ 
+            //TODO
+        }
+        @Test public void absorberHeight1Test(){ 
+            //TODO
+        }
+    // Trigger Storage 
+    // Trigger A ball Storage with no balls in the 
+    // Trigger another BallStorage one time step later 
+        @Test public void ballStorageTest(){ 
+            //TODO
+        }
+        @Test public void multipleBallsStorageTest(){ 
+            //TODO
+        }
+//        Collisions 
+//                Ball Collides with Absorber from the top
+//                Ball Collides with Absorber from the bottom
+        @Test public void ballCollideTopOfAbsorberTest(){ 
+            //TODO
+        }
+        @Test public void ballCollideBottomOfAbsorberTest(){ 
+            //TODO
+        }
+  
+    
 }
