@@ -172,4 +172,10 @@ public interface Gadget {
      */
     public void addTriggeredGadget(Gadget triggeredGadget);
 
+    /**
+     * Called when the Gadget is triggered
+     * Calls action of Gadgets that Gadget it supposed to Trigger. 
+     */
+    void trigger();
+
 }

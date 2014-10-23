@@ -3,6 +3,7 @@ package phase1;
 //import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import physics.Geometry;
 import physics.LineSegment;
@@ -14,6 +15,8 @@ public class TriangleBumper implements Gadget {
     private LineSegment wall1; 
     private LineSegment wall2; 
     private LineSegment longWall; 
+    private List<Gadget> triggeredGadgets; 
+
     //private Polygon gadgetArea; 
     //private Rectangle gadgetArea; 
     
@@ -113,9 +116,16 @@ public class TriangleBumper implements Gadget {
         
     }
     
+    @Override 
+    public void trigger(){ 
+        //Trigger Triggered Gadgets
+        for (Gadget gadget : this.triggeredGadgets){ 
+            gadget.action(); 
+        }
+    }
+    
     @Override
     public void action() {
-        // TODO Auto-generated method stub
 
     }
 
@@ -259,7 +269,7 @@ public class TriangleBumper implements Gadget {
         
 //        System.out.println("Old Ball Velocity: " + ball.getVelocity().toString());
 //        System.out.println("New Ball Velocity: " + newBallVelocity.toString());
-
+        this.action(); 
         ball.updateVelocity(newBallVelocity); 
     }
 
@@ -285,4 +295,8 @@ public class TriangleBumper implements Gadget {
         return timeToWallCollision;
     }
 
+    @Override
+    public void addTriggeredGadget(Gadget triggeredGadget) {
+        this.triggeredGadgets.add(triggeredGadget); 
+    }
 }
