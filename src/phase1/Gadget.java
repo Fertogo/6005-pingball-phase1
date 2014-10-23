@@ -25,8 +25,8 @@ public interface Gadget {
      * @param y: y Position on the board
      * @param size:  A rectangle kL *mL where k and m are 0<k<=20
      */
-    public static Gadget absorber(int x, int y, int width, int height){ 
-        return new Absorber(x,  y, width, height); 
+    public static Gadget absorber(Vect position, int width, int height){ 
+        return new Absorber(position, width, height); 
     }
     
     /**
@@ -82,8 +82,8 @@ public interface Gadget {
      * @param velocity: initial velocity of the ball
      * @return A ball
      */
-    public static Gadget ball(Vect position, Vect velocity, double gravity){
-        return new Ball(position, velocity, gravity);
+    public static Gadget ball(Vect position, Vect velocity){
+        return new Ball(position, velocity);
     }
     /**
      * Called when a gadget is triggered
@@ -124,10 +124,6 @@ public interface Gadget {
      */
     public void collision(Ball ball);
 
-    /**
-     * Updates gadget after one timestep
-     */
-    public void step(); 
     
     
     /**

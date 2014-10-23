@@ -8,21 +8,14 @@ public class Ball implements Gadget {
     
     private Vect position;
     private Vect velocity;
-    private double gravity;
-    private double mu = .025;
-    private double mu2 = .025;
     
     public Ball(Vect position, Vect velocity) {
         this.position = new Vect(position.x(), position.y());//Add 1 to account for walls
         this.velocity = velocity;
-        this.gravity = 25; 
+
     }
     
-    public Ball(Vect position, Vect velocity, double gravity) {
-        this.position = new Vect(position.x(), position.y());//Add 1 to account for walls
-        this.velocity = velocity;
-        this.gravity = gravity;
-    }
+  
     
     public Ball(Vect position){ 
         this.position = new Vect(position.x(), position.y());//Add 1 to account for walls
@@ -91,13 +84,7 @@ public class Ball implements Gadget {
         this.velocity = velocity;
     }
     
-    public void updateBall(double time){
-        this.updatePosition(this.getPosition().plus(this.getVelocity().times(time)));
-        this.updateVelocity(this.getVelocity().plus(Vect.Y_HAT.times(time*gravity)));
-        double delta = 1 - mu*time - mu2*this.getVelocity().length()*time;
-        this.updateVelocity(this.getVelocity().times(delta));
-        
-    }
+    
     
     public void step(){
 //        Vect gravity = new Vect(0, this.gravity*(System.currentTimeMillis() - this.time));
@@ -123,23 +110,7 @@ public class Ball implements Gadget {
         return this.getPosition().plus(this.getVelocity().times(time));
 
     }
-
-    @Override
-    public boolean contains(Vect pos) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    public void setFriction(double mu, double mu2){
-        this.mu = mu;
-        this.mu2 = mu2;
-    }
-
-    @Override
-    public boolean willColide(Ball ball) {
-        // TODO Auto-generated method stub
-        return false;
-    }
+ 
 
     @Override
     public double timeToCollision(Ball ball) {
@@ -150,6 +121,20 @@ public class Ball implements Gadget {
                 timeToWallCollision = minimumTime;
             }
         return timeToWallCollision;
+    }
+
+    @Override
+    public void addTriggeredGadget(Gadget triggeredGadget) {
+        // TODO Auto-generated method stub
+        
+    }
+
+
+
+    @Override
+    public void trigger() {
+        // TODO Auto-generated method stub
+        
     }
    
 }

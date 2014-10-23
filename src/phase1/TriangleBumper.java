@@ -174,7 +174,6 @@ public class TriangleBumper implements Gadget {
 
     @Override
     public Vect getNext(double time) {
-        this.step();
         return this.position;
     }
 
@@ -273,10 +272,7 @@ public class TriangleBumper implements Gadget {
         ball.updateVelocity(newBallVelocity); 
     }
 
-    @Override
-    public void step() {
-        
-    }
+   
 
 
     @Override
@@ -297,6 +293,8 @@ public class TriangleBumper implements Gadget {
 
     @Override
     public void addTriggeredGadget(Gadget triggeredGadget) {
+
         this.triggeredGadgets.add(triggeredGadget); 
     }
+
 }

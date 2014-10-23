@@ -13,7 +13,7 @@ public class BallTest {
         Board board = new Board(20, 20);
         Vect velocity = new Vect(0,0);
         Vect position = new Vect(3.0, 3.0);
-        Ball ball = new Ball(position, velocity, 25);
+        Ball ball = new Ball(position, velocity);
         board.addBall(ball);
         
         
@@ -31,7 +31,7 @@ public class BallTest {
         Board board = new Board(20, 20);
         Vect velocity = new Vect(.5,0);
         Vect position = new Vect(3.0, 3.0);
-        Ball ball = new Ball(position, velocity, 25);
+        Ball ball = new Ball(position, velocity);
         board.addBall(ball);
         
         Gadget sBumper1 = new SquareBumper(new Vect(3.0, 10.0));

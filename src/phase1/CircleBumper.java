@@ -65,9 +65,7 @@ public class CircleBumper implements Gadget {
 
 
 
-    @Override
-    public void step() {
-    }
+   
 
 
     @Override

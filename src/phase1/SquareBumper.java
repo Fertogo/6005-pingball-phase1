@@ -1,6 +1,6 @@
 package phase1;
 
-import java.awt.Rectangle;
+//import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +16,7 @@ import physics.Vect;
  */
 public class SquareBumper implements Gadget {
     private Vect position;
+
     private LineSegment leftWall; 
     private LineSegment rightWall; 
     private LineSegment bottomWall; 
@@ -27,7 +28,6 @@ public class SquareBumper implements Gadget {
         int y = (int)(position.y()); 
 
         this.position = new Vect(x,y);
-        
 
         
         //Create walls representing square bumper. 
@@ -138,10 +138,7 @@ public class SquareBumper implements Gadget {
         this.trigger(); 
     }
 
-    @Override
-    public void step() {
-        
-    }
+   
 
     @Override
 

@@ -26,11 +26,12 @@ public class GadgetTest {
     //Tests correct bounces on left,right,top and bottom walls. 
     @Test public void testOuterWallsAllSides() {
         Board board = new Board(20,20); 
-        board.setGravity(0);
-        board.setFriction(0);
-        Ball ball = new Ball(new Vect(5,5), new Vect(3,-3),0); 
+
+        Ball ball = new Ball(new Vect(5,5), new Vect(5,-5)); 
         board.addBall(ball);
-        ball.setFriction(0, 0);
+        //ball.setFriction(0, 0);
+        board.setGravity(0);
+        board.setFriction(0, 0);
         board.step(200);
 
         //TODO: Assert something! Final ballPosition = 5,5
@@ -39,7 +40,7 @@ public class GadgetTest {
     //Test ball bouncing between top right and bottom left corners
     @Test public void testOuterWallsTopRightBottomLeftCorners(){ 
         Board board = new Board(20,20); 
-        Ball ball = new Ball(new Vect(1,1), new Vect(-10,-10),0); 
+        Ball ball = new Ball(new Vect(1,1), new Vect(-10,-10)); 
         board.addBall(ball);
         
         board.step(45); 
@@ -50,7 +51,7 @@ public class GadgetTest {
     //Test ball bouncing between top left and bottom right corners
     @Test public void testOuterWallsTopLeftBottomRightCorners(){ 
         Board board = new Board(20,20); 
-        Ball ball = new Ball(new Vect(0,19), new Vect(1,-1),0); 
+        Ball ball = new Ball(new Vect(0,19), new Vect(1,-1)); 
         board.addBall(ball);
         board.step(65); 
         fail("Not correct bounces"); //TODO Fix
@@ -76,7 +77,7 @@ public class GadgetTest {
         Board board = new Board (20,20); 
         Gadget squareBumper = new SquareBumper(new Vect(5,5)); 
         board.addGadget(squareBumper);
-        Ball ball = new Ball (new Vect(5,1), new Vect(0,1),0); 
+        Ball ball = new Ball (new Vect(5,1), new Vect(0,1)); 
         board.addBall(ball);
         
         board.step(5);
@@ -89,7 +90,7 @@ public class GadgetTest {
         Board board = new Board (20,20); 
         Gadget squareBumper = new SquareBumper(new Vect(5,5)); 
         board.addGadget(squareBumper);
-        Ball ball = new Ball (new Vect(5,8), new Vect(0,-1),0); 
+        Ball ball = new Ball (new Vect(5,8), new Vect(0,-1)); 
         board.addBall(ball);
         
 
@@ -103,7 +104,7 @@ public class GadgetTest {
         Board board = new Board (20,20); 
         Gadget squareBumper = new SquareBumper(new Vect(5,5)); 
         board.addGadget(squareBumper);
-        Ball ball = new Ball (new Vect(1,5), new Vect(1,0),0); 
+        Ball ball = new Ball (new Vect(1,5), new Vect(1,0)); 
         board.addBall(ball);
         
 
@@ -117,7 +118,7 @@ public class GadgetTest {
         Board board = new Board (20,20); 
         Gadget squareBumper = new SquareBumper(new Vect(5,5)); 
         board.addGadget(squareBumper);
-        Ball ball = new Ball (new Vect(8,5), new Vect(-1,0),0);
+        Ball ball = new Ball (new Vect(8,5), new Vect(-1,0));
         board.addBall(ball);
         
 
@@ -145,7 +146,7 @@ public class GadgetTest {
         board.setFriction(0);
         Gadget circleBumper = new CircleBumper(new Vect(5,5)); 
         board.addGadget(circleBumper);
-        Ball ball = new Ball (new Vect(5,1), new Vect(0,5),0); 
+        Ball ball = new Ball (new Vect(5,1), new Vect(0,5)); 
         board.addBall(ball); 
         
         board.step(7); 
@@ -159,7 +160,7 @@ public class GadgetTest {
         board.setFriction(0);
         Gadget circleBumper = new CircleBumper(new Vect(5,5)); 
         board.addGadget(circleBumper);
-        Ball ball = new Ball (new Vect(3,3), new Vect(3,3),0); 
+        Ball ball = new Ball (new Vect(3,3), new Vect(3,3)); 
         board.addBall(ball); 
         
         board.step(8); 
@@ -210,7 +211,7 @@ public class GadgetTest {
         board.addGadget(triangleBumper); 
         //Hit top wall
         System.out.println("Hitting Top Wall"); 
-        Ball ball = new Ball(new Vect(5,1), new Vect(0,5),0); 
+        Ball ball = new Ball(new Vect(5,1), new Vect(0,5)); 
         board.addBall(ball);
         board.step(10); 
         assertTrue(ball.getPosition().y() < 5); 
@@ -247,7 +248,7 @@ public class GadgetTest {
         board.addGadget(triangleBumper); 
         //Hit top wall
         System.out.println("Hitting Top Wall"); 
-        Ball ball = new Ball(new Vect(5,1), new Vect(0,5),0); 
+        Ball ball = new Ball(new Vect(5,1), new Vect(0,5)); 
         board.addBall(ball);
         board.step(10); 
         assertTrue(ball.getPosition().y() < 5);    
@@ -285,7 +286,7 @@ public class GadgetTest {
         board.addGadget(triangleBumper); 
         //Hit top wall
         System.out.println("Hitting Top Wall"); 
-        Ball ball = new Ball(new Vect(5,1), new Vect(0,5),0); 
+        Ball ball = new Ball(new Vect(5,1), new Vect(0,5)); 
         board.addBall(ball);
         board.step(10); 
         assertTrue(ball.getPosition().x() < 5);
@@ -326,7 +327,7 @@ public class GadgetTest {
         board.addGadget(triangleBumper); 
         //Hit top wall
         System.out.println("Hitting Top Wall"); 
-        Ball ball = new Ball(new Vect(5,1), new Vect(0,5),0); 
+        Ball ball = new Ball(new Vect(5,1), new Vect(0,5)); 
         board.addBall(ball);
         board.step(7); 
         assertTrue(ball.getPosition().x() > 5); 
@@ -429,7 +430,7 @@ public class GadgetTest {
             board.addGadget(rightHorizontalFlipper); 
             
             //Test leftVerticalFlipper
-            Ball ball = new Ball(new Vect(1,4), new Vect(1,0), 0); 
+            Ball ball = new Ball(new Vect(1,4), new Vect(1,0)); 
             board.addBall(ball); 
             board.step(8); 
             //TODO Assert that ball bounced off correctly
@@ -477,7 +478,7 @@ public class GadgetTest {
     @Test public void testAbsorberHoldBall(){ 
         Board board = new Board(20,20); 
         Ball ball1 = new Ball(new Vect(1.25,1.25), new Vect(1,0)); 
-        Absorber absorber = new Absorber(10,10, 3, 2);
+        Absorber absorber = new Absorber(new Vect(10,10), 3, 2);
         board.addGadget(absorber); 
         board.addBall(ball1); 
         absorber.shootBall(ball1);
@@ -496,9 +497,6 @@ public class GadgetTest {
             //TODO
         }
         @Test public void absorberWidth10Test(){ 
-            //TODO
-        }
-        @Test public void absorberHeight1Test(){ 
             //TODO
         }
         @Test public void absorberHeight20Test(){ 

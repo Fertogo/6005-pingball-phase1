@@ -169,10 +169,7 @@ public class Flipper implements Gadget{
         this.flipFlipper();
     }
     
-    @Override
-    public void step() {
-        //Empty
-    }
+    
     
     /**
      * Returns a string representation of flipper
@@ -208,7 +205,7 @@ public class Flipper implements Gadget{
     public void rotateGadget(int degrees) {
       //TODO  Geometry. rotateAround
     }
-   
+
 
     @Override
     public double timeToCollision(Ball ball) {
@@ -220,6 +217,7 @@ public class Flipper implements Gadget{
             }
         return timeToWallCollision;
     }
+  
 
     @Override
     public void addTriggeredGadget(Gadget triggeredGadget) {

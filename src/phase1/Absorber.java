@@ -34,6 +34,7 @@ public class Absorber implements Gadget {
      * @param size - General Size of the absorber. 
      */
     public Absorber(Vect position, int width, int height ){ 
+
         this.position = position; 
         this.width=width;
         this.height=height;
@@ -57,13 +58,13 @@ public class Absorber implements Gadget {
     public void collision(Ball ball){
        this.storeBall(ball);      
     }
-    @Override
-    public void step() {
-       if(ballsStored>0 && this.ballStorage.size()>0){
-           shootBall(this.ballStorage.remove(0)); 
-       }
-        
-    }
+//    @Override
+//    public void step() {
+//       if(ballsStored>0 && this.ballStorage.size()>0){
+//           shootBall(this.ballStorage.remove(0)); 
+//       }
+//        
+//    }
     /**
      * Store ball in one iteration and shoots it back in the next
      * 
@@ -178,6 +179,7 @@ public class Absorber implements Gadget {
         // TODO Auto-generated method stub
         
     }
+   
     
     @Override
     public void addTriggeredGadget(Gadget triggeredGadget) {
