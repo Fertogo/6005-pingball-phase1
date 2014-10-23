@@ -3,6 +3,7 @@ package phase1;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import physics.Geometry;
 import physics.LineSegment;
@@ -20,6 +21,7 @@ public class SquareBumper implements Gadget {
     private LineSegment rightWall; 
     private LineSegment bottomWall; 
     private LineSegment topWall; 
+    private List<Gadget> triggeredGadgets; 
     
     public SquareBumper(Vect position) {
         int x = (int)(position.x()); //Adding 1 to compensate for the walls
@@ -128,6 +130,11 @@ public class SquareBumper implements Gadget {
         
         
         ball.updateBall(currentBallPosition, newBallVelocity); 
+        
+        //Trigger Triggered Gadgets
+        for (Gadget gadget : this.triggeredGadgets){ 
+            gadget.action(); 
+        }
     }
 
     @Override
@@ -160,6 +167,11 @@ public class SquareBumper implements Gadget {
     public boolean willColide(Ball ball) {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    public void addTriggeredGadget(Gadget triggeredGadget) {
+        this.triggeredGadgets.add(triggeredGadget); 
     }
 
    

@@ -1,5 +1,7 @@
 package phase1; 
 
+import java.util.List;
+
 import physics.*; 
 
 /*
@@ -14,7 +16,7 @@ import physics.*;
  * Some gadgets have actions - A response that a gadget can make to a trigger happening somewhere on the board. 
  */   
 public interface Gadget {
-
+    
     /**
      * absorber stops ball and holds it. 
      * if not holding the ball or if previously rejected ball hos not left the absorber, 
@@ -151,9 +153,6 @@ public interface Gadget {
     public static char [][] getArray(int height,int width){
         char [][] wallArray = new char[height][width];
 
-
-    
-
         //Populate with space
         for (int x = 0; x<width; x++){ 
             for (int y = 0; y<height; y++){ 
@@ -180,5 +179,10 @@ public interface Gadget {
         return wallArray;
     }
     
+    /**
+     * Adds a gadget to Gadget's gadgets to be triggered
+     * @param triggeredGadget: Gadget to be added to triggered gadgets
+     */
+    public void addTriggeredGadget(Gadget triggeredGadget);
 
 }
