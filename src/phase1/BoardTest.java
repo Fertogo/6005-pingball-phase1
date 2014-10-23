@@ -36,7 +36,7 @@ public class BoardTest {
         Gadget squareBumper = new SquareBumper(bumperPosition);
         board.addGadget(squareBumper); 
         
-        Ball ball = new Ball(position, velocity, 25); 
+        Ball ball = new Ball(position, velocity); 
         
         board.addBall(ball); 
 
@@ -56,8 +56,8 @@ public class BoardTest {
     
     @Test public void testTwoBallsHitSameWallSameTime(){ 
         Board board = new Board(20,20); 
-        Ball ball1 = new Ball(new Vect(5,5), new Vect(-1,0),0); 
-        Ball ball2 = new Ball(new Vect(5,10), new Vect(-1,0),0); 
+        Ball ball1 = new Ball(new Vect(5,5), new Vect(-1,0)); 
+        Ball ball2 = new Ball(new Vect(5,10), new Vect(-1,0)); 
         board.addBall(ball1); 
         board.addBall(ball2);
         board.step(70); //Watch how the balls go out of sync! 

@@ -1,8 +1,9 @@
 package phase1;
 
-import java.awt.Rectangle;
+//import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import physics.Geometry;
 import physics.LineSegment;
@@ -15,20 +16,19 @@ import physics.Vect;
  */
 public class SquareBumper implements Gadget {
     private Vect position;
-    private Rectangle gadgetArea; 
+
     private LineSegment leftWall; 
     private LineSegment rightWall; 
     private LineSegment bottomWall; 
     private LineSegment topWall; 
+    private List<Gadget> triggeredGadgets = new ArrayList<Gadget>(); 
     
     public SquareBumper(Vect position) {
         int x = (int)(position.x()); //Adding 1 to compensate for the walls
         int y = (int)(position.y()); 
 
         this.position = new Vect(x,y);
-        
 
-        this.gadgetArea = new Rectangle(x, y, 1, 1);
         
         //Create walls representing square bumper. 
         this.topWall = new LineSegment(x,y,x+1,y); 
@@ -38,8 +38,15 @@ public class SquareBumper implements Gadget {
     }
 
     @Override
+    public void trigger(){ 
+        //Trigger Triggered Gadgets
+        for (Gadget gadget : this.triggeredGadgets){ 
+            gadget.action(); 
+        }
+    }
+    @Override
     public void action() {
-        //TODO: Implement this
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -125,21 +132,13 @@ public class SquareBumper implements Gadget {
             System.out.println("Hit Left Wall of Square Bumper"); 
             newBallVelocity = Geometry.reflectWall(leftWall, currentBallVelocity);
         }
-        
-        
+
         ball.updateBall(currentBallPosition, newBallVelocity); 
-    }
-
-    @Override
-    public void step() {
         
+        this.trigger(); 
     }
 
-    @Override
-    public boolean contains(Vect position) {  
-        return gadgetArea.contains(position.x(),position.y());
-        //return this.position.equals(position); 
-    }
+   
 
     @Override
 
@@ -157,11 +156,8 @@ public class SquareBumper implements Gadget {
         return timeToWallCollision;
     }
 
-    public boolean willColide(Ball ball) {
-        // TODO Auto-generated method stub
-        return false;
+    @Override
+    public void addTriggeredGadget(Gadget triggeredGadget) {
+        this.triggeredGadgets.add(triggeredGadget); 
     }
-
-   
-
 }

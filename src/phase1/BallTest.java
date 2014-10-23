@@ -13,7 +13,7 @@ public class BallTest {
         Board board = new Board(20, 20);
         Vect velocity = new Vect(0,0);
         Vect position = new Vect(3.0, 3.0);
-        Ball ball = new Ball(position, velocity, 25);
+        Ball ball = new Ball(position, velocity);
         board.addBall(ball);
         
         
@@ -31,15 +31,15 @@ public class BallTest {
         Board board = new Board(20, 20);
         Vect velocity = new Vect(.5,0);
         Vect position = new Vect(3.0, 3.0);
-        Ball ball = new Ball(position, velocity, 25);
+        Ball ball = new Ball(position, velocity);
         board.addBall(ball);
         
         Gadget sBumper1 = new SquareBumper(new Vect(3.0, 10.0));
-        Gadget sBumper2 = new TriangleBumper(new Vect(4.0, 11.0), 90);
+        Gadget sBumper2 = new CircleBumper(new Vect(4.0, 11.0));
         Gadget sBumper3 = new CircleBumper(new Vect(5.0, 12.0));
         board.addGadget(sBumper1);
         board.addGadget(sBumper2);
-        board.addGadget(sBumper3);
+       // board.addGadget(sBumper3);
 
         
         int steps = 2000;

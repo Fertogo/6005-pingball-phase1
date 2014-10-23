@@ -1,5 +1,6 @@
 package phase1;
 import java.awt.Rectangle;
+import java.util.List;
 
 import physics.*;
 
@@ -27,6 +28,8 @@ public class Flipper implements Gadget{
     private LineSegment lineSegment; 
     private Vect pivotPoint; 
     private Angle angle;
+    private List<Gadget> triggeredGadgets; 
+
     
     /**
      * Constructor
@@ -43,18 +46,25 @@ public class Flipper implements Gadget{
         this.angle= new Angle(3/2*Math.PI);
         this.isHorizontal=false;
     }
-    /**
-     * Triggering event that is proceeded by an action
-     */
-    public void trigger(){
-        this.action();
-       if(isHorizontal){
-           isHorizontal=false;
-       }
-       else if(!isHorizontal){
-           isHorizontal=true;
-       }
+    
+    public Flipper(Vect position, int type, boolean isHorizontal){ 
+        this.position = position; 
+        this.pivotPoint= new Vect(position.x(),position.y());
+        this.lineSegment= new LineSegment(position.x(),position.y(), position.x(), position.y()-1);
+//        this.flipperType=typesOfFlipper[type];
+        this.flipperType=type;
+        this.angle= new Angle(3/2*Math.PI);
+        this.isHorizontal=isHorizontal;
     }
+    
+    @Override 
+    public void trigger(){ 
+        //Trigger Triggered Gadgets
+        for (Gadget gadget : this.triggeredGadgets){ 
+            gadget.action(); 
+        }
+    }
+    
     /**
      * Method that returns a ball that has been hit by a flipper
      * @param ball
@@ -85,13 +95,20 @@ public class Flipper implements Gadget{
            return newBall;
     }
 
+    
     /**
      * Switches the state of the flipper 
      */
     //TODO  Fix Balls issue think of something creative 
     @Override
     public void action() {
-      
+        this.action();
+       if(isHorizontal){
+           isHorizontal=false;
+       }
+       else if(!isHorizontal){
+           isHorizontal=true;
+       }
     }
     
     //Orientation
@@ -152,18 +169,7 @@ public class Flipper implements Gadget{
         this.flipFlipper();
     }
     
-    @Override
-    public void step() {
-        //Empty
-    }
-    /**
-     * Return true if the lineSegment contains the point
-     */
-    @Override
-    public boolean contains(Vect position) {
-       if(  lineSegment.p1().equals(position ) ||  lineSegment.p2().equals(position ) ) return true;
-       return false;
-    }
+    
     
     /**
      * Returns a string representation of flipper
@@ -194,19 +200,12 @@ public class Flipper implements Gadget{
         return boardToString;
 
     }
-    
-    
+     
     @Override
     public void rotateGadget(int degrees) {
       //TODO  Geometry. rotateAround
     }
-    
-    @Override
 
-    public boolean willColide(Ball ball) {
-        // TODO Auto-generated method stub
-        return false;
-    }
 
     @Override
     public double timeToCollision(Ball ball) {
@@ -218,8 +217,12 @@ public class Flipper implements Gadget{
             }
         return timeToWallCollision;
     }
+  
 
-    
+    @Override
+    public void addTriggeredGadget(Gadget triggeredGadget) {
+        this.triggeredGadgets.add(triggeredGadget); 
+    }
 
     
     

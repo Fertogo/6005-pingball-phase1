@@ -3,6 +3,7 @@ package phase1;
 //import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import physics.Geometry;
 import physics.LineSegment;
@@ -14,6 +15,8 @@ public class TriangleBumper implements Gadget {
     private LineSegment wall1; 
     private LineSegment wall2; 
     private LineSegment longWall; 
+    private List<Gadget> triggeredGadgets = new ArrayList<Gadget>();; 
+
     //private Polygon gadgetArea; 
     //private Rectangle gadgetArea; 
     
@@ -113,9 +116,16 @@ public class TriangleBumper implements Gadget {
         
     }
     
+    @Override 
+    public void trigger(){ 
+        //Trigger Triggered Gadgets
+        for (Gadget gadget : this.triggeredGadgets){ 
+            gadget.action(); 
+        }
+    }
+    
     @Override
     public void action() {
-        // TODO Auto-generated method stub
 
     }
 
@@ -164,7 +174,6 @@ public class TriangleBumper implements Gadget {
 
     @Override
     public Vect getNext(double time) {
-        this.step();
         return this.position;
     }
 
@@ -201,60 +210,53 @@ public class TriangleBumper implements Gadget {
             newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
         }
         //Check which wall was hit. step the ball if it hits hypotenous (since gadgetArea of Triangle is a rectangle)
-        else if(ballY < this.position.y() && ballX >= this.position.x() && ballX <= this.position.x()+1 ){ 
+        
+        else if(ballY <= this.position.y() && ballX >= this.position.x() && ballX <= this.position.x()+1 ){ 
             //Hitting top wall
-            //System.out.println("TOP"); 
+            System.out.println("TOP"); 
             //System.out.println(longWall.toString()) ;
             switch(this.orientation){ 
            
             case(0):    newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
             case(90):   newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
-            case(180):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
-                        break;
-            case(270):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
-                         break;
+            case(180):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);  break;
+            case(270):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
             
             }
            
         }
-        else if(ballY >= this.position.y()+1){ 
+        else if(ballY >= this.position.y() && ballX >= this.position.x() && ballX <= this.position.x()+1){ 
             //Hitting bottom wall
-            //System.out.println("BOTTOM");
+            System.out.println("BOTTOM");
             switch(this.orientation){ 
 
-            case(0):    newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);
-                         break;
-            case(90):   newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);
-                         break;
+            case(0):    newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
+            case(90):   newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
             case(180):  newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
             case(270): newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
             
             }
         }
-        else if(ballX >= this.position.x()+1){ 
+        else if(ballX >= this.position.x()){ 
             //Hitting right wall
-            //System.out.println("RIGHT");
+            System.out.println("RIGHT");
             //System.out.println(longWall.toString()); 
             switch(this.orientation){ 
 
-            case(0):    newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
-                         break;
+            case(0):    newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);  break;
             case(90):   newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
             case(180):  newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
-            case(270):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
-                        break;
-            
-            }        }
+            case(270):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity);  break;
+                }        
+            }
         else if(ballX <= this.position.x()){ 
             //Hitting left wall
-            //System.out.println("LEFT");
+            System.out.println("LEFT");
             switch(this.orientation){ 
             
             case(0):    newBallVelocity = Geometry.reflectWall(wall2, currentBallVelocity); break;
-            case(90):   newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
-                         break;
-            case(180):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); 
-                         break;
+            case(90):   newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
+            case(180):  newBallVelocity = Geometry.reflectWall(longWall, currentBallVelocity); break;
             case(270):  newBallVelocity = Geometry.reflectWall(wall1, currentBallVelocity); break;
             
             }  
@@ -266,29 +268,12 @@ public class TriangleBumper implements Gadget {
         
 //        System.out.println("Old Ball Velocity: " + ball.getVelocity().toString());
 //        System.out.println("New Ball Velocity: " + newBallVelocity.toString());
-
+        this.action(); 
         ball.updateVelocity(newBallVelocity); 
     }
 
-    @Override
-    public void step() {
-        
-    }
+   
 
-    @Override
-    public boolean contains(Vect position) {
-        //System.out.println(position); 
-        //System.out.println(gadgetArea.contains(position.x()+1,position.y()+1));
-        //return gadgetArea.contains(position.x(),position.y());
-        //return this.position.equals(position); 
-        return false; 
-    }
-
-    @Override
-    public boolean willColide(Ball ball) {
-
-        return false;
-    }
 
     @Override
     public double timeToCollision(Ball ball) {
@@ -303,6 +288,12 @@ public class TriangleBumper implements Gadget {
             }
         }
         return timeToWallCollision;
+    }
+
+    @Override
+    public void addTriggeredGadget(Gadget triggeredGadget) {
+
+        this.triggeredGadgets.add(triggeredGadget); 
     }
 
 }

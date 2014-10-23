@@ -1,6 +1,8 @@
 package phase1;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 
 import physics.Circle;
 import physics.Geometry;
@@ -9,16 +11,18 @@ import physics.Vect;
 public class CircleBumper implements Gadget {
     private Vect position;
     private Circle circle;
-    private Rectangle gadgetArea; 
+    //private Rectangle gadgetArea; 
+    private List<Gadget> triggeredGadgets = new ArrayList<Gadget>();; 
+
     
 
     public CircleBumper(Vect position) {
-        int diameter = 1; 
+        double diameter = 1; 
         this.circle = new Circle(position.x(), position.y(), diameter/2); 
         int posX = (int)(position.x());
         int posY = (int)(position.y()); 
         this.position = new Vect(posX, posY); 
-        this.gadgetArea = new Rectangle(posX, posY, 1, 1);
+        //this.gadgetArea = new Rectangle(posX, posY, 1, 1);
 
     }
 
@@ -50,7 +54,6 @@ public class CircleBumper implements Gadget {
 
     @Override
     public void collision(Ball ball) {
-        System.out.println("Collision with a CircleBumper"); 
         Vect newBallVelocity = Geometry.reflectCircle(circle.getCenter(), ball.getPosition(), ball.getVelocity());
         ball.updateBall(ball.getPosition(), newBallVelocity);
     }
@@ -60,23 +63,6 @@ public class CircleBumper implements Gadget {
         return this.position;
     }
 
-
-
-    @Override
-    public void step() {
-    }
-
-    @Override
-    public boolean contains(Vect position) {
-        return gadgetArea.contains(position.x(),position.y());
-        //return this.position.equals(position); 
-    }
-
-    @Override
-    public boolean willColide(Ball ball) {
-        // TODO Auto-generated method stub
-        return false;
-    }
 
     @Override
     public Vect getNext(double time) {
@@ -91,6 +77,19 @@ public class CircleBumper implements Gadget {
                 timeToWallCollision = minimumTime;
             }
         return timeToWallCollision;
+    }
+
+    @Override
+    public void addTriggeredGadget(Gadget triggeredGadget) {
+        this.triggeredGadgets.add(triggeredGadget); 
+    }
+
+    @Override
+    public void trigger() {
+        //Trigger Triggered Gadgets
+        for (Gadget gadget : this.triggeredGadgets){ 
+            gadget.action(); 
+        }  
     }
 
 }
