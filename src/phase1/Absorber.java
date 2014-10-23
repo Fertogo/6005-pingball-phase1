@@ -1,6 +1,7 @@
 package phase1;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.List;
 
 import physics.LineSegment;
 import physics.Geometry;
@@ -26,6 +27,8 @@ public class Absorber implements Gadget {
     private Rectangle absorberArea; 
     private Vect positionPoint; 
     private ArrayList<Ball> ballStorage;
+    private List<Gadget> triggeredGadgets; 
+
     /**
      * 
      * @param x-xPosition
@@ -171,10 +174,11 @@ public class Absorber implements Gadget {
         // TODO Auto-generated method stub
         
     }
+   
+    
     @Override
     public void addTriggeredGadget(Gadget triggeredGadget) {
-        // TODO Auto-generated method stub
-        
+        this.triggeredGadgets.add(triggeredGadget); 
     }
     
     

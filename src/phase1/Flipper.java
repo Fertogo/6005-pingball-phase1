@@ -1,5 +1,6 @@
 package phase1;
 import java.awt.Rectangle;
+import java.util.List;
 
 import physics.*;
 
@@ -27,6 +28,8 @@ public class Flipper implements Gadget{
     private LineSegment lineSegment; 
     private Vect pivotPoint; 
     private Angle angle;
+    private List<Gadget> triggeredGadgets; 
+
     
     /**
      * Constructor
@@ -43,18 +46,15 @@ public class Flipper implements Gadget{
         this.angle= new Angle(3/2*Math.PI);
         this.isHorizontal=false;
     }
-    /**
-     * Triggering event that is proceeded by an action
-     */
-    public void trigger(){
-        this.action();
-       if(isHorizontal){
-           isHorizontal=false;
-       }
-       else if(!isHorizontal){
-           isHorizontal=true;
-       }
+    
+    @Override 
+    public void trigger(){ 
+        //Trigger Triggered Gadgets
+        for (Gadget gadget : this.triggeredGadgets){ 
+            gadget.action(); 
+        }
     }
+    
     /**
      * Method that returns a ball that has been hit by a flipper
      * @param ball
@@ -85,13 +85,20 @@ public class Flipper implements Gadget{
            return newBall;
     }
 
+    
     /**
      * Switches the state of the flipper 
      */
     //TODO  Fix Balls issue think of something creative 
     @Override
     public void action() {
-      
+        this.action();
+       if(isHorizontal){
+           isHorizontal=false;
+       }
+       else if(!isHorizontal){
+           isHorizontal=true;
+       }
     }
     
     //Orientation
@@ -183,13 +190,11 @@ public class Flipper implements Gadget{
         return boardToString;
 
     }
-    
-    
+     
     @Override
     public void rotateGadget(int degrees) {
       //TODO  Geometry. rotateAround
     }
-    
 
 
     @Override
@@ -202,13 +207,12 @@ public class Flipper implements Gadget{
             }
         return timeToWallCollision;
     }
+  
+
     @Override
     public void addTriggeredGadget(Gadget triggeredGadget) {
-        // TODO Auto-generated method stub
-        
+        this.triggeredGadgets.add(triggeredGadget); 
     }
-
-    
 
     
     

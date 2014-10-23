@@ -128,5 +128,13 @@ public class Ball implements Gadget {
         // TODO Auto-generated method stub
         
     }
+
+
+
+    @Override
+    public void trigger() {
+        // TODO Auto-generated method stub
+        
+    }
    
 }

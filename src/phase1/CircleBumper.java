@@ -1,6 +1,7 @@
 package phase1;
 
 import java.awt.Rectangle;
+import java.util.List;
 
 import physics.Circle;
 import physics.Geometry;
@@ -10,6 +11,8 @@ public class CircleBumper implements Gadget {
     private Vect position;
     private Circle circle;
     private Rectangle gadgetArea; 
+    private List<Gadget> triggeredGadgets; 
+
     
 
     public CircleBumper(Vect position) {
@@ -82,8 +85,15 @@ public class CircleBumper implements Gadget {
 
     @Override
     public void addTriggeredGadget(Gadget triggeredGadget) {
-        // TODO Auto-generated method stub
-        
+        this.triggeredGadgets.add(triggeredGadget); 
+    }
+
+    @Override
+    public void trigger() {
+        //Trigger Triggered Gadgets
+        for (Gadget gadget : this.triggeredGadgets){ 
+            gadget.action(); 
+        }  
     }
 
 }

@@ -16,7 +16,7 @@ import physics.Vect;
  */
 public class SquareBumper implements Gadget {
     private Vect position;
-    //private Rectangle gadgetArea; 
+
     private LineSegment leftWall; 
     private LineSegment rightWall; 
     private LineSegment bottomWall; 
@@ -28,9 +28,7 @@ public class SquareBumper implements Gadget {
         int y = (int)(position.y()); 
 
         this.position = new Vect(x,y);
-        
 
-        //this.gadgetArea = new Rectangle(x, y, 1, 1);
         
         //Create walls representing square bumper. 
         this.topWall = new LineSegment(x,y,x+1,y); 
@@ -40,8 +38,15 @@ public class SquareBumper implements Gadget {
     }
 
     @Override
+    public void trigger(){ 
+        //Trigger Triggered Gadgets
+        for (Gadget gadget : this.triggeredGadgets){ 
+            gadget.action(); 
+        }
+    }
+    @Override
     public void action() {
-        //TODO: Implement this
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -127,14 +132,10 @@ public class SquareBumper implements Gadget {
             System.out.println("Hit Left Wall of Square Bumper"); 
             newBallVelocity = Geometry.reflectWall(leftWall, currentBallVelocity);
         }
-        
-        
+
         ball.updateBall(currentBallPosition, newBallVelocity); 
         
-        //Trigger Triggered Gadgets
-        for (Gadget gadget : this.triggeredGadgets){ 
-            gadget.action(); 
-        }
+        this.trigger(); 
     }
 
    
@@ -159,7 +160,4 @@ public class SquareBumper implements Gadget {
     public void addTriggeredGadget(Gadget triggeredGadget) {
         this.triggeredGadgets.add(triggeredGadget); 
     }
-
-   
-
 }
