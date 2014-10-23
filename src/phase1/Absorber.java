@@ -19,13 +19,11 @@ import physics.Vect;
  * then the absorber takes no action when triggered.   
  */
 public class Absorber implements Gadget {
-    private int xPos; 
-    private int yPos;
+    private Vect position; 
     private int width;
     private int height;
     private int ballsStored;
     private Rectangle absorberArea; 
-    private Vect positionPoint; 
     private ArrayList<Ball> ballStorage;
     private List<Gadget> triggeredGadgets; 
 
@@ -35,12 +33,12 @@ public class Absorber implements Gadget {
      * @param y-yPosition
      * @param size - General Size of the absorber. 
      */
-    public Absorber(int x, int y, int width, int height ){ 
-        this.xPos =x;
-        this.yPos = y;
+    public Absorber(Vect position, int width, int height ){ 
+        this.position = position; 
         this.width=width;
         this.height=height;
-        this.positionPoint= new Vect(this.xPos, this.yPos);;
+        int x = (int)position.x(); 
+        int y = (int)position.y(); 
         this.absorberArea= new Rectangle(x, y, width, height);
         this.ballStorage= new ArrayList<>();
         this.ballsStored=0;
@@ -77,22 +75,25 @@ public class Absorber implements Gadget {
     }
     
     public void createAbsorber(int boardWidth, int boardHeight){
+        int yPos = (int)this.position.y(); 
+        int xPos = (int)this.position.x(); 
+
         char [][] wallArray =  Gadget.getArray(boardHeight,boardWidth); 
         for(int i=0; i< this.width;i++){
 //            stringBuilder+="=";
-            wallArray[this.yPos][this.xPos+i] = '=';
+            wallArray[yPos][xPos+i] = '=';
         }
 //        for(int i=0; i<height;i++){
 //            stringBuilder+="\n";    
 //        }
         for(int i=0; i< this.width;i++){
 //            stringBuilder+="=";
-            wallArray[this.yPos+this.height][this.xPos+i] = '=';
+            wallArray[yPos+this.height][xPos+i] = '=';
             if(this.height < 4 && i> this.width-1-this.ballsStored){
-                wallArray[this.yPos+this.height][this.xPos+i] = '*';
+                wallArray[yPos+this.height][xPos+i] = '*';
             }
             if(this.height > 4 && i> this.width-1-this.ballsStored){
-                wallArray[this.yPos+this.height-(int)(this.height/4.0)][this.xPos+i] = '*';
+                wallArray[yPos+this.height-(int)(this.height/4.0)][xPos+i] = '*';
             }
         }
     }
@@ -119,11 +120,11 @@ public class Absorber implements Gadget {
     
     public void shootBall(Ball ball){
         if(this.height < 4 ){
-            ball.updateBall(new Vect(positionPoint.x()+this.width, positionPoint.y()+this.height), new Vect(0,50));
+            ball.updateBall(new Vect(position.x()+this.width, position.y()+this.height), new Vect(0,50));
             
         }
         if(this.height > 4 ){
-            ball.updateBall(new Vect(positionPoint.x()+this.width, positionPoint.y()+this.height-(int)(this.height/4.0)), new Vect(0,50));
+            ball.updateBall(new Vect(position.x()+this.width, position.y()+this.height-(int)(this.height/4.0)), new Vect(0,50));
         }
         this.ballsStored--;
     }
@@ -134,28 +135,31 @@ public class Absorber implements Gadget {
     public void storeBall(Ball ball){
         if(this.ballStorage.size()>0)this.ballStorage.add(ball);
         if(this.height < 4 ){
-            ball.updateBall(new Vect(positionPoint.x()+this.width, positionPoint.y()+this.height), new Vect(0,0));
+            ball.updateBall(new Vect(position.x()+this.width, position.y()+this.height), new Vect(0,0));
             
         }
         if(this.height > 4 ){
-            ball.updateBall(new Vect(positionPoint.x()+this.width, positionPoint.y()+this.height-(int)(this.height/4.0)), new Vect(0,0));
+            ball.updateBall(new Vect(position.x()+this.width, position.y()+this.height-(int)(this.height/4.0)), new Vect(0,0));
         }
         this.ballsStored++;
     }
     
     @Override
     public Vect getPosition() {
-       return this.positionPoint;
+       return this.position;
     }
     @Override
     public Vect getNext(double time) {
-       return positionPoint;
+       return position;
     }
 
     @Override
     public double timeToCollision(Ball ball) {
-        LineSegment topBorder= new LineSegment(this.xPos, this.yPos,this.xPos+this.width, this.yPos);
-        LineSegment bottomBorder= new LineSegment(this.xPos, this.yPos,this.xPos+this.width, this.yPos);
+        int xPos = (int) this.position.x(); 
+        int yPos = (int) this.position.x(); 
+
+        LineSegment topBorder= new LineSegment(xPos, yPos,xPos+this.width, yPos);
+        LineSegment bottomBorder= new LineSegment(xPos, yPos,xPos+this.width, yPos);
         double  topTime   =   Geometry.timeUntilWallCollision(topBorder,ball.ballReturnCircle(), ball.getVelocity());
         double bottomTime =   Geometry.timeUntilWallCollision(bottomBorder,ball.ballReturnCircle(), ball.getVelocity());
         double timeToWallCollision = Double.POSITIVE_INFINITY;
