@@ -85,15 +85,7 @@ public class Ball implements Gadget {
     }
     
     
-    
-    public void step(){
-//        Vect gravity = new Vect(0, this.gravity*(System.currentTimeMillis() - this.time));
-//        System.out.println("Velocity in step" + velocity);
-//        System.out.println("Gravity in step" + gravity);
-//        Vect delta = new Vect(velocity.plus(gravity).angle().cos(), velocity.plus(gravity).angle().sin());
-//        System.out.println("Delta in step" + delta);
-//        this.position = this.position.plus(delta);
-    }
+   
 
     public Vect getPosition(){
         return this.position;

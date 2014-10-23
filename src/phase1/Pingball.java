@@ -14,6 +14,7 @@ public class Pingball {
             }
 
         }
+        
         //board.step(); 
         board.run(); 
     }
@@ -21,7 +22,7 @@ public class Pingball {
     public static Board defaultBoard(){ 
         Board board = new Board(20,20); 
         Ball ball = new Ball(new Vect(1.25,1.25),new Vect(0,1));
-        board.addBall(ball); 
+        
         
         Gadget circleBumper = new CircleBumper(new Vect(1,10));
         board.addGadget(circleBumper);
@@ -43,6 +44,7 @@ public class Pingball {
         board.addGadget(circleBumper2); 
         board.addGadget(circleBumper3); 
         
+        board.addBall(ball); 
         return board; 
     }
     
