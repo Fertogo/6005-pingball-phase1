@@ -37,6 +37,8 @@ public class Absorber implements Gadget {
         this.height=height;
         this.positionPoint= new Vect(this.xPos, this.yPos);;
         this.absorberArea= new Rectangle(x, y, width, height);
+        this.ballStorage= new ArrayList<>();
+        this.ballsStored=0;
     }
     /**
      * Occurs when a ball hits it
@@ -69,8 +71,8 @@ public class Absorber implements Gadget {
         
     }
     
-    public void createAbsorber(){
-        char [][] wallArray =  Gadget.getArray(height,width); 
+    public void createAbsorber(int boardWidth, int boardHeight){
+        char [][] wallArray =  Gadget.getArray(boardHeight,boardWidth); 
         for(int i=0; i< this.width;i++){
 //            stringBuilder+="=";
             wallArray[this.yPos][this.xPos+i] = '=';
@@ -94,9 +96,10 @@ public class Absorber implements Gadget {
      * return Absorber representation
      */
     @Override
-    public String toString(int boardWidth, int boardHeight) {
-        char [][] wallArray = Gadget.getArray(height,width); 
-        this.createAbsorber();
+    public String toString( int boardHeight, int boardWidth) {
+        
+        char [][] wallArray = Gadget.getArray(boardHeight,boardWidth); 
+        this.createAbsorber(boardWidth, boardHeight);
         String boardToString = "";
         for(int i=0; i<wallArray.length;i++){
             for(int j=0; j< wallArray[0].length;j++){
@@ -121,7 +124,7 @@ public class Absorber implements Gadget {
     }
     
     public void storeBall(Ball ball){
-        this.ballStorage.add(ball);
+        if(this.ballStorage.size()>0)this.ballStorage.add(ball);
         if(this.height < 4 ){
             ball.updateBall(new Vect(positionPoint.x()+this.width, positionPoint.y()+this.height), new Vect(0,0));
             

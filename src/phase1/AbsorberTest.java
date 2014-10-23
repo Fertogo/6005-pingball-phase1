@@ -4,60 +4,26 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class BoardTest {
+public class AbsorberTest {
 
-    @Test
-    public void testMergeBoard() {
+    @Test public void holdBall(){ 
         Board board = new Board(20,20); 
-
-
-        //Gadget circleBumper = new CircleBumper(10,10);
-        Vect vector = new Vect(1, 1);
-        Vect vector2 = new Vect(5, 5);
-        Gadget absorber = new Absorber(vector2); 
-     
-        board.addGadget(absorber);
-        board.step();     
-    }
-    
-    @Test
-    public void testBouncingBall(){ 
-        Board board = new Board(20,20); 
-
-        Vect position = new Vect(2,5); 
-
-        Vect velocity = new Vect(2,2); 
-
-
-        Vect bumperPosition = new Vect(5, 5);
-        Gadget squareBumper = new SquareBumper(bumperPosition);
-        board.addGadget(squareBumper); 
+        Ball ball1 = new Ball(new Vect(1.25,1.25), new Vect(1,0)); 
+        Absorber absorber = new Absorber(10,10, 3, 2);
+        board.addGadget(absorber); 
+        board.addBall(ball1); 
+        absorber.shootBall(ball1);
+//        absorber.toString();
         
-        Ball ball = new Ball(position, velocity, 25); 
         
-        board.addBall(ball); 
+        //Test with CircleBumper
+       
+       
+//        board.step(100); //TODO Ball goes through Bumper instead of hitting it. 
+//        assertTrue(ball1.getPosition().x() > 1.25); 
+        System.out.print(absorber.toString(20,20));
+       
 
-        int steps = 1000; 
-        for (int i=0; i<steps; i++){ 
-            board.step(); 
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-
-        System.out.println("Done");
     }
-    
-//    public void testCheckRep(){ 
-//        Board board = new Board(20,20); 
-//        Gadget circleBumper = new CircleBumper(10,10);
-//        Gadget circleBumper2 = new CircleBumper(10,10); 
-//        board.addGadget(circleBumper); 
-//        board.addGadget(circleBumper2); 
-//        //TODO: Assert that checkrep fails
-//    }
 
 }
