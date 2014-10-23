@@ -56,41 +56,51 @@ public class Board {
         for (Ball ball : balls){ 
             Vect newBallPosition = ball.getNext(timestep); 
 
-            //            System.out.println("Rounded position x: " + Math.round(newBallPosition.x())); 
-            //            System.out.println("Rounded position y: " + Math.round(newBallPosition.y()));
-            //            System.out.println("Height: " + height);
-            //            System.out.println("Width: " + width);
-            //Check for wall collisions
-            if (Math.round(newBallPosition.x()) == 0) { 
-                //Left wall collision
-                System.out.println("Hit Left Wall"); 
-                walls.collision(ball, 3);
-
+            //Check for corner collisions
+            System.out.println("New Ball position " +  newBallPosition);
+            if (Math.round(newBallPosition.y()) <= 0 && Math.round(newBallPosition.x()) <= 0){
+                ball.updateVelocity(ball.getVelocity().times(-1));
+            }else if(Math.round(newBallPosition.y()) <= 0 && Math.round(newBallPosition.x()) >= 19){
+                ball.updateVelocity(ball.getVelocity().times(-1));
+            }else if (Math.round(newBallPosition.y()) >= 19 && Math.round(newBallPosition.x()) <= 0){
+                ball.updateVelocity(ball.getVelocity().times(-1));
+            }else if (Math.round(newBallPosition.y()) >= 19 && Math.round(newBallPosition.x()) >= 19){
+                ball.updateVelocity(ball.getVelocity().times(-1));
             }
-            else if (Math.round(newBallPosition.x()) == width-2){ 
-                //Right wall collision
-                System.out.println("Hit Right Wall"); 
+            
+            //Checks for wall collisions
+            else{
 
-                walls.collision(ball, 1);
-                break; 
+                if (Math.round(newBallPosition.x()) == 0) { 
+                    //Left wall collision
+                    System.out.println("Hit Left Wall"); 
+                    walls.collision(ball, 3);
+
+                }
+                else if (Math.round(newBallPosition.x()) == width-2){ 
+                    //Right wall collision
+                    System.out.println("Hit Right Wall"); 
+
+                    walls.collision(ball, 1);
+                    break; 
+                }
+
+                if (Math.round(newBallPosition.y()) == 0) { 
+                    //Top Wall collision
+                    System.out.println("Hit Top Wall"); 
+
+                    walls.collision(ball, 0);
+                }
+
+                else if (Math.round(newBallPosition.y()) == height-2){ 
+                    //Bottom Wall collision
+                    System.out.println("Hit Bottom Wall"); 
+
+                    walls.collision(ball, 2);
+                }
             }
 
-            if (Math.round(newBallPosition.y()) == 0) { 
-                //Top Wall collision
-                System.out.println("Hit Top Wall"); 
-
-                walls.collision(ball, 0);
-            }
-
-            else if (Math.round(newBallPosition.y()) == height-2){ 
-                //Bottom Wall collision
-                System.out.println("Hit Bottom Wall"); 
-
-                walls.collision(ball, 2);
-            }
-
-            //System.out.println(newBallPosition.toString());
-            //Check for collisions in other gadgets
+            //Check for collisions with other gadgets
             for (Gadget gadget : gadgets){ 
                 double timeToCollision = gadget.timeToCollision(ball);
                 if(timeToCollision < timestep) {
@@ -107,8 +117,6 @@ public class Board {
                     nextBall.collision(ball); 
                 } 
             }
-            //            System.out.println("Ball is allowed to move to position "+ newBallPosition.toString()); 
-            //ball.updateBall(timestep);
 
         }
         this.updateBalls(timestep);
@@ -199,7 +207,7 @@ public class Board {
     public void setGravity(double gravity) {
         this.gravity = gravity;
     }
-    
+
     public void setFriction(double friction){ 
         this.mu = friction; 
         this.mu2 = friction; 

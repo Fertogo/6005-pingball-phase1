@@ -103,7 +103,7 @@ public class Pingball {
         
         Gadget circleBumper1 = new CircleBumper (new Vect(5,18));
         Gadget circleBumper2 = new CircleBumper (new Vect(7,13));
-        Gadget circleBumper3 = new CircleBumper (new Vect(0,55));
+        Gadget circleBumper3 = new CircleBumper (new Vect(0,5));
         circleBumper3.addTriggeredGadget(leftFlipper1); 
             
         Gadget circleBumper4 = new CircleBumper (new Vect(5,5));

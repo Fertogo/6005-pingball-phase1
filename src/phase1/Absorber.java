@@ -122,7 +122,15 @@ public class Absorber implements Gadget {
     public String toString( int boardHeight, int boardWidth) {
         
         char [][] wallArray = Gadget.getArray(boardHeight,boardWidth); 
-        this.createAbsorber(boardWidth, boardHeight);
+        //this.createAbsorber(boardWidth, boardHeight);
+        for(int j=0; j<boardHeight; j++){
+            for(int i=0; i<boardWidth; i++){
+                wallArray[(int) this.position.y()+ 1 + i + j][(int) this.position.x()+1 + i ] = '=';
+            }
+        }
+        
+  
+        
         String boardToString = "";
         for(int i=0; i<wallArray.length;i++){
             for(int j=0; j< wallArray[0].length;j++){
