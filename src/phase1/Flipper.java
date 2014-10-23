@@ -156,14 +156,6 @@ public class Flipper implements Gadget{
     public void step() {
         //Empty
     }
-    /**
-     * Return true if the lineSegment contains the point
-     */
-    @Override
-    public boolean contains(Vect position) {
-       if(  lineSegment.p1().equals(position ) ||  lineSegment.p2().equals(position ) ) return true;
-       return false;
-    }
     
     /**
      * Returns a string representation of flipper
@@ -203,10 +195,6 @@ public class Flipper implements Gadget{
     
     @Override
 
-    public boolean willColide(Ball ball) {
-        // TODO Auto-generated method stub
-        return false;
-    }
 
     @Override
     public double timeToCollision(Ball ball) {

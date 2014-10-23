@@ -66,17 +66,6 @@ public class CircleBumper implements Gadget {
     public void step() {
     }
 
-    @Override
-    public boolean contains(Vect position) {
-        return gadgetArea.contains(position.x(),position.y());
-        //return this.position.equals(position); 
-    }
-
-    @Override
-    public boolean willColide(Ball ball) {
-        // TODO Auto-generated method stub
-        return false;
-    }
 
     @Override
     public Vect getNext(double time) {

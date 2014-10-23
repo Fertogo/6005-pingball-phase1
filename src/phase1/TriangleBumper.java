@@ -268,27 +268,6 @@ public class TriangleBumper implements Gadget {
         
     }
 
-    @Override
-    public boolean contains(Vect position) {
-        //System.out.println(position); 
-        //System.out.println(gadgetArea.contains(position.x()+1,position.y()+1));
-        //return gadgetArea.contains(position.x(),position.y());
-        //return this.position.equals(position); 
-        return false; 
-    }
-
-    @Override
-    public boolean willColide(Ball ball) {
-
-        double timeTillWall1 = Geometry.timeUntilWallCollision(wall1, ball.ballReturnCircle(), ball.getVelocity()); 
-        double timeTillWall2 = Geometry.timeUntilWallCollision(wall2, ball.ballReturnCircle(), ball.getVelocity()); 
-        double timeTillLongWall = Geometry.timeUntilWallCollision(longWall, ball.ballReturnCircle(), ball.getVelocity());
-        //System.out.println(timeTillWall1); 
-        //return (timeTillWall1 < .5 || timeTillWall2 <= .5 || timeTillLongWall <= .5); 
-
-
-        return false;
-    }
 
     @Override
     public double timeToCollision(Ball ball) {

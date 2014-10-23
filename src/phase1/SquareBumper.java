@@ -143,12 +143,6 @@ public class SquareBumper implements Gadget {
     }
 
     @Override
-    public boolean contains(Vect position) {  
-        return gadgetArea.contains(position.x(),position.y());
-        //return this.position.equals(position); 
-    }
-
-    @Override
 
     public double timeToCollision(Ball ball) {
         ArrayList<LineSegment> bumperWalls = new ArrayList<LineSegment>();
@@ -162,11 +156,6 @@ public class SquareBumper implements Gadget {
             }
         }
         return timeToWallCollision;
-    }
-
-    public boolean willColide(Ball ball) {
-        // TODO Auto-generated method stub
-        return false;
     }
 
     @Override

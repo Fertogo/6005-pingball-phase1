@@ -148,19 +148,7 @@ public class Absorber implements Gadget {
     public Vect getNext(double time) {
        return positionPoint;
     }
-    @Override
-    public boolean contains(Vect pos) {
-        return absorberArea.contains(pos.x(), pos.y()); 
-    }
 
-
-    @Override
-    public boolean willCollide(Ball ball) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
- 
     @Override
     public double timeToCollision(Ball ball) {
         LineSegment topBorder= new LineSegment(this.xPos, this.yPos,this.xPos+this.width, this.yPos);

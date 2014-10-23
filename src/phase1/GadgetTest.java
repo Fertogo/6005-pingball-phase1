@@ -28,7 +28,7 @@ public class GadgetTest {
         Board board = new Board(20,20); 
         board.setGravity(0);
         board.setFriction(0);
-        Ball ball = new Ball(new Vect(5,5), new Vect(1,-1),0); 
+        Ball ball = new Ball(new Vect(5,5), new Vect(3,-3),0); 
         board.addBall(ball);
         ball.setFriction(0, 0);
         board.step(200);

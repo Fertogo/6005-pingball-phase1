@@ -109,9 +109,7 @@ public class Board {
             }
             //            System.out.println("Ball is allowed to move to position "+ newBallPosition.toString()); 
             //ball.updateBall(timestep);
-            for (Gadget gadget : gadgets){ 
-                if (gadget.willColide(ball)) gadget.collision(ball); 
-            }
+
         }
         this.updateBalls(timestep);
         System.out.println(this.toString()); //Print the board. 

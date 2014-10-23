@@ -129,19 +129,6 @@ public interface Gadget {
      */
     public void step(); 
     
-    /**
-     * 
-     * @param position: position to check in Gadget
-     * @return True if gadget contains p, that is, a ball at p would collide with the gadget. 
-     */
-    public boolean contains(Vect position); 
-    
-    /**
-     * 
-     * @param ball
-     * @return whether the ball will colide with the gadget on the next timestep. 
-     */
-    public boolean willColide(Ball ball); 
     
     /**
      * 
