@@ -124,14 +124,14 @@ public class GadgetTest {
         Board board = new Board (20,20); 
         Gadget squareBumper = new SquareBumper(new Vect(5,5)); 
         board.addGadget(squareBumper);
-        Ball ball = new Ball (new Vect(8,5), new Vect(-5,0));
+        Ball ball = new Ball (new Vect(10,5), new Vect(-5,0));
         board.addBall(ball);
         board.setGravity(0);
         board.setFriction(0, 0);
 
-        board.step(10);
+        board.step(15);
 
-        assertEquals(new Vect(8,5), ball.getPosition()); 
+        assertTrue(ball.getPosition().x() > 5); 
     }
     
     //TODO: Test ball collision at an angle
@@ -236,7 +236,7 @@ public class GadgetTest {
         
         //Hit RightWall(long)
         System.out.println("Hitting Right Wall"); 
-        ball.updateBall(new Vect(10,5), new Vect (-5,0));
+        ball.updateBall(new Vect(10.5,5.5), new Vect (-5,0));
         board.step(10); 
         assertTrue(ball.getPosition().y() > 5);
         //Should hit the longWall and be deflected to the bottom
@@ -282,7 +282,7 @@ public class GadgetTest {
         
         //Hit leftWall
         System.out.println("Hitting Left Wall"); 
-        ball.updateBall(new Vect(1,5), new Vect (5,0));
+        ball.updateBall(new Vect(1,5.5), new Vect (5,0));
         board.step(10); 
         assertTrue(ball.getPosition().y() > 5);
         //should hit longWall and be deflected to the bottom
@@ -298,7 +298,7 @@ public class GadgetTest {
         board.addGadget(triangleBumper); 
         //Hit top wall
         System.out.println("Hitting Top Wall"); 
-        Ball ball = new Ball(new Vect(5,1), new Vect(0,5)); 
+        Ball ball = new Ball(new Vect(5.5,1), new Vect(0,5)); 
         board.addBall(ball);
         board.step(10); 
         assertTrue(ball.getPosition().x() < 5);
@@ -306,7 +306,7 @@ public class GadgetTest {
         
         //Hit Bottom Wall
         System.out.println("Hitting Bottom Wall"); 
-        ball.updateBall(new Vect(5,10), new Vect(0,-5));
+        ball.updateBall(new Vect(5.5,10), new Vect(0,-5));
         System.out.println(ball.getPosition());
         System.out.println(ball.getVelocity());
         System.out.println(ball.getNext(.1)); 
@@ -316,7 +316,7 @@ public class GadgetTest {
         
         //Hit RightWall(long)
         System.out.println("Hitting Right Wall"); 
-        ball.updateBall(new Vect(10,5), new Vect (-5,0));
+        ball.updateBall(new Vect(10.5,5), new Vect (-5,0));
         board.step(7); 
         assertTrue(ball.getPosition().x() > 5); 
         //Should bounce back to the right
@@ -324,7 +324,7 @@ public class GadgetTest {
         
         //Hit leftWall
         System.out.println("Hitting Left Wall"); 
-        ball.updateBall(new Vect(1,5), new Vect (5,0));
+        ball.updateBall(new Vect(1.5,5), new Vect (5,0));
         board.step(7); 
         assertTrue(ball.getPosition().y() < 5); 
         //should hit longWall and be deflected up.
@@ -340,7 +340,7 @@ public class GadgetTest {
         board.addGadget(triangleBumper); 
         //Hit top wall
         System.out.println("Hitting Top Wall"); 
-        Ball ball = new Ball(new Vect(5,1), new Vect(0,5)); 
+        Ball ball = new Ball(new Vect(5.5,1), new Vect(0,5)); 
         board.addBall(ball);
         board.step(7); 
         assertTrue(ball.getPosition().x() > 5); 
@@ -348,14 +348,14 @@ public class GadgetTest {
         
         //Hit Bottom Wall
         System.out.println("Hitting Bottom Wall"); 
-        ball.updateBall(new Vect(5,10), new Vect(0,-5));
+        ball.updateBall(new Vect(5.5,10), new Vect(0,-5));
         board.step(7); 
         assertTrue(ball.getPosition().y() > 5);
         //Should bounce back to the bottom
         
         //Hit RightWall(long)
         System.out.println("Hitting Right Wall"); 
-        ball.updateBall(new Vect(10,5), new Vect (-5,0));
+        ball.updateBall(new Vect(10.5,5), new Vect (-5,0));
         board.step(7); 
         assertTrue(ball.getPosition().y() < 5); 
         //Should hit longWall and be deflected up
@@ -363,7 +363,7 @@ public class GadgetTest {
         
         //Hit leftWall
         System.out.println("Hitting Left Wall"); 
-        ball.updateBall(new Vect(1,5), new Vect (5,0));
+        ball.updateBall(new Vect(1.5,5), new Vect (5,0));
         board.step(7); 
         assertTrue(ball.getPosition().x() < 5);
         //should bounce back to the left
