@@ -9,6 +9,11 @@ public class Ball implements Gadget {
     private Vect position;
     private Vect velocity;
     
+    /**
+     * Ball Contructor 
+     * @param position
+     * @param velocity
+     */
     public Ball(Vect position, Vect velocity) {
         this.position = new Vect(position.x(), position.y());//Add 1 to account for walls
         this.velocity = velocity;
