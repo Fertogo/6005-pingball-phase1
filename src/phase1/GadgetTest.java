@@ -67,7 +67,6 @@ public class GadgetTest {
         board.setGravity(0);
         board.setFriction(0, 0);
         board.step(65); 
-
         //TODO: Assert Something! 
     }
     
@@ -142,7 +141,6 @@ public class GadgetTest {
 
         assertTrue(ball.getPosition().x() > 5); 
     }
-    
     
     //TODO: Test ball collision at an angle
     //TODO: Test ball collision on corners. 
