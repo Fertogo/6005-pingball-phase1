@@ -170,8 +170,7 @@ public class Flipper implements Gadget{
     public Vect getPosition() {
        return this.pivotPoint;
     }
-    
- 
+
     /**
      * Defines the action that is to be committed upon collision
      */
@@ -218,7 +217,7 @@ public class Flipper implements Gadget{
       */
     @Override
     public void rotateGadget(int degrees) {
-      //TODO  Geometry. rotateAround
+      //Uneccesary 
     }
 
     /**
