@@ -77,11 +77,6 @@ public class SquareBumper implements Gadget {
     }
 
     @Override
-    public Vect getNext(double time) {
-        return this.position;
-    }
-
-    @Override
     public void collision(Ball ball) {
         System.out.println("Ball collision with Square Bumper"); 
         Vect currentBallVelocity = ball.getVelocity(); 

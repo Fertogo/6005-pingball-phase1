@@ -485,6 +485,25 @@ public class GadgetTest {
         
 
         /**
+         * Test triggering of Gadgets
+         * Make sure a bumper can correctly trigger anther gadget. 
+         */
+        @Test public void testTriggerGadgets(){ 
+            Board board = new Board(20,20); 
+            Gadget squareBumper = new SquareBumper(new Vect(5,10)); 
+            Gadget flipper = new Flipper(new Vect(10,10), 0); 
+            Ball ball = new Ball (new Vect(5.1,1)); 
+            squareBumper.addTriggeredGadget(flipper);
+            board.addGadget(flipper); 
+            board.addGadget(squareBumper); 
+            board.addBall(ball);
+            board.step(10); 
+            assertTrue(board.toString().contains("-"));
+        }
+        
+
+
+        /**
          * Absorber Testing Strategy
          *      Make sure ball bounces off correctly on stable and moving flipper
          *      Partitions:
@@ -637,6 +656,7 @@ public class GadgetTest {
                 absorber2.storeBall(ball);
                 assertTrue(ball.getPosition().equals(new Vect(10.0, 12.0)));
             }
+            
             @Test public void multipleBallsStorageTest(){ 
                 Board board = new Board(20,20); 
                 Ball ball = new Ball(new Vect(1.25,1.25), new Vect(1,0)); 
@@ -662,6 +682,7 @@ public class GadgetTest {
 
 
     
+
 
 
 }

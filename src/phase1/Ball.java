@@ -101,8 +101,6 @@ public class Ball implements Gadget {
         return this.velocity;
     }
 
-    
-    @Override
     public Vect getNext(double time) {
         return this.getPosition().plus(this.getVelocity().times(time));
 
