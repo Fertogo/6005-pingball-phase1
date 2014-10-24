@@ -9,31 +9,60 @@ public class Ball implements Gadget {
     private Vect position;
     private Vect velocity;
     
+    public void checkRep(){
+      assert(position.x()>0);
+      assert(position.y()>0);
+      assert(position.x()<21);
+      assert(position.y()<21);
+    }
+    /**
+     * Ball Contructor 
+     * @param position: position of ball
+     * @param velocity: velocity of ball
+     */
     public Ball(Vect position, Vect velocity) {
         this.position = new Vect(position.x(), position.y());//Add 1 to account for walls
         this.velocity = velocity;
 
     }
-    
-  
-    
+    /**
+     * Adds Stationary ball
+     * @param position- position of ball
+     */
     public Ball(Vect position){ 
         this.position = new Vect(position.x(), position.y());//Add 1 to account for walls
         this.velocity = new Vect(0,0); 
+        checkRep();
     }
-
+    /*Unecessary in ball
+     * (non-Javadoc)
+     * @see phase1.Gadget#action()
+     */
     @Override
     public void action() {
-
+        //Empty
     }
+    /**
+     * Returns a circle representation of ball 
+     * @return circle
+     */
     public Circle ballReturnCircle(){
         return new Circle(position, .25);
     }
+    /**
+     * Unecessary in ball
+     */
     @Override
     public void rotateGadget(int degrees) {
-
+        //Empty
     }
-
+    
+    /**
+     * 
+     * @param width of board
+     * @param height of board
+     * @return string - representation of ball
+     */
     @Override
     public String toString(int width, int height) {
         char [][] wallArray = Gadget.getArray(height,width); 
@@ -58,7 +87,11 @@ public class Ball implements Gadget {
         }
         return boardToString;
     }
-
+    /**
+     * Method representing what happens in a collision
+     * @param Ball
+     * 
+     */
     @Override
     public void collision(Ball ball) {
         System.out.println("Ball hit ball!");
@@ -69,39 +102,71 @@ public class Ball implements Gadget {
         Geometry.VectPair ballCollision = Geometry.reflectBalls(centerBall1, massBall1 , ball.getVelocity()
                 ,centerBall2 , massBall2, this.getVelocity());
         ball.updateBall(ball.getPosition(), ballCollision.v1);
-        
+        checkRep();
     }
+    /**
+     * Updates Ball Properties 
+     * @param position
+     * @param velocity
+     */
     public void updateBall(Vect position, Vect velocity) {
         this.position = new Vect(position.x(), position.y());//Add 1 to account for walls
         this.velocity = velocity;
-        
+        checkRep();
     }
+    /**
+     * Updates position
+     * @param position
+     */
     public void updatePosition(Vect position){
         this.position = position;
+        checkRep();
     }
-    
+    /**
+     * Updates Velocity
+     * @param velocity
+     */
     public void updateVelocity(Vect velocity) {
         this.velocity = velocity;
+        checkRep();
     }
     
-    
-   
-
+    /**
+     * Gets the position of the ball
+     * @return position Vect
+     */
     public Vect getPosition(){
+        checkRep();
         return this.position;
+      
+
     }
     
-
+    /**
+     * gets the Velocity of the ball
+     * @return Vect velocity 
+     */
     public Vect getVelocity(){
+        checkRep();
         return this.velocity;
-    }
 
+    }
+    /**
+     * Gets the next position of the ball
+     * @param time
+     * @return next position
+     */
     public Vect getNext(double time) {
+        checkRep();
         return this.getPosition().plus(this.getVelocity().times(time));
 
     }
  
-
+    /**
+     * Returns time to collision
+     * @param Ball
+     * @return timeTill collides with other objects
+     */
     @Override
     public double timeToCollision(Ball ball) {
         double timeToWallCollision = Double.POSITIVE_INFINITY;
@@ -112,7 +177,10 @@ public class Ball implements Gadget {
             }
         return timeToWallCollision;
     }
-
+    /**
+     * Adds a trigger
+     * @param other gadget that serves as a trigger
+     */
     @Override
     public void addTriggeredGadget(Gadget triggeredGadget) {
         // TODO Auto-generated method stub
@@ -120,7 +188,9 @@ public class Ball implements Gadget {
     }
 
 
-
+    /**
+     * Trigger
+     */
     @Override
     public void trigger() {
         // TODO Auto-generated method stub

@@ -166,10 +166,7 @@ public class Flipper implements Gadget{
     /**
      * Returns the next point that the Flipper will be at. 
      */
-    @Override
-    public Vect getNext(double time) {
-        return this.pivotPoint;
-    }
+
     
     /**
      * Defines the action that is to be committed upon collision

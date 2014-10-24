@@ -97,6 +97,7 @@ public class Board {
             }
 
             //Check for collisions with other gadgets
+
             for (Gadget gadget : gadgets){ 
                 double timeToCollision = gadget.timeToCollision(ball);
                 if(timeToCollision < timestep) {

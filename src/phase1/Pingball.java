@@ -50,15 +50,15 @@ public class Pingball {
         Ball ball1 = new Ball(new Vect(10.25, 15.25)); 
         Ball ball2 = new Ball(new Vect(19.25,3.25));
         Ball ball3 = new Ball(new Vect(1.25,5.25));
-        board.addBall(ball1); 
-        board.addBall(ball2); 
-        board.addBall(ball3); 
+        
         
         Gadget absorber = new Absorber(new Vect (0,18), 20, 2) ;
         board.addGadget(absorber); 
         
         Gadget triangleBumper = new TriangleBumper(new Vect(19,0), 90); 
         board.addGadget(triangleBumper);
+        
+        
         
         Gadget circleBumper1 = new CircleBumper(new Vect(1,10));
         Gadget circleBumper2 = new CircleBumper(new Vect(2,10));
@@ -71,6 +71,14 @@ public class Pingball {
         board.addGadget(circleBumper4);
         board.addGadget(circleBumper5);
 
+        circleBumper1.addTriggeredGadget(absorber);
+        circleBumper2.addTriggeredGadget(absorber);
+        circleBumper3.addTriggeredGadget(absorber);
+        circleBumper4.addTriggeredGadget(absorber);
+        circleBumper5.addTriggeredGadget(absorber);
+        board.addBall(ball1); 
+        board.addBall(ball2); 
+        board.addBall(ball3); 
         return board; 
     }
     
