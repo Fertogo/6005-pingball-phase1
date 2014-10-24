@@ -1,6 +1,14 @@
 package phase1;
 import physics.*;
 
+/**
+ * Represents the OuterWalls (playing area) of the board. 
+ * Define L to be the basic distance unit, equal to the edge length of a square bumper. 
+ * Corresponding to standard usage in the graphics community, the origin is in the 
+ * upper left-hand corner with coordinates increasing to the right and down.
+ * 
+ *
+ */
 public class OuterWalls {
     private LineSegment leftWall;
     private LineSegment rightWall;
@@ -10,9 +18,17 @@ public class OuterWalls {
     private int width; 
     
     private void checkRep(){
-        //TODO: Check that all of the walls are connected
+        assert(leftWall.p1() == topWall.p1());
+        assert(rightWall.p2() == bottomWall.p2());
+        assert(topWall.p2() == rightWall.p1());
+        assert(bottomWall.p1() == leftWall.p2());
     }
     
+    /**
+     * Outer Walls constructor 
+     * @param width: width of the playing board 
+     * @param height: height of the playing board
+     */
     public OuterWalls(int width, int height){ 
         leftWall = new LineSegment(0,0,0,height-1); 
         rightWall = new LineSegment(width-1,0,width-1,height-1); 
@@ -23,7 +39,12 @@ public class OuterWalls {
         checkRep(); 
     }
     
-    public void collision(Ball ball, int wall){ //0:Top 1:Right 2:Bottom 3:Left
+    /**
+     * Called when a ball collies with an outer wall. 
+     * @param ball: Ball that collied with an outer Wall
+     * @param wall: int representing which wall was hit. //0:Top 1:Right 2:Bottom 3:Left
+     */
+    public void collision(Ball ball, int wall){ 
         System.out.println("Hit a wall!"); 
         System.out.println(ball.getPosition()); 
         Vect oldVelocity = ball.getVelocity(); 
@@ -44,37 +65,46 @@ public class OuterWalls {
         case(3):
            //Collision with Left Wall
            newVelocity = Geometry.reflectWall(leftWall, oldVelocity);
-            break;
-            
+            break;   
         }
         
         Vect position = ball.getPosition(); 
-        ball.updateBall(position,  newVelocity);
-
-        
+        ball.updateBall(position, newVelocity);
+   
     }
+    
+    /**
+     * 
+     * @return height of the outer walls
+     */
     public int getHeight(){ 
         return this.height; 
     }
     
+    /**
+     * 
+     * @return height of the outer walls
+     */
     public int getWidth(){ 
         return this.width; 
     }
    
+    /**
+     * 
+     * @param width
+     * @param height
+     * @return: a string representation of a playing area with specified width and height
+     */
     public String toString(int width, int height) {
 
         char [][] wallArray; 
         System.out.println(height + " " + width); 
         wallArray = new char[height][width];
-      //Populate with space
-
+        //Populate with space
         for (int x = 0; x<width; x++){ 
             System.out.println("x: " + x); 
             for (int y = 0; y<height; y++){ 
-                //System.out.println(wallArray[x]);
                 wallArray[x][y] = ' '; 
-                //System.out.println("   y:" + y); 
-
             }
         }
         
@@ -108,7 +138,5 @@ public class OuterWalls {
 
      return board;
     }
-
-
-  
+ 
 }

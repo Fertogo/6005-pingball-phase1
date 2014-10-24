@@ -1,6 +1,5 @@
 package phase1;
 
-//import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +10,7 @@ import physics.Vect;
 
 /**
  * 
- * Represents a PingBall Square Bumper
+ * Represents a PingBall square shape with edge length 1L
  *
  */
 public class SquareBumper implements Gadget {
@@ -23,13 +22,13 @@ public class SquareBumper implements Gadget {
     private LineSegment topWall; 
     private List<Gadget> triggeredGadgets = new ArrayList<Gadget>(); 
     
+    //Constructs a square Bumper at specified position
     public SquareBumper(Vect position) {
-        int x = (int)(position.x()); //Adding 1 to compensate for the walls
+        int x = (int)(position.x()); 
         int y = (int)(position.y()); 
 
         this.position = new Vect(x,y);
 
-        
         //Create walls representing square bumper. 
         this.topWall = new LineSegment(x,y,x+1,y); 
         this.rightWall = new LineSegment(x+1,y,x+1,y+1); 
@@ -39,7 +38,6 @@ public class SquareBumper implements Gadget {
 
     @Override
     public void trigger(){ 
-        //Trigger Triggered Gadgets
         for (Gadget gadget : this.triggeredGadgets){ 
             gadget.action(); 
         }
@@ -133,10 +131,7 @@ public class SquareBumper implements Gadget {
         this.trigger(); 
     }
 
-   
-
     @Override
-
     public double timeToCollision(Ball ball) {
         ArrayList<LineSegment> bumperWalls = new ArrayList<LineSegment>();
         bumperWalls.addAll(Arrays.asList(topWall,rightWall,bottomWall,leftWall));
