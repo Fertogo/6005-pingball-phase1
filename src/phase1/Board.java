@@ -97,7 +97,7 @@ public class Board {
             }
 
             //Check for collisions with other gadgets
-            System.out.println("Position of ball: " + ball.getPosition());
+
             for (Gadget gadget : gadgets){ 
                 double timeToCollision = gadget.timeToCollision(ball);
                 if(timeToCollision < timestep) {

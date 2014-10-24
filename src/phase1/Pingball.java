@@ -74,6 +74,11 @@ public class Pingball {
         board.addGadget(circleBumper4);
         board.addGadget(circleBumper5);
 
+        circleBumper1.addTriggeredGadget(absorber);
+        circleBumper2.addTriggeredGadget(absorber);
+        circleBumper3.addTriggeredGadget(absorber);
+        circleBumper4.addTriggeredGadget(absorber);
+        circleBumper5.addTriggeredGadget(absorber);
         board.addBall(ball1); 
         board.addBall(ball2); 
         board.addBall(ball3); 

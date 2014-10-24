@@ -24,7 +24,7 @@ public class Absorber implements Gadget {
     private int width;
     private int height;
     private ArrayList<Ball> ballStorage;
-    private List<Gadget> triggeredGadgets; 
+    private List<Gadget> triggeredGadgets = new ArrayList<Gadget>(); 
     
     private void checkRep(){
         if(this.position.x()<1){
@@ -63,7 +63,7 @@ public class Absorber implements Gadget {
      */
     public void trigger(){
       this.action();
-      this.checkRep();
+      //this.checkRep();
     }
     /**
      * Detects collsions
@@ -111,20 +111,15 @@ public class Absorber implements Gadget {
     @Override
     public String toString( int boardHeight, int boardWidth) {
         
-        char [][] wallArray = Gadget.getArray(boardHeight,boardWidth); 
-//        this.createAbsorber(boardWidth, boardHeight);
-////        for(int j=0; j<boardHeight; j++){
-////            for(int i=0; i<boardWidth; i++){
-////                wallArray[(int) this.position.y()+ 1 + i + j][(int) this.position.x()+1 + i ] = '=';
-////            }
-////        }
-//        
-  
+        char [][] wallArray = Gadget.getArray(boardHeight,boardWidth);   
         
         for(int j=0; j<this.height; j++){
-            for(int i=0; i<this.width; i++){
-                wallArray[(int) this.position.y() + j + 1][(int) this.position.x() + 1 + i ] = '=';
+            for(int i=0; i<this.width + 1; i++){
+                wallArray[(int) this.position.y() + j + 1][(int) this.position.x()  + i ] = '=';
             }
+        }
+        if(!this.ballStorage.isEmpty()){
+            wallArray[(int) (this.position.y()+this.height)][(int) (this.position.x()+this.width)] = '*';
         }
         String boardToString = "";
         for(int i=0; i<wallArray.length;i++){
@@ -153,7 +148,7 @@ public class Absorber implements Gadget {
      * @param ball that is to be Stored 
      */
     public void storeBall(Ball ball){
-        if(this.ballStorage.size()>0)this.ballStorage.add(ball);
+        
         if(this.height < 4 ){
             ball.updateBall(new Vect(position.x()+(int)(this.width*3.0/4.0), position.y()+this.height), new Vect(0,0));
             
@@ -161,6 +156,7 @@ public class Absorber implements Gadget {
         if(this.height > 4 ){
             ball.updateBall(new Vect(position.x()+(int)(this.width*3.0/4.0), position.y()+this.height-(int)(this.height/4.0)), new Vect(0,0));
         }
+        this.ballStorage.add(ball);
     }
     
     @Override
@@ -168,11 +164,7 @@ public class Absorber implements Gadget {
         this.checkRep();
        return this.position;
     }
-    @Override
-    public Vect getNext(double time) {
-       return this.position;
-    }
-   
+
 
     public boolean willCollide(Ball ball) {
         double timeToWallCollision = Double.POSITIVE_INFINITY;
