@@ -287,7 +287,7 @@ public class TriangleBumper implements Gadget {
                 timeToWallCollision = minimumTime;
             }
         }
-        System.out.println(timeToWallCollision); 
+        //System.out.println(timeToWallCollision); 
         return timeToWallCollision;
     }
 

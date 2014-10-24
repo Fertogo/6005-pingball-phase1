@@ -3,6 +3,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.awt.Point;
 import java.util.List;
+
 import physics.LineSegment;
 import physics.Geometry;
 import physics.Vect;
@@ -62,6 +63,7 @@ public class Absorber implements Gadget {
      */
     public void trigger(){
       this.action();
+      this.checkRep();
     }
     /**
      * Detects collsions
@@ -69,7 +71,6 @@ public class Absorber implements Gadget {
      */
     @Override
     public void collision(Ball ball){
-        System.out.println("Ball hit absorber!");
        this.storeBall(ball);      
     }
 
@@ -111,6 +112,15 @@ public class Absorber implements Gadget {
     public String toString( int boardHeight, int boardWidth) {
         
         char [][] wallArray = Gadget.getArray(boardHeight,boardWidth); 
+//        this.createAbsorber(boardWidth, boardHeight);
+////        for(int j=0; j<boardHeight; j++){
+////            for(int i=0; i<boardWidth; i++){
+////                wallArray[(int) this.position.y()+ 1 + i + j][(int) this.position.x()+1 + i ] = '=';
+////            }
+////        }
+//        
+  
+        
         for(int j=0; j<this.height; j++){
             for(int i=0; i<this.width; i++){
                 wallArray[(int) this.position.y() + j + 1][(int) this.position.x() + 1 + i ] = '=';
@@ -155,6 +165,7 @@ public class Absorber implements Gadget {
     
     @Override
     public Vect getPosition() {
+        this.checkRep();
        return this.position;
     }
     @Override
@@ -164,8 +175,8 @@ public class Absorber implements Gadget {
    
 
     public boolean willCollide(Ball ball) {
-        double timeVariable= 1.5;
-        if(this.timeToCollision(ball)< timeVariable){
+        double timeToWallCollision = Double.POSITIVE_INFINITY;
+        if(this.timeToCollision(ball)< timeToWallCollision){
             return true;
         }
         return false; 
@@ -190,7 +201,9 @@ public class Absorber implements Gadget {
         }
         if(firstCollsion < timeToWallCollision){
             timeToWallCollision = firstCollsion;
+
         }
+       
         return timeToWallCollision;
                 
     }
