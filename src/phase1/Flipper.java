@@ -20,6 +20,8 @@ import physics.*;
  * velocity of the part that contacts the ball
  * 
  */
+
+
 public class Flipper implements Gadget{
     private Vect position; 
     //Int type  representing left(0) or right flipper(1)
@@ -47,7 +49,12 @@ public class Flipper implements Gadget{
         this.angle= new Angle(3/2*Math.PI);
         this.isHorizontal=false;
     }
-    
+    /**
+     * Constructs the flipper
+     * @param position- position 
+     * @param type- 0 for left flipper; 1 for right flipper
+     * @param isHorizontal- initial position 
+     */
     public Flipper(Vect position, int type, boolean isHorizontal){ 
         this.position = position; 
         this.pivotPoint= new Vect(position.x(),position.y());
@@ -57,7 +64,9 @@ public class Flipper implements Gadget{
         this.angle= new Angle(3/2*Math.PI);
         this.isHorizontal=isHorizontal;
     }
-    
+    /**
+     * Trigger for gadget
+     */
     @Override 
     public void trigger(){ 
         //Trigger Triggered Gadgets
@@ -110,7 +119,6 @@ public class Flipper implements Gadget{
     /**
      * Switches the state of the flipper 
      */
-    //TODO  Fix Balls issue think of something creative 
     @Override
     public void action() {
        this.flipFlipper(); 
@@ -163,14 +171,7 @@ public class Flipper implements Gadget{
        return this.pivotPoint;
     }
     
-    /**
-     * Returns the next point that the Flipper will be at. 
-     */
-    @Override
-    public Vect getNext(double time) {
-        return this.pivotPoint;
-    }
-    
+ 
     /**
      * Defines the action that is to be committed upon collision
      */
@@ -184,6 +185,7 @@ public class Flipper implements Gadget{
     
     /**
      * Returns a string representation of flipper
+     * 
      */
     @Override
     public String toString(int width, int height) {
@@ -211,13 +213,19 @@ public class Flipper implements Gadget{
         return boardToString;
 
     }
-     
+     /**
+      * Rotates the gadget 
+      */
     @Override
     public void rotateGadget(int degrees) {
       //TODO  Geometry. rotateAround
     }
 
-
+    /**
+     * Calculates the time to collision 
+     * @param ball
+     * @return time to collisio 
+     */
     @Override
     public double timeToCollision(Ball ball) {
         double timeToWallCollision = Double.POSITIVE_INFINITY;
@@ -230,7 +238,9 @@ public class Flipper implements Gadget{
         return timeToWallCollision;
     }
   
-
+    /**
+     * Gives object the ability to be triggered by other events 
+     */
     @Override
     public void addTriggeredGadget(Gadget triggeredGadget) {
         this.triggeredGadgets.add(triggeredGadget); 

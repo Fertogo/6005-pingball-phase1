@@ -20,7 +20,9 @@ public class Board {
     private double timestep = .16;
     private double mu = .025;
     private double mu2 = .025;
-
+    /**
+     * Checks the representation
+     */
     private void checkRep(){ 
         Set<Vect> positions = new HashSet<Vect>(); 
         for (Gadget gadget : gadgets){ 
@@ -42,7 +44,12 @@ public class Board {
             assert(positionBall.y() <= height);
         }
     }
-
+    /**
+     * Checks constructor
+     * @param width
+     * @param height
+     */
+    
     public Board(int width, int height){ 
         this.height= height+2; //Add two to compensate for walls. 
         this.width = width+2;
@@ -126,7 +133,6 @@ public class Board {
         try {
             Thread.sleep(10);
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         System.out.println(this.toString()); //Print the board. 
@@ -139,7 +145,10 @@ public class Board {
     public void step(int steps){ 
         for (int i=0; i<steps; i++) step();  
     }
-
+    /**
+     * updates Balls on the board
+     * @param time
+     */
     private void updateBalls(double time){
         for(Ball ball: balls){
             ball.updatePosition(ball.getPosition().plus(ball.getVelocity().times(time)));
@@ -148,18 +157,26 @@ public class Board {
             ball.updateVelocity(ball.getVelocity().times(delta));
         }
     }
-
+    /**
+     * Adds gadget to the board
+     * @param gadget
+     */
     public void addGadget(Gadget gadget){ 
         //Add gadget to board. 
         this.gadgets.add(gadget); 
         checkRep();
     }
-
+    /**
+     * Adds ball to the board
+     * @param ball
+     */
     public void addBall(Ball ball){ 
         this.balls.add(ball); 
         checkRep(); 
     }
-
+    /**
+     * runs game
+     */
     public void run(){ 
         while (true) this.step(); 
     }
@@ -188,7 +205,10 @@ public class Board {
         }
         return ' '; 
     }
-
+    /**
+     * To String method
+     * Represents board 
+     */
     @Override
     public String toString(){
         System.out.println("Printing Board"); 
@@ -206,19 +226,33 @@ public class Board {
 
         return board.toString(); 
     }
-
+    /**
+     * Returns gravity
+     * @return  gravity 
+     */
     public double getGravity() {
         return gravity;
     }
-
+    /**
+     * Sets the friction 
+     * @param mu - of object one 
+     * @param mu2- of object two
+     */
     public void setFriction(double mu, double mu2){
         this.mu = mu;
         this.mu2 = mu2;
     }
+    /**
+     * Sets the gravity 
+     * @param gravity
+     */
     public void setGravity(double gravity) {
         this.gravity = gravity;
     }
-
+    /**
+     * Sets the friction 
+     * @param friction
+     */
     public void setFriction(double friction){ 
         this.mu = friction; 
         this.mu2 = friction; 

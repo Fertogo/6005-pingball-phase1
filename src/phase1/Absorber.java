@@ -1,7 +1,5 @@
 package phase1;
-import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.awt.Point;
 import java.util.List;
 
 import physics.LineSegment;
@@ -168,12 +166,17 @@ public class Absorber implements Gadget {
         this.checkRep();
        return this.position;
     }
-    @Override
-    public Vect getNext(double time) {
-       return this.position;
-    }
    
-
+   
+    public boolean contains(Vect pos) {
+        boolean contains = false;
+        this.checkRep();
+        if( (pos.x()>=this.position.x() && pos.x()<=(this.position.x()+this.width)) && (pos.y()>=this.position.y() && pos.y()<=(this.position.y()+this.height)) ){
+        contains =true;
+        }
+        return contains;
+        }
+    
     public boolean willCollide(Ball ball) {
         double timeToWallCollision = Double.POSITIVE_INFINITY;
         if(this.timeToCollision(ball)< timeToWallCollision){
