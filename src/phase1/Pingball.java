@@ -14,7 +14,6 @@ public class Pingball {
             }
 
         }
-        
         //board.step(); 
         board.run(); 
     }

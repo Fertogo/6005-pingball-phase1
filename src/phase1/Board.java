@@ -118,6 +118,13 @@ public class Board {
 
         }
         this.updateBalls(timestep);
+        
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         System.out.println(this.toString()); //Print the board. 
     }
 

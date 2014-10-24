@@ -1,5 +1,6 @@
 package phase1;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.List;
 
 import physics.*;
@@ -28,7 +29,7 @@ public class Flipper implements Gadget{
     private LineSegment lineSegment; 
     private Vect pivotPoint; 
     private Angle angle;
-    private List<Gadget> triggeredGadgets; 
+    private List<Gadget> triggeredGadgets = new ArrayList<Gadget>(); 
 
     
     /**
@@ -70,29 +71,39 @@ public class Flipper implements Gadget{
      * @param ball
      * @return
      */
-    public Ball hitBall(Ball ball){
+    public void hitBall(Ball ball){
         Ball newBall=ball;
-    
+        
         if(!isHorizontal){
             //left  --CounterClockwise 90
-            if(this.flipperType ==0){
-                    newBall =new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, -1080., ball.ballReturnCircle(), ball.getVelocity()));
+            if(this.flipperType ==0){ //Rotate wall at 1080 radians per second
+                    newBall =new Ball(ball.getPosition(),
+                            Geometry.reflectRotatingWall(lineSegment,pivotPoint, 1080.*Math.PI/180., 
+                                    ball.ballReturnCircle(), ball.getVelocity()));
             }
             //right  -- Clockwise 90
             if(this.flipperType ==1){
-                newBall =new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, 1080., ball.ballReturnCircle(), ball.getVelocity()));
+                newBall =new Ball(ball.getPosition(), 
+                        Geometry.reflectRotatingWall(lineSegment,pivotPoint, -1080.*Math.PI/180., 
+                                ball.ballReturnCircle(), ball.getVelocity()));
             }
         }else if(isHorizontal){
             //left  -- Clockwise
             if(this.flipperType ==0){
-                newBall =new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, 1080., ball.ballReturnCircle(), ball.getVelocity()));
+                newBall =new Ball(ball.getPosition(), 
+                        Geometry.reflectRotatingWall(lineSegment,pivotPoint, -1080.*Math.PI/180.,
+                                ball.ballReturnCircle(), ball.getVelocity()));
             }
             //right  -- CounterClockwise
             if(this.flipperType ==1){
-                newBall = new Ball(ball.getPosition(), Geometry.reflectRotatingWall(lineSegment,pivotPoint, -1080., ball.ballReturnCircle(), ball.getVelocity()));
+                newBall = new Ball(ball.getPosition(), 
+                        Geometry.reflectRotatingWall(lineSegment,pivotPoint, 1080.*Math.PI/180., 
+                                ball.ballReturnCircle(), ball.getVelocity()));
             }
         }
-           return newBall;
+           ball.updateBall(newBall.getPosition(), newBall.getVelocity());
+           this.flipFlipper(); 
+           System.out.println(ball.getVelocity());
     }
 
     
@@ -102,13 +113,7 @@ public class Flipper implements Gadget{
     //TODO  Fix Balls issue think of something creative 
     @Override
     public void action() {
-        this.action();
-       if(isHorizontal){
-           isHorizontal=false;
-       }
-       else if(!isHorizontal){
-           isHorizontal=true;
-       }
+       this.flipFlipper(); 
     }
     
     //Orientation
@@ -139,6 +144,12 @@ public class Flipper implements Gadget{
             }
         }
         
+        if(isHorizontal){
+            isHorizontal=false;
+        }
+        else if(!isHorizontal){
+            isHorizontal=true;
+        }
         
         Geometry.rotateAround( this.lineSegment, this.pivotPoint, this.angle);    
         
@@ -158,17 +169,17 @@ public class Flipper implements Gadget{
     @Override
     public Vect getNext(double time) {
         return this.pivotPoint;
-
     }
+    
     /**
      * Defines the action that is to be committed upon collision
      */
     @Override
     public void collision(Ball ball) {
+        System.out.println("Collision with Flipper");
         this.hitBall(ball);
-        this.flipFlipper();
+        this.trigger(); 
     }
-    
     
     
     /**
@@ -215,6 +226,7 @@ public class Flipper implements Gadget{
             if(minimumTime < timeToWallCollision){
                 timeToWallCollision = minimumTime;
             }
+        System.out.println(timeToWallCollision); 
         return timeToWallCollision;
     }
   
