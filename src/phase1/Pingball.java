@@ -12,16 +12,13 @@ public class Pingball {
             case("flippers"): board = flipperBoard(); break;
             case("default"): board = defaultBoard(); break;
             }
-
         }
-        //board.step(); 
         board.run(); 
     }
     
     public static Board defaultBoard(){ 
         Board board = new Board(20,20); 
         Ball ball = new Ball(new Vect(1.25,1.25),new Vect(0,1));
-        
         
         Gadget circleBumper = new CircleBumper(new Vect(1,10));
         board.addGadget(circleBumper);
@@ -130,7 +127,9 @@ public class Pingball {
         board.addGadget(rightFlipper2);
         
         Gadget absorber = new Absorber (new Vect(0,19),20,1); 
-            //TODO: Add Triggers: RightFlipper1, RightFlipper2, Absorber
+        absorber.addTriggeredGadget(absorber);
+        absorber.addTriggeredGadget(rightFlipper1);
+        absorber.addTriggeredGadget(rightFlipper2);
         board.addGadget(absorber); 
 
        return board; 
