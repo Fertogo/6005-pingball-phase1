@@ -5,9 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class AbsorberTest {
-<<<<<<< HEAD
-//
-=======
 
     @Test public void holdBall(){ 
         Board board = new Board(20,20); 
@@ -49,7 +46,6 @@ public class AbsorberTest {
      *             
      */
     //TODO
->>>>>>> 79ead91b3cb8cf1d7c1ff109967cdf4e3f98c976
 //    @Test public void holdBall(){ 
 //        Board board = new Board(20,20); 
 //        Ball ball1 = new Ball(new Vect(1.25,1.25), new Vect(1,0)); 
