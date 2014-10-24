@@ -165,15 +165,8 @@ public class TriangleBumper implements Gadget {
         return boardToString;
     }
 
-    
-
     @Override
     public Vect getPosition() {
-        return this.position;
-    }
-
-    @Override
-    public Vect getNext(double time) {
         return this.position;
     }
 
@@ -268,7 +261,7 @@ public class TriangleBumper implements Gadget {
         
 //        System.out.println("Old Ball Velocity: " + ball.getVelocity().toString());
 //        System.out.println("New Ball Velocity: " + newBallVelocity.toString());
-        this.action(); 
+        this.trigger(); 
         ball.updateVelocity(newBallVelocity); 
     }
 

@@ -54,10 +54,9 @@ public class Board {
      */
     public void step(){ 
         for (Ball ball : balls){ 
-            Vect newBallPosition = ball.getNext(timestep); 
-
-            //Check for corner collisions
             
+            Vect newBallPosition = ball.getNext(timestep); 
+            //Check for corner collisions
             if (Math.round(newBallPosition.y()) <= 0 && Math.round(newBallPosition.x()) <= 0){
                 ball.updateVelocity(ball.getVelocity().times(-1));
             }else if(Math.round(newBallPosition.y()) <= 0 && Math.round(newBallPosition.x()) >= 19){
@@ -93,8 +92,7 @@ public class Board {
                 else if (Math.round(newBallPosition.y()) >= height-2){ 
                     //Bottom Wall collision
                     //System.out.println("Hit Bottom Wall"); 
-                    walls.collision(ball, 2);
-                    
+                    walls.collision(ball, 2);           
                 }
             }
 
@@ -107,6 +105,8 @@ public class Board {
                 } 
             }
             //Checks for collisions with other balls
+
+
             Iterator<Ball> it = balls.iterator();
             while(it.hasNext()){
                 Ball nextBall = it.next();
@@ -116,6 +116,9 @@ public class Board {
                     nextBall.collision(ball); 
                 } 
             }
+            
+
+
 
         }
         this.updateBalls(timestep);
@@ -188,6 +191,7 @@ public class Board {
 
     @Override
     public String toString(){
+        System.out.println("Printing Board"); 
 
         //Merge Layers
         StringBuilder board = new StringBuilder(""); 
@@ -198,8 +202,9 @@ public class Board {
             }
             board.append("\n"); 
         }
-        return board.toString(); 
+        System.out.println("Done");
 
+        return board.toString(); 
     }
 
     public double getGravity() {
