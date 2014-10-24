@@ -30,9 +30,9 @@ public class Absorber implements Gadget {
 
     /**
      * 
-     * @param x-xPosition
-     * @param y-yPosition
-     * @param size - General Size of the absorber. 
+     * @param Vect: position of absorber
+     * @param int: width of the absorber. 
+     * @param int: height of the absorber
      */
     public Absorber(Vect position, int width, int height ){ 
 
@@ -126,15 +126,20 @@ public class Absorber implements Gadget {
     public String toString( int boardHeight, int boardWidth) {
         
         char [][] wallArray = Gadget.getArray(boardHeight,boardWidth); 
-        this.createAbsorber(boardWidth, boardHeight);
-//        for(int j=0; j<boardHeight; j++){
-//            for(int i=0; i<boardWidth; i++){
-//                wallArray[(int) this.position.y()+ 1 + i + j][(int) this.position.x()+1 + i ] = '=';
-//            }
-//        }
-        
+//        this.createAbsorber(boardWidth, boardHeight);
+////        for(int j=0; j<boardHeight; j++){
+////            for(int i=0; i<boardWidth; i++){
+////                wallArray[(int) this.position.y()+ 1 + i + j][(int) this.position.x()+1 + i ] = '=';
+////            }
+////        }
+//        
   
         
+        for(int j=0; j<this.height; j++){
+            for(int i=0; i<this.width; i++){
+                wallArray[(int) this.position.y() + j + 1][(int) this.position.x() + 1 + i ] = '=';
+            }
+        }
         String boardToString = "";
         for(int i=0; i<wallArray.length;i++){
             for(int j=0; j< wallArray[0].length;j++){
@@ -142,7 +147,6 @@ public class Absorber implements Gadget {
             }
             boardToString += "\n";
         }
-        
         return boardToString;
       
     }
