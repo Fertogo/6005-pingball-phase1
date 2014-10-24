@@ -201,12 +201,12 @@ public class TriangleBumper implements Gadget {
         }
         else if (ballX < this.position.x() && ballY > this.position.y()+1){ 
             //Hitting the bottom left corner of Bumper
-            //System.out.println("BOTTOM-LEFT-CORNER");
+            System.out.println("BOTTOM-LEFT-CORNER");
             newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
         }
         else if (ballX > this.position.x()+1 && ballY > this.position.y()+1){ 
             //Hitting the bottom right corner of Bumper
-            //System.out.println("BOTTOM=RIGHT-CORNER");
+            System.out.println("BOTTOM=RIGHT-CORNER");
             newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
         }
         //Check which wall was hit. step the ball if it hits hypotenous (since gadgetArea of Triangle is a rectangle)
@@ -287,6 +287,7 @@ public class TriangleBumper implements Gadget {
                 timeToWallCollision = minimumTime;
             }
         }
+        System.out.println(timeToWallCollision); 
         return timeToWallCollision;
     }
 
