@@ -211,7 +211,7 @@ public class Board {
      */
     @Override
     public String toString(){
-        System.out.println("Printing Board"); 
+
 
         //Merge Layers
         StringBuilder board = new StringBuilder(""); 
@@ -222,7 +222,7 @@ public class Board {
             }
             board.append("\n"); 
         }
-        System.out.println("Done");
+
 
         return board.toString(); 
     }

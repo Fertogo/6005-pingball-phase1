@@ -91,7 +91,7 @@ public class TriangleBumper implements Gadget {
      * Changes orientation of this to a triangle with an orientation of 180 degrees
      */
     private void triangleDegree180(){ 
-        System.out.println("Rotating triangle to 180"); 
+
         int x = (int)(this.position.x());
         int y = (int)(this.position.y()); 
         this.wall1 = new LineSegment(x,y+1,x+1,y+1); 
@@ -161,14 +161,14 @@ public class TriangleBumper implements Gadget {
 
     @Override
     public void collision(Ball ball) {
-        System.out.println("Collision with a TriangleBumper!"); 
+
         Vect currentBallVelocity = ball.getVelocity(); 
         Vect currentBallPosition = ball.getPosition(); 
         Vect newBallVelocity = new Vect(0,0); 
         double ballX = currentBallPosition.x(); 
         double ballY = currentBallPosition.y(); 
         
-        System.out.println(currentBallPosition.toString());
+
         //Check Corners
         if (ballX > this.position.x() + 1 && ballY > this.position.y()){ 
             //Hitting the top right corner of Bumper

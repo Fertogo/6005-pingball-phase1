@@ -45,8 +45,7 @@ public class OuterWalls {
      * @param wall: int representing which wall was hit. //0:Top 1:Right 2:Bottom 3:Left
      */
     public void collision(Ball ball, int wall){ 
-        System.out.println("Hit a wall!"); 
-        System.out.println(ball.getPosition()); 
+
         Vect oldVelocity = ball.getVelocity(); 
         Vect newVelocity = null; 
         switch(wall){ 
@@ -98,11 +97,10 @@ public class OuterWalls {
     public String toString(int width, int height) {
 
         char [][] wallArray; 
-        System.out.println(height + " " + width); 
+
         wallArray = new char[height][width];
         //Populate with space
         for (int x = 0; x<width; x++){ 
-            System.out.println("x: " + x); 
             for (int y = 0; y<height; y++){ 
                 wallArray[x][y] = ' '; 
             }

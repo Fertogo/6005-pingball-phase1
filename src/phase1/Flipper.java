@@ -112,7 +112,7 @@ public class Flipper implements Gadget{
         }
            ball.updateBall(newBall.getPosition(), newBall.getVelocity());
            this.flipFlipper(); 
-           System.out.println(ball.getVelocity());
+
     }
 
     
@@ -176,7 +176,6 @@ public class Flipper implements Gadget{
      */
     @Override
     public void collision(Ball ball) {
-        System.out.println("Collision with Flipper");
         this.hitBall(ball);
         this.trigger(); 
     }
@@ -233,7 +232,6 @@ public class Flipper implements Gadget{
             if(minimumTime < timeToWallCollision){
                 timeToWallCollision = minimumTime;
             }
-        System.out.println(timeToWallCollision); 
         return timeToWallCollision;
     }
   
