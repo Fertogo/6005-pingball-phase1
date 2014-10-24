@@ -136,11 +136,11 @@ public class Absorber implements Gadget {
         Ball storedBall = this.ballStorage.remove(0);
         if(this.height < 4 ){
             storedBall.updateBall(new Vect(position.x()+this.width, 
-                    position.y()+this.height), new Vect(0,50));
+                    position.y()+this.height+1), new Vect(0,-50));
         }
         if(this.height > 4 ){
             storedBall.updateBall(new Vect(position.x()+this.width, 
-                    position.y()+this.height-(int)(this.height/4.0)), new Vect(0,50));
+                    position.y()+this.height-(int)(this.height/4.0)), new Vect(0,-50));
         }
     }
     /**
