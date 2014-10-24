@@ -3,6 +3,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.awt.Point;
 import java.util.List;
+
 import physics.LineSegment;
 import physics.Geometry;
 import physics.Vect;
@@ -65,6 +66,7 @@ public class Absorber implements Gadget {
      */
     public void trigger(){
       this.action();
+      this.checkRep();
     }
     /**
      * Detects collsions
@@ -72,7 +74,9 @@ public class Absorber implements Gadget {
      */
     @Override
     public void collision(Ball ball){
-       this.storeBall(ball);      
+        this.checkRep();
+       this.storeBall(ball);  
+       System.out.print("Collision");
     }
 //    @Override
 //    public void step() {
@@ -122,12 +126,12 @@ public class Absorber implements Gadget {
     public String toString( int boardHeight, int boardWidth) {
         
         char [][] wallArray = Gadget.getArray(boardHeight,boardWidth); 
-        //this.createAbsorber(boardWidth, boardHeight);
-        for(int j=0; j<boardHeight; j++){
-            for(int i=0; i<boardWidth; i++){
-                wallArray[(int) this.position.y()+ 1 + i + j][(int) this.position.x()+1 + i ] = '=';
-            }
-        }
+        this.createAbsorber(boardWidth, boardHeight);
+//        for(int j=0; j<boardHeight; j++){
+//            for(int i=0; i<boardWidth; i++){
+//                wallArray[(int) this.position.y()+ 1 + i + j][(int) this.position.x()+1 + i ] = '=';
+//            }
+//        }
         
   
         
@@ -171,6 +175,7 @@ public class Absorber implements Gadget {
     
     @Override
     public Vect getPosition() {
+        this.checkRep();
        return this.position;
     }
     @Override
@@ -190,8 +195,8 @@ public class Absorber implements Gadget {
 
    
     public boolean willCollide(Ball ball) {
-        double timeVariable= 1.5;
-        if(this.timeToCollision(ball)< timeVariable){
+        double timeToWallCollision = Double.POSITIVE_INFINITY;
+        if(this.timeToCollision(ball)< timeToWallCollision){
             return true;
         }
         return false; 
@@ -203,15 +208,20 @@ public class Absorber implements Gadget {
         int yPos = (int) this.position.x(); 
 
         LineSegment topBorder= new LineSegment(xPos, yPos,xPos+this.width, yPos);
-        LineSegment bottomBorder= new LineSegment(xPos, yPos,xPos+this.width, yPos);
+        LineSegment bottomBorder= new LineSegment(xPos, yPos+this.height,xPos+this.width, yPos+this.height);
         double  topTime   =   Geometry.timeUntilWallCollision(topBorder,ball.ballReturnCircle(), ball.getVelocity());
         double bottomTime =   Geometry.timeUntilWallCollision(bottomBorder,ball.ballReturnCircle(), ball.getVelocity());
         double timeToWallCollision = Double.POSITIVE_INFINITY;
+        double fasterOfBottomOrTop = Double.POSITIVE_INFINITY;
         if(topTime<bottomTime){
-            timeToWallCollision= topTime;
+            fasterOfBottomOrTop= topTime;
         }else if(topTime>bottomTime){
-            timeToWallCollision = bottomTime;
+            fasterOfBottomOrTop = bottomTime;
         }
+        if(fasterOfBottomOrTop<timeToWallCollision){
+            timeToWallCollision=fasterOfBottomOrTop;
+        }
+       
         return timeToWallCollision;
         
         
