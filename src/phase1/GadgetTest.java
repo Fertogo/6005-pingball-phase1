@@ -483,4 +483,21 @@ public class GadgetTest {
             //TODO Assert that the ball bounced off correctly 
         }
         
+        /**
+         * Test triggering of Gadgets
+         * Make sure a bumper can correctly trigger anther gadget. 
+         */
+        @Test public void testTriggerGadgets(){ 
+            Board board = new Board(20,20); 
+            Gadget squareBumper = new SquareBumper(new Vect(5,10)); 
+            Gadget flipper = new Flipper(new Vect(10,10), 0); 
+            Ball ball = new Ball (new Vect(5.1,1)); 
+            squareBumper.addTriggeredGadget(flipper);
+            board.addGadget(flipper); 
+            board.addGadget(squareBumper); 
+            board.addBall(ball);
+            board.step(10); 
+            assertTrue(board.toString().contains("-"));
+        }
+        
 }

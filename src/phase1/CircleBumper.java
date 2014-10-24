@@ -1,6 +1,5 @@
 package phase1;
 
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +27,7 @@ public class CircleBumper implements Gadget {
 
     @Override
     public void action() {
+        throw new UnsupportedOperationException();//Bumpers have no action
     }
 
     @Override
@@ -56,17 +56,12 @@ public class CircleBumper implements Gadget {
     public void collision(Ball ball) {
         Vect newBallVelocity = Geometry.reflectCircle(circle.getCenter(), ball.getPosition(), ball.getVelocity());
         ball.updateBall(ball.getPosition(), newBallVelocity);
+        this.trigger(); 
     }
 
     @Override
     public Vect getPosition() {
         return this.position;
-    }
-
-
-    @Override
-    public Vect getNext(double time) {
-        return null;
     }
 
     @Override
