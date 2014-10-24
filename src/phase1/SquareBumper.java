@@ -76,7 +76,7 @@ public class SquareBumper implements Gadget {
 
     @Override
     public void collision(Ball ball) {
-        System.out.println("Ball collision with Square Bumper"); 
+
         Vect currentBallVelocity = ball.getVelocity(); 
         Vect currentBallPosition = ball.getPosition(); 
         Vect newBallVelocity = new Vect(0,0); 
@@ -85,44 +85,44 @@ public class SquareBumper implements Gadget {
         //Check Corners
         if (ballX > this.position.x() + 1 && ballY > this.position.y()){ 
             //Hitting the top right corner of Bumper
-            System.out.println("Hit TopRight corner of Square Bumper"); 
+
 
             newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
         }
         else if (ballX < this.position.x() && ballY > this.position.y()){ 
             //Hitting the top left corner of Bumper
-            System.out.println("Hit TopLeft corner of Square Bumper"); 
+ 
             newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
         }
         else if (ballX < this.position.x() && ballY > this.position.y()+1){ 
             //Hitting the bottom left corner of Bumper
-            System.out.println("Hit BottomLeft corner of Square Bumper"); 
+
             newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
         }
         else if (ballX > this.position.x()+1 && ballY > this.position.y()+1){ 
             //Hitting the bottom right corner of Bumper
-            System.out.println("Hit BottomRight corner of Square Bumper"); 
+
             newBallVelocity = new Vect(currentBallVelocity.x()*-1, currentBallVelocity.y()*-1); //Reflect Ball (Turn around)
         }
         //Check which wall was hit
         else if(ballY < this.position.y()){ 
             //Hitting top wall
-            System.out.println("Hit Top Wall of Square Bumper"); 
+
             newBallVelocity = Geometry.reflectWall(topWall, currentBallVelocity);
         }
         else if(ballY > this.position.y()+1){ 
             //Hitting bottom wall
-            System.out.println("Hit Bottom Wall of Square Bumper"); 
+ 
             newBallVelocity = Geometry.reflectWall(bottomWall, currentBallVelocity);
         }
         else if(ballX > this.position.x()+1){ 
             //Hitting right wall
-            System.out.println("Hit Right Wall of Square Bumper"); 
+
             newBallVelocity = Geometry.reflectWall(rightWall, currentBallVelocity);
         }
         else if(ballX < this.position.x()){ 
             //Hitting left wall
-            System.out.println("Hit Left Wall of Square Bumper"); 
+  
             newBallVelocity = Geometry.reflectWall(leftWall, currentBallVelocity);
         }
 
