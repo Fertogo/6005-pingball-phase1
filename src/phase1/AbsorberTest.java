@@ -12,7 +12,6 @@ public class AbsorberTest {
         Absorber absorber = new Absorber(new Vect(0,16), 20, 4);
         board.addGadget(absorber); 
         board.addBall(ball1); 
-        absorber.shootBall(ball1);
         
         
         //Test with CircleBumper

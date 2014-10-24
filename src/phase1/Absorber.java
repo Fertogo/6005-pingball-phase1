@@ -22,29 +22,10 @@ public class Absorber implements Gadget {
     private Vect position; 
     private int width;
     private int height;
-    private int ballsStored;
-    private Rectangle absorberArea; 
     private ArrayList<Ball> ballStorage;
     private List<Gadget> triggeredGadgets; 
-
-    /**
-     * 
-     * @param Vect: position of absorber
-     * @param int: width of the absorber. 
-     * @param int: height of the absorber
-     */
-    public Absorber(Vect position, int width, int height ){ 
-
-        this.position = position; 
-        this.width=width;
-        this.height=height;
-        int x = (int)position.x(); 
-        int y = (int)position.y(); 
-        this.absorberArea= new Rectangle(x, y, width, height);
-        this.ballStorage= new ArrayList<>();
-        this.ballsStored=0;
-    }
-    public void checkRep(){
+    
+    private void checkRep(){
         if(this.position.x()<1){
             this.position= new Vect(1, this.position.y());
         }
@@ -59,6 +40,22 @@ public class Absorber implements Gadget {
             this.height = (int)(20 - this.position.y());
         }
     }
+    /**
+     * 
+     * @param Vect: position of absorber
+     * @param int: width of the absorber. 
+     * @param int: height of the absorber
+     */
+    public Absorber(Vect position, int width, int height ){ 
+
+        this.position = position; 
+        this.width=width;
+        this.height=height;
+        int x = (int)position.x(); 
+        int y = (int)position.y(); 
+        this.ballStorage= new ArrayList<>();
+        //checkRep();
+    }
     
     /**
      * Occurs when a ball hits it
@@ -72,23 +69,19 @@ public class Absorber implements Gadget {
      */
     @Override
     public void collision(Ball ball){
+        System.out.println("Ball hit absorber!");
        this.storeBall(ball);      
     }
-//    @Override
-//    public void step() {
-//       if(ballsStored>0 && this.ballStorage.size()>0){
-//           shootBall(this.ballStorage.remove(0)); 
-//       }
-//        
-//    }
+
     /**
      * Store ball in one iteration and shoots it back in the next
      * 
      */
     @Override
     public void action() {
- 
-        
+        if(ballStorage.size() > 0){
+            this.shootBall();
+        }
     }
     
     public void createAbsorber(int boardWidth, int boardHeight){
@@ -97,19 +90,15 @@ public class Absorber implements Gadget {
 
         char [][] wallArray =  Gadget.getArray(boardHeight,boardWidth); 
         for(int i=0; i< this.width;i++){
-//            stringBuilder+="=";
             wallArray[yPos][xPos+i] = '=';
         }
-//        for(int i=0; i<height;i++){
-//            stringBuilder+="\n";    
-//        }
+
         for(int i=0; i< this.width;i++){
-//            stringBuilder+="=";
             wallArray[yPos+this.height][xPos+i] = '=';
-            if(this.height < 4 && i> this.width-1-this.ballsStored){
+            if(this.height < 4 && i> this.width-1-this.ballStorage.size()){
                 wallArray[yPos+this.height][xPos+i] = '*';
             }
-            if(this.height > 4 && i> this.width-1-this.ballsStored){
+            if(this.height > 4 && i> this.width-1-this.ballStorage.size()){
                 wallArray[yPos+this.height-(int)(this.height/4.0)][xPos+i] = '*';
             }
         }
@@ -138,15 +127,16 @@ public class Absorber implements Gadget {
       
     }
     
-    public void shootBall(Ball ball){
+    public void shootBall(){
+        Ball storedBall = this.ballStorage.remove(0);
         if(this.height < 4 ){
-            ball.updateBall(new Vect(position.x()+this.width, position.y()+this.height), new Vect(0,50));
-            
+            storedBall.updateBall(new Vect(position.x()+this.width, 
+                    position.y()+this.height), new Vect(0,50));
         }
         if(this.height > 4 ){
-            ball.updateBall(new Vect(position.x()+this.width, position.y()+this.height-(int)(this.height/4.0)), new Vect(0,50));
+            storedBall.updateBall(new Vect(position.x()+this.width, 
+                    position.y()+this.height-(int)(this.height/4.0)), new Vect(0,50));
         }
-        this.ballsStored--;
     }
     /**
      * 
@@ -161,7 +151,6 @@ public class Absorber implements Gadget {
         if(this.height > 4 ){
             ball.updateBall(new Vect(position.x()+(int)(this.width*3.0/4.0), position.y()+this.height-(int)(this.height/4.0)), new Vect(0,0));
         }
-        this.ballsStored++;
     }
     
     @Override
@@ -173,17 +162,7 @@ public class Absorber implements Gadget {
        return this.position;
     }
    
-    public boolean contains(Vect pos) {
-        boolean contains = false;
-        this.checkRep();
-        if(  (pos.x()>=this.position.x() && pos.x()<=(this.position.x()+this.width))  &&  (pos.y()>=this.position.y() && pos.y()<=(this.position.y()+this.height)) ){
-            contains =true;
-        }
-        return contains;
-    }
 
-
-   
     public boolean willCollide(Ball ball) {
         double timeVariable= 1.5;
         if(this.timeToCollision(ball)< timeVariable){
@@ -195,21 +174,25 @@ public class Absorber implements Gadget {
     @Override
     public double timeToCollision(Ball ball) {
         int xPos = (int) this.position.x(); 
-        int yPos = (int) this.position.x(); 
-
-        LineSegment topBorder= new LineSegment(xPos, yPos,xPos+this.width, yPos);
+        int yPos = (int) this.position.y(); 
+        
         LineSegment bottomBorder= new LineSegment(xPos, yPos,xPos+this.width, yPos);
-        double  topTime   =   Geometry.timeUntilWallCollision(topBorder,ball.ballReturnCircle(), ball.getVelocity());
-        double bottomTime =   Geometry.timeUntilWallCollision(bottomBorder,ball.ballReturnCircle(), ball.getVelocity());
+        LineSegment topBorder= new LineSegment(xPos, yPos+this.height,xPos+this.width, yPos+this.height);
+            
+        double topTime =  Geometry.timeUntilWallCollision(topBorder,ball.ballReturnCircle(), ball.getVelocity());
+        double bottomTime = Geometry.timeUntilWallCollision(bottomBorder,ball.ballReturnCircle(), ball.getVelocity());
+        double firstCollsion;
         double timeToWallCollision = Double.POSITIVE_INFINITY;
-        if(topTime<bottomTime){
-            timeToWallCollision= topTime;
-        }else if(topTime>bottomTime){
-            timeToWallCollision = bottomTime;
+        if(topTime < bottomTime){
+            firstCollsion = topTime;
+        }else {
+            firstCollsion = bottomTime;
+        }
+        if(firstCollsion < timeToWallCollision){
+            timeToWallCollision = firstCollsion;
         }
         return timeToWallCollision;
-        
-        
+                
     }
     
     @Override
@@ -218,14 +201,8 @@ public class Absorber implements Gadget {
         
     }
    
-    
     @Override
     public void addTriggeredGadget(Gadget triggeredGadget) {
         this.triggeredGadgets.add(triggeredGadget); 
     }
-    
-    
-    
-
-}
-    
+}   
