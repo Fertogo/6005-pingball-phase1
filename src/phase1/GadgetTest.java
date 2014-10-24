@@ -445,8 +445,8 @@ public class GadgetTest {
             board.setFriction(0, 0);
             Gadget leftVerticalFlipper = new Flipper(new Vect(5,5),0); 
             Gadget rightVerticalFlipper = new Flipper(new Vect(10,5),1);     
-            Gadget leftHorizontalFlipper = new Flipper(new Vect(5,10),0); 
-            Gadget rightHorizontalFlipper = new Flipper(new Vect(10,10),0); 
+            Gadget leftHorizontalFlipper = new Flipper(new Vect(5,10),0,true); 
+            Gadget rightHorizontalFlipper = new Flipper(new Vect(10,10),0,true); 
             leftHorizontalFlipper.rotateGadget(0);
             rightHorizontalFlipper.rotateGadget(0);
             board.addGadget(leftVerticalFlipper);
@@ -455,56 +455,32 @@ public class GadgetTest {
             board.addGadget(rightHorizontalFlipper); 
             
             //Test leftVerticalFlipper
-            Ball ball = new Ball(new Vect(1,4), new Vect(1,0)); 
+            System.out.println("Testing left Verical Flipper");
+            Ball ball = new Ball(new Vect(1,4), new Vect(5,0)); 
             board.addBall(ball); 
-            board.step(8); 
+            board.step(15); 
             //TODO Assert that ball bounced off correctly
             
             //Test rightVericalFlipper
-            ball.updateBall(new Vect(10,4), new Vect(-1,0)); 
+            System.out.println("Testing right Verical Flipper");
+
+            ball.updateBall(new Vect(10,4), new Vect(-5,0)); 
             board.step(8); 
             //TODO Assert that the ball bounced off correctly
             
             //Test leftHorizontalFlipper
-            ball.updateBall(new Vect(5,19), new Vect(0,-1)); 
-            board.step(8); 
+            System.out.println("Testing left horizontal Flipper");
+
+            ball.updateBall(new Vect(5,19), new Vect(0,-5)); 
+            board.step(15); 
             //TODO Assert that the ball bounced off correctly
             
             //Test rightHorizontalFlipper
-            ball.updateBall(new Vect(10,19), new Vect(0,-1)); 
-            board.step(8); 
+            System.out.println("Testing right horizontal Flipper");
+
+            ball.updateBall(new Vect(10,19), new Vect(0,-5)); 
+            board.step(15); 
             //TODO Assert that the ball bounced off correctly 
         }
-
-        @Test public void removeMe(){ 
-            Board board = new Board(20,20); 
-            Ball ball = new Ball(new Vect(1.25,1.25),new Vect(0,1));
-            
-            
-            Gadget circleBumper = new CircleBumper(new Vect(1,10));
-            board.addGadget(circleBumper);
-            
-            Gadget triangleBumper = new TriangleBumper(new Vect(12,15), 180);
-            board.addGadget(triangleBumper); 
-            
-            Gadget squareBumper1 = new SquareBumper(new Vect(0,17));
-            Gadget squareBumper2 = new SquareBumper(new Vect(1,17));
-            Gadget squareBumper3 = new SquareBumper(new Vect(2,17));
-            board.addGadget(squareBumper1); 
-            board.addGadget(squareBumper2); 
-            board.addGadget(squareBumper3); 
-            
-            Gadget circleBumper1 = new CircleBumper(new Vect(7,18));
-            Gadget circleBumper2 = new CircleBumper(new Vect(8,18));
-            Gadget circleBumper3 = new CircleBumper(new Vect(9,18));
-            board.addGadget(circleBumper1); 
-            board.addGadget(circleBumper2); 
-            board.addGadget(circleBumper3); 
-            
-            board.addBall(ball); 
-            board.run(); 
-        }
-
-    
-
+        
 }
