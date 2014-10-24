@@ -1,7 +1,5 @@
 package phase1;
-import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.awt.Point;
 import java.util.List;
 
 import physics.LineSegment;
@@ -136,11 +134,11 @@ public class Absorber implements Gadget {
         Ball storedBall = this.ballStorage.remove(0);
         if(this.height < 4 ){
             storedBall.updateBall(new Vect(position.x()+this.width, 
-                    position.y()+this.height), new Vect(0,50));
+                    position.y()+this.height+1), new Vect(0,-50));
         }
         if(this.height > 4 ){
             storedBall.updateBall(new Vect(position.x()+this.width, 
-                    position.y()+this.height-(int)(this.height/4.0)), new Vect(0,50));
+                    position.y()+this.height-(int)(this.height/4.0)), new Vect(0,-50));
         }
     }
     /**
@@ -165,14 +163,19 @@ public class Absorber implements Gadget {
        return this.position;
     }
 
-
-    public boolean willCollide(Ball ball) {
-        double timeToWallCollision = Double.POSITIVE_INFINITY;
-        if(this.timeToCollision(ball)< timeToWallCollision){
-            return true;
+   
+    public boolean contains(Vect pos) {
+        boolean contains = false;
+        this.checkRep();
+        if( (pos.x()>=this.position.x() && pos.x()<=(this.position.x()+this.width)) && (pos.y()>=this.position.y() && pos.y()<=(this.position.y()+this.height)) ){
+        contains =true;
         }
-        return false; 
-    }
+        return contains;
+        }
+    
+
+
+
 
     @Override
     public double timeToCollision(Ball ball) {
